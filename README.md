@@ -45,7 +45,7 @@ Click here for the key plots of the real world cases</summary>
 </div>  
 </details>
 
-#### 🧠 Two-Tier Evaluation Framework
+### 🧠 Two-Tier Evaluation Framework
 
 * 🟢 **Basic Tier:** Core perception and multimodal instruction following (e.g., social understanding, temporal perception, and gesture-based prompts).
 * 🔵 **Advanced Tier:** Higher-level interactive skills (e.g., procedural guidance and proactive response).
@@ -64,7 +64,7 @@ Click here for the key plots of the real world cases</summary>
 </i></p>
 </div>
 
-#### 📊 Dataset Highlights
+### 📊 Dataset Highlights
 
 * 📈 **Scale**: **687** open-ended question-answer pairs from **300** videos, covering 7 major task types and **17** fine-grained tasks.
 * **🎥 Custom-Filmed Real-World Cases**: Features three comprehensive multi-turn interaction case studies exclusively filmed by our team to reflect genuine assistant usage.
