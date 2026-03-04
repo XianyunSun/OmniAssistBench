@@ -1,4 +1,3 @@
-# OmniAssistBench
 <div align="center">
 
 # 🤖🤝OmniAssistBench: Assistant-style Interaction Benchmark for Omni-LLMs
