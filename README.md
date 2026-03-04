@@ -8,6 +8,7 @@
 [![Dataset](https://img.shields.io/badge/HuggingFace-Under_Review-yellow)](#)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](#)
 
+The first benchmerk specially designed to evaluate Omni-LLMs under assistant-style, real-time video chat scenarios.
 The dataset and the paper will be made public after review.
 
 </div>
@@ -16,7 +17,7 @@ The dataset and the paper will be made public after review.
 
 ## 💡 Introduction
 
-**OmniAssistBench** is the first benchmerk specially designed to evaluate Omni-modal large language models (Omni-LLMs) under assistant-style, real-time video chat scenarios.
+Recent advances in Omni-LLMs are paving the way for real-time video chat applications, such as visual assistance for visually impaired users. However, existing benchmarks fail to systematically evaluate models under these dynamic, interactive settings. To bridge this gap, **OmniAssistBench** quantifies model's omni-assistant capabilities by summarizing critical abilities and tasks from common real world Omni-MLLM application senarios.
 
 <div align="center">
   <img src="docs/general.png" alt="OmniAssistBench summarizes critical abilities and tasks from real world Omni-LLM applications" width="80%">
