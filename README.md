@@ -84,6 +84,7 @@ OmniAssistBench requires candidate models to be capable of processing videos alo
 | **MiniCPM-o 4.5** | 9B | 2.23 | 2.39 | 1.89 | **2.30** | 46.0% |
 | **Qwen3-Omni** | 30B-A3B | 1.42 | 1.82 | 1.76 | **1.68** | 33.6% |
 | **Baichuan-Omni 1.5** | 7B | 1.23 | 2.09 | 1.76 | **2.16** | 43.2% |
+| **VITA 1.5** | 7B | 1.23 | 1.29 | 0.73 | **1.23** | 12.6% |
 
 OmniAssistBench is highly challenging. Current evaluations show that even the most advanced models have substantial room for improvement before they can serve as reliable real-world assistants.
 
