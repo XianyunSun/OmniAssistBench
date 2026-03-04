@@ -103,8 +103,8 @@ to the user. Otherwise, if you decide to keep quiet, output exactly "[KEEP QUIET
 
 We provide two example scripts of evaluating Gemini3 Pro via API and evaluating Qwen3-Omni via local inference. Please refer to the comments for handling multi-turn test samples:
 
-* [`/eval_oe_qwen3omni.py`](./eval_qwen3omni.py)
-* [`/eval_oe_gemini3.py`](./eval_gemini3.py) 
+* [`/eval_qwen3omni.py`](./eval_qwen3omni.py)
+* [`/eval_gemini3.py`](./eval_gemini3.py) 
 
 **2. LLM-as-a-Judge Scoring:** We utilize an advanced LLM as a judge to grade the model's `output_text` from 0 to 5. The output of this step is a CSV file containing the `video_name`, `video_class`, and `score`.
 
@@ -119,9 +119,9 @@ Here is a brief summary of what each score represents. Please refer to [`score_r
 | **1** | **Related**: Fails to comprehend the user's intent, and gives responses loosely related to the video. |
 | **0** | **Failure**: Fails to comprehend the user's intent, and gives unrelated responses. |
 
-An example judgment script using GPT-5 is provided in[`/judge_gpt5.py`](./judge_gpt5.py).
+An example judgment script using GPT-5 is provided in[`/score.py`](./score.py).
 
-**3. Calculate Task Averages:** Once the grading is complete, you can aggregate the results to see how the model performs across different tasks. We provide a script ([`/calculate_average_score.py`](./calculate_average_score.py)) that reads the judgment CSV and automatically calculates the average scores at sub-task level, major-task level and tier-level.
+**3. Calculate Task Averages:** Once the grading is complete, you can aggregate the results to see how the model performs across different tasks. We provide a script ([`/score_cont.py`](./score_cont.py)) that reads the judgment CSV and automatically calculates the average scores at sub-task level, major-task level and tier-level.
 
 
 
