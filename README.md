@@ -19,9 +19,9 @@ The dataset and the paper will be made public after review.
 **OmniAssistBench** is the first benchmerk specially designed to evaluate Omni-modal large language models (Omni-LLMs) under assistant-style, real-time video chat scenarios.
 
 <div align="center">
-  <img src="docs/typical_tasks.png" alt="Examples of four typical tasks in OmniAssistBench" width="80%">
+  <img src="docs/typical_tasks.png" alt="Examples of typical tasks in OmniAssistBench" width="80%">
   <p>
-<i>Examples of four typical tasks in OmniAssistBench.
+<i>Examples of typical tasks in OmniAssistBench.
 </i></p>
 </div>
 
