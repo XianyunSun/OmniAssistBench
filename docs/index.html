@@ -23,12 +23,115 @@
     .section { padding: 3rem 1.5rem; }
     .content h2 { border-bottom: 2px solid #eaeaea; padding-bottom: 0.5rem; margin-top: 2rem; }
     .figure-caption { text-align: center; font-style: italic; font-size: 0.9rem; color: #555; margin-top: 0.5rem; }
-    .table-container { overflow-x: auto; margin-top: 1.5rem; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: center !important; vertical-align: middle !important; padding: 0.75rem !important; border: 1px solid #ddd; }
-    th { background-color: #f5f5f5; }
+    
     pre { background-color: #f4f4f4; padding: 1rem; border-radius: 5px; overflow-x: auto; font-size: 0.9em; }
     .highlight-row { font-weight: bold; background-color: #fdfdfd; }
+
+    /* --- Table Settings & Custom Width Parameters --- */
+    :root {
+      /* Adjust this parameter to change the minimum width of the leaderboard tables */
+      --table-min-width: 1200px;
+      /* Adjust this to change the TOTAL width of the Basic/Advanced task tables */
+      --task-table-width: 1300px; 
+      /* Adjust this to change the PERCENTAGE width of the Description column */
+      --desc-col-width: 65%; 
+    }
+    .table-container { 
+      overflow-x: auto; 
+      margin-top: 1.5rem; 
+      width: 100%;
+    }
+    table { border-collapse: collapse; }
+    .table-container table {
+      width: 100%;
+      min-width: var(--table-min-width); 
+    }
+    /* Specific class for the task detail tables to control their width separately */
+    .task-table-wrapper table {
+      width: var(--task-table-width);
+      min-width: var(--task-table-width);
+    }
+  
+    /* Target the Description column (the 4th column) in the task tables */
+    .task-table-wrapper table th:nth-child(4),
+    .task-table-wrapper table td:nth-child(4) {
+      width: var(--desc-col-width);
+      text-align: left !important;
+      white-space: normal; /* Allows text to wrap normally alongside your manual <br> tags */
+    }
+    
+    th, td { 
+      text-align: center !important; 
+      vertical-align: middle !important; 
+      padding: 0.75rem !important; 
+      border: 1px solid #ddd; 
+    }
+    th { background-color: #f5f5f5; }
+    
+    /* Force tables to stay on one line unless <br> is used manually */
+    .table-container table th, 
+    .table-container table td {
+      white-space: nowrap;
+    }
+
+    /* --- Tier Card Styles --- */
+    .tier-card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08); /* Subtle shadow similar to image 2 */
+      padding: 1.5rem;
+      height: 100%;
+      border-left: 5px solid transparent; /* Placeholder for colored bar */
+    }
+    .tier-card.basic-tier {
+      border-left-color: #A9D18E; /* Light green from pie chart */
+    }
+    .tier-card.adv-tier {
+      border-left-color: #9BC2E6; /* Light blue from pie chart */
+    }
+
+    /* --- Expand Button Styles --- */
+    .expand-btn {
+      cursor: pointer;
+      text-align: left;
+      font-size: 1.05rem;
+      margin-top: 1.5rem;
+      display: inline-block;
+      user-select: none;
+    }
+    .expand-btn:hover {
+      text-decoration: underline;
+    }
+
+    /* --- Clean 'Details/Summary' Line Style (for Leaderboard Dropdown) --- */
+    details.clean-details {
+      background: transparent;
+      padding: 0;
+      border: none;
+      margin-top: 1.5rem;
+    }
+    details.clean-details > summary {
+      cursor: pointer;
+      font-weight: bold;
+      text-align: left;
+      font-size: 1.1rem;
+      color: #3273dc; /* Makes it look clickable like a link */
+      outline: none;
+      list-style: none; /* Removes the default HTML triangle marker */
+    }
+    details.clean-details > summary::-webkit-details-marker {
+      display: none; /* Removes the default HTML triangle marker in Webkit browsers */
+    }
+    details.clean-details > summary::before {
+      content: "► ";
+      font-size: 0.8em;
+      color: #3273dc;
+      display: inline-block;
+      margin-right: 5px;
+    }
+    details.clean-details[open] > summary::before {
+      content: "▼ ";
+    }
 
     /* --- Carousel Styles --- */
     .carousel-container {
@@ -38,8 +141,8 @@
     }
 
     .carousel-slide {
-      display: none; /* Hide all slides by default */
-      text-align: center; /* Centers the caption text */
+      display: none; 
+      text-align: center; 
     }
 
     .carousel-slide img {
@@ -47,46 +150,37 @@
       margin: 0 auto;
     }    
 
-    /* Next & previous buttons */
     .carousel-prev, .carousel-next {
       cursor: pointer;
       position: absolute;
       top: 100px;
       transform: none;
-      width: 48px;  /* Width of the circle */
-      height: 48px; /* Height of the circle */
-      background-color: #ffffff; /* White background */
-      color: #4a4a4a; /* Dark gray arrow color */
+      width: 48px;  
+      height: 48px; 
+      background-color: #ffffff; 
+      color: #4a4a4a; 
       font-size: 20px;
       font-weight: bold;
-      border-radius: 50%; /* Makes it a perfect circle */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Adds the soft shadow from your screenshot */
+      border-radius: 50%; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
       transition: all 0.3s ease;
       user-select: none;
       text-decoration: none;
-      display: flex; /* Uses flexbox to center the arrow inside the circle */
+      display: flex; 
       justify-content: center;
       align-items: center;
-      z-index: 10; /* Ensures buttons stay on top of the images */
+      z-index: 10; 
     }
 
-    /* Position them slightly off the edges so they float */
-    .carousel-prev {
-      left: 0px; 
-    }
+    .carousel-prev { left: 0px; }
+    .carousel-next { right: 0px; }
 
-    .carousel-next {
-      right: 0px;
-    }
-
-    /* Hover effect for the buttons */
     .carousel-prev:hover, .carousel-next:hover {
       background-color: #f9f9f9;
       color: #111111;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Slightly larger shadow on hover */
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     }
 
-    /* The dots/bullets/indicators */
     .carousel-dot {
       cursor: pointer;
       height: 12px;
@@ -102,7 +196,6 @@
       background-color: #4a4a4a;
     }
 
-    /* Fading animation */
     .carousel-fade {
       animation-name: fadeAnimation;
       animation-duration: 0.6s;
@@ -111,6 +204,23 @@
     @keyframes fadeAnimation {
       from {opacity: .4} 
       to {opacity: 1}
+    }
+
+    /* --- Table Sorting Styles --- */
+    th.sortable {
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.2s ease;
+    }
+    th.sortable:hover {
+      background-color: #e8e8e8 !important;
+    }
+    th.sortable::after {
+      content: ' \25BC';
+      font-size: 0.7em;
+      color: #888;
+      margin-left: 4px;
+      vertical-align: middle;
     }
   </style>
 </head>
@@ -122,11 +232,6 @@
     <div class="container is-max-desktop has-text-centered">
       <h1 class="title is-1 publication-title">OmniAssistBench</h1>
       <h2 class="title is-3">Assistant-style Interaction Benchmark for Omni-LLMs</h2>
-
-      <!-- Authors -->
-      <!--<div class="is-size-5 publication-authors" style="margin-top: 1rem;">
-        <span class="author-block">Authors</span>
-      </div>-->
 
       <!-- Links/Badges -->
       <div class="publication-links">
@@ -160,7 +265,7 @@
 </section>
 
 <!-- INTRODUCTION -->
-<section class="section has-background-light">
+<section class="section">
   <div class="container is-max-desktop">
     <div class="content">
       <h2 class="has-text-centered"> Introduction</h2>
@@ -182,16 +287,220 @@
 <section class="section">
   <div class="container is-max-desktop">
     <div class="content">
-      <h2 class="has-text-centered"> Highlights</h2>
-      <h4>Novel task design</h4>
+      <h2 class="has-text-centered"> Dataset and Annotation</h2>
+
+      <h4>Task Design</h4>
       <ul>
-        <li><strong>Framework: </strong>OmniAssistBench decomposes real-world assistant capabilities into two complementary levels. Evaluation tasks are designed base on this two-tier framework.</li>
-          <ul>
-            <li><strong>Basic Tier:</strong> Core perception and multimodal instruction following (e.g., social understanding, temporal perception, and gesture-based prompts).</li>
-            <li><strong>Advanced Tier:</strong> Higher-level interactive skills (e.g., procedural guidance and proactive response).</li>
-          </ul>
+        OmniAssistBench decomposes real-world assistant capabilities into two complementary levels. Evaluation tasks are designed base on this two-tier framework.
         <li><strong>Scale: </strong>There are a total of <strong>687</strong> open-ended question-answer pairs from <strong>300</strong> videos, covering 7 major task types and <strong>17</strong> fine-grained tasks.</li>
         <li><strong>Real world cases: </strong>There are also <strong>three</strong> comprehensive multi-turn <strong>real world interaction case studies filmed by our team</strong>  to reflect genuine assistant usage.</li>
+
+
+        <!-- Side-by-side Basic and Advanced Tiers -->
+        <div class="columns is-desktop" style="margin-top: 1.5rem; margin-bottom: 1rem;">
+          
+          <!-- Basic Tier Card -->
+          <div class="column">
+            <div class="tier-card basic-tier">
+              <h5 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Basic Tier</h5>
+              <p style="font-size: 0.95rem;">Core perception and multimodal instruction following (e.g., social understanding, temporal perception, and gesture-based prompts).</p>
+              
+              <!-- Inside Expand Button for Basic Tier -->
+              <div class="expand-btn" onclick="toggleTierTable('basic-tier-details', 'basic-arrow')">
+                <span id="basic-arrow">►</span> Click here to expand for Basic tasks
+              </div>
+            </div>
+          </div>
+          
+          <!-- Advanced Tier Card -->
+          <div class="column">
+            <div class="tier-card adv-tier">
+              <h5 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Advanced Tier</h5>
+              <p style="font-size: 0.95rem;">Higher-level interactive skills (e.g., procedural guidance and proactive response).</p>
+              
+              <!-- Inside Expand Button for Advanced Tier -->
+              <div class="expand-btn" onclick="toggleTierTable('adv-tier-details', 'adv-arrow')">
+                <span id="adv-arrow">►</span> Click here to expand for Advanced tasks
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hidden Detail Tables (Positioned beneath the tier cards) -->
+        <div id="basic-tier-details" style="display: none; margin-top: 1.5rem; margin-bottom: 2rem;">
+          <h5 class="has-text-centered" style="margin-bottom: 1rem;">Basic Interactive Understanding Tasks</h5>
+          <div class="table-container task-table-wrapper" style="margin-top: 0;">
+            <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+              <thead>
+                <tr>
+                  <th style="text-align: center; vertical-align: middle;">Major task</th>
+                  <th style="text-align: center; vertical-align: middle;">Sub task</th>
+                  <th style="text-align: center; vertical-align: middle;">Turns</th>
+                  <th style="text-align: center; vertical-align: middle;">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Social Perception (3 rows) -->
+                <tr>
+                  <td rowspan="3" style="vertical-align: middle; font-weight: bold; text-align: center;">Social<br>Perception</td>
+                  <td style="vertical-align: middle; font-weight: bold;">Identity Identification (II)</td>
+                  <td style="vertical-align: middle; text-align: center;">Single</td>
+                  <td>"Who said that sentence? Who performed that action?"</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: middle; font-weight: bold;">Addressee<br>Identification (AI)</td>
+                  <td style="vertical-align: middle; text-align: center;">Single</td>
+                  <td>"Who is he/she talking to?"</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: middle; font-weight: bold;">Complex Emotion<br>Understanding (CE)</td>
+                  <td style="vertical-align: middle; text-align: center;">Single</td>
+                  <td>
+                    "What emotion or attitude is the person expressing?"<br>
+                    <i>One modality (e.g. expression or dialogue) alone cannot lead to the correct answer.</i>
+                  </td>
+                </tr>
+
+                <!-- Temporal Perception (3 rows) -->
+                <tr>
+                  <td rowspan="3" style="vertical-align: middle; font-weight: bold; text-align: center;">Temporal<br>Perception</td>
+                  <td style="vertical-align: middle; font-weight: bold;">Event Retrieval (ER)</td>
+                  <td style="vertical-align: middle; text-align: center;">Single</td>
+                  <td>
+                    "When the main person A said xxx, what color clothes were the person passing behind them wearing?"<br>
+                    <i>The model needs to establish temporal correlations between the main and non-salient objects or details.</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: middle; font-weight: bold;">Appearance Order<br>Perception (AO)</td>
+                  <td style="vertical-align: middle; text-align: center;">Single</td>
+                  <td>
+                    "Which colors of clothes did the blogger try on in sequence?"<br>
+                    <i>Model may need to distinguish the target object from similar ones.<br>For example, the blogger may have picked up a lot of clothes but only tried on a part of them.</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: middle; font-weight: bold;">Dynamic Counting (DC)</td>
+                  <td style="vertical-align: middle; text-align: center;">Single</td>
+                  <td>
+                    "How many standard pull-ups did the person perform?"<br>
+                    <i>Counting a large number of instances (>10) or requires the model to filter specific objects</i>
+                  </td>
+                </tr>
+
+                <!-- Referential Perception (2 rows) -->
+                <tr>
+                  <td rowspan="2" style="vertical-align: middle; font-weight: bold; text-align: center;">Referential<br>Perception</td>
+                  <td style="vertical-align: middle; font-weight: bold;">Action Reference<br>Perception (AR)</td>
+                  <td style="vertical-align: middle; text-align: center;">Single</td>
+                  <td>
+                    "Which student is the teacher pointing at? Which file is the mouse point at on the screen?"<br>
+                    <i>The "pointing" action alone might be ambiguous, so contextual information may be required by the correct answer.</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: middle; font-weight: bold;">Linguistic Reference<br>Perception (LR)</td>
+                  <td style="vertical-align: middle; text-align: center;">Single</td>
+                  <td>"What is the title of the second book on the right?"</td>
+                </tr>
+
+                <!-- Non-audio Prompt Following (2 rows) -->
+                <tr>
+                  <td rowspan="2" style="vertical-align: middle; font-weight: bold; text-align: center;">Non-audio<br>Prompt Following</td>
+                  <td style="vertical-align: middle; font-weight: bold;">Gesture-based Prompt<br>Following (GPF)</td>
+                  <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
+                  <td>
+                    <i>4 gestures are defined at the beginning of the video,<br>then these gestures are embedded using a picture-in-picture layout as prompts.<br>The gestures as prompts may be made by a different person.<br>Not all pre-defined gestures necessarily appear as prompts, nor do they strictly follow the defined order</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: middle; font-weight: bold;">OCR-based Prompt<br>Following (OPF)</td>
+                  <td style="vertical-align: middle; text-align: center;">Single</td>
+                  <td>
+                    <i>User prompts are embedded as subtitles or images / video clips of hand writing using a picture-in-picture layout.<br>To balance task difficulty, most questions only ask about obvious properties of the target object.</i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Hidden Detail Tables (Positioned beneath the tier cards) -->
+        <div id="adv-tier-details" style="display: none; margin-top: 1.5rem; margin-bottom: 2rem;">
+          <h5 class="has-text-centered" style="margin-bottom: 1rem;">Advanced Interactive Understanding Tasks</h5>
+          <div class="table-container task-table-wrapper" style="margin-top: 0;">
+            <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+              <thead>
+                <tr>
+                  <th style="text-align: center; vertical-align: middle;">Major task</th>
+                  <th style="text-align: center; vertical-align: middle;">Sub task</th>
+                  <th style="text-align: center; vertical-align: middle;">Turns</th>
+                  <th style="text-align: center; vertical-align: middle;">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Proactive Response (2 rows) -->
+                <tr>
+                  <td rowspan="2" style="vertical-align: middle; font-weight: bold; text-align: center;">Proactive<br>Response</td>
+                  <td style="vertical-align: middle; font-weight: bold;">Single Event-triggered<br>Response (SER)</td>
+                  <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
+                  <td>
+                    "When the next taxi approaches, tell me its license plate number."<br>
+                    <i>We DO NOT explicitly ask the model whether to respond at the end of each turn.<br>Instead, the user prompt is provided only in the first turn, followed by raw video clips in subsequent turns.<br>The model must autonomously determine the appropriate timing for a response.</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: middle; font-weight: bold;">Multi Event-triggered<br>Response (MER)</td>
+                  <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
+                  <td>
+                    "Whenever the professor flips to a new slide, tell me its title."<br>
+                    <i>The target event may appear several times, but the user prompt appears in the first turn.</i>
+                  </td>
+                </tr>
+
+                <!-- Process Tracking (3 rows) -->
+                <tr>
+                  <td rowspan="3" style="vertical-align: middle; font-weight: bold; text-align: center;">Process<br>Tracking</td>
+                  <td style="vertical-align: middle; font-weight: bold;">Step Tracking (ST)</td>
+                  <td style="vertical-align: middle; text-align: center;">6 turns<br>in avg.</td>
+                  <td>
+                    "I want to make this dish strictly following this example video. What should I do next?"<br>
+                    <i>To avoid ambiguity, we provide a reference (manual images or demonstration videos) at the beginning.<br>User might ask for the next step after completing multiple steps or while halfway through one,<br>preventing shortcut responses that merely recite the next sentence.</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: middle; font-weight: bold;">Checklist Tracking (CT)</td>
+                  <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
+                  <td>
+                    "This is my shopping list. Which items have not been bought yet?"<br>
+                    <i>A checklist is provided at the beginning as an image rendered from text.<br>Objects may appear in a different order compared with the list.</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: middle; font-weight: bold;">Multitask Tracking (MT)</td>
+                  <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
+                  <td>
+                    "Here is a TODO list and brief steps of how to finish each task. What is the progress of everything now?"<br>
+                    <i>The user constantly switch between multiple tasks.<br>There are strict sequential steps within a task, but no dependency between tasks.</i>
+                  </td>
+                </tr>
+
+                <!-- Context-Aware Response (1 row) -->
+                <tr>
+                  <td style="vertical-align: middle; font-weight: bold; text-align: center;">Context-Aware<br>Response</td>
+                  <td style="vertical-align: middle; font-weight: bold;">Context-Aware<br>Response (CR)</td>
+                  <td style="vertical-align: middle; text-align: center;">Single<br>turn</td>
+                  <td>
+                    "I'm on the FFmpeg download page. How can I download FFmpeg for this computer?"<br>
+                    <i>It can be inferred from the video that the user is using a Windows machine.<br>We prefer the model to tailor its suggestions exclusively to the Windows platform,<br>instead of providing generic suggestions covering all major operating systems.</i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+
 
       <div class="columns is-centered" style="margin-top: 1.5rem;">
         <div class="column has-text-centered">
@@ -200,200 +509,48 @@
         </div>
       </div>
 
-      <details style="background: #f9f9f9; padding: 1rem; border-radius: 8px; border: 1px solid #ddd;">
-        <summary style="cursor: pointer; font-weight: bold; text-align: left;">Click here for detailed task descriptions.</summary>
 
-        <div class="container is-max-desktop">
-          <div class="content">
-            <h5 class="has-text-centered" style="margin-top: 2rem;">Basic Interactive Understanding Tasks</h5>
-            <div class="table-container" style="margin-top: 0rem;">
-              <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-                <thead>
-                  <tr>
-                    <th style="text-align: center; vertical-align: middle;">major task</th>
-                    <th style="text-align: center; vertical-align: middle;">sub task</th>
-                    <th style="text-align: center; vertical-align: middle;">description</th>
-                    <th style="text-align: center; vertical-align: middle;">turns</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                  <!-- Social Perception (3 rows) -->
-                  <tr>
-                    <td rowspan="3" style="vertical-align: middle; font-weight: bold; text-align: center;">Social Perception</td>
-                    <td style="vertical-align: middle; font-weight: bold;">Identity Identification (II)</td>
-                    <td>"Who said that sentence? Who performed that action?"</td>
-                    <td style="vertical-align: middle; text-align: center;">Single turn</td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: middle; font-weight: bold;">Addressee Identification (AI)</td>
-                    <td>"Who is he/she talking to?"</td>
-                    <td style="vertical-align: middle; text-align: center;">Single turn</td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: middle; font-weight: bold;">Complex Emotion Understanding (CE)</td>
-                    <td>
-                      "What emotion or attitude is the person expressing?"<br>
-                      <i>One modality (e.g. expression or dialogue) alone cannot lead to the correct answer.</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">Single turn</td>
-                  </tr>
-
-                  <!-- Temporal Perception (3 rows) -->
-                  <tr>
-                    <td rowspan="3" style="vertical-align: middle; font-weight: bold; text-align: center;">Temporal Perception</td>
-                    <td style="vertical-align: middle; font-weight: bold;">Event Retrieval (ER)</td>
-                    <td>
-                      "When the main person A said xxx, what color clothes were the person passing behind them wearing?"<br>
-                      <i>The model needs to establish temporal correlations between the main and non-salient objects or details.</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">Single turn</td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: middle; font-weight: bold;">Appearance Order Perception (AO)</td>
-                    <td>
-                      "Which colors of clothes did the blogger try on in sequence?"<br>
-                      <i>Model may need to distinguish the target object from similar ones. For example, the blogger may have picked up a lot of clothes but only tried on a part of them.</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">Single turn</td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: middle; font-weight: bold;">Dynamic Counting (DC)</td>
-                    <td>
-                      "How many standard pull-ups did the person perform?"<br>
-                      <i>Counting a large number of instances (>10) or requires the model to filter specific objects</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">Single turn</td>
-                  </tr>
-
-                  <!-- Referential Perception (2 rows) -->
-                  <tr>
-                    <td rowspan="2" style="vertical-align: middle; font-weight: bold; text-align: center;">Referential Perception</td>
-                    <td style="vertical-align: middle; font-weight: bold;">Action Reference Perception (AR)</td>
-                    <td>
-                      "Which student is the teacher pointing at? Which file is the mouse point at on the screen?"<br>
-                      <i>The "pointing" action alone might be ambiguous, so contextual information may be required by the correct answer.</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">Single turn</td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: middle; font-weight: bold;">Linguistic Reference Perception (LR)</td>
-                    <td>"What is the title of the second book on the right?"</td>
-                    <td style="vertical-align: middle; text-align: center;">Single turn</td>
-                  </tr>
-
-                  <!-- Non-audio Prompt Following (2 rows) -->
-                  <tr>
-                    <td rowspan="2" style="vertical-align: middle; font-weight: bold; text-align: center;">Non-audio<br>Prompt Following</td>
-                    <td style="vertical-align: middle; font-weight: bold;">Gesture-based Prompt Following (GPF)</td>
-                    <td>
-                      <i>4 gestures are defined at the beginning of the video, then these gestures are embedded using a picture-in-picture layout as prompts. The gestures as prompts may be made by a different person. Not all pre-defined gestures necessarily appear as prompts, nor do they strictly follow the defined order</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: middle; font-weight: bold;">OCR-based Prompt Following (OPF)</td>
-                    <td>
-                      <i>User prompts are embedded as subtitles or images / video clips of hand writing using a picture-in-picture layout. To balance task difficulty, most questions only ask about obvious properties of the target object.</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">Single turn</td>
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-        <div class="container is-max-desktop">
-          <div class="content">
-            <h5 class="has-text-centered" style="margin-top: 2rem;">Advanced Interactive Understanding Tasks</h5>
-            <div class="table-container" style="margin-top: 0rem;">
-              <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-                <thead>
-                  <tr>
-                    <th style="text-align: center; vertical-align: middle;">major task</th>
-                    <th style="text-align: center; vertical-align: middle;">sub task</th>
-                    <th style="text-align: center; vertical-align: middle;">description</th>
-                    <th style="text-align: center; vertical-align: middle;">turns</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                  <!-- Proactive Response (2 rows) -->
-                  <tr>
-                    <td rowspan="2" style="vertical-align: middle; font-weight: bold; text-align: center;">Proactive Response</td>
-                    <td style="vertical-align: middle; font-weight: bold;">Single Event-triggered Response (SER)</td>
-                    <td>
-                      "When the next taxi approaches, tell me its license plate number."<br>
-                      <i>We DO NOT explicitly ask the model whether to respond at the end of each turn. Instead, the user prompt is provided only in the first turn, followed by raw video clips in subsequent turns. The model must autonomously determine the appropriate timing for a response.</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: middle; font-weight: bold;">Multi Event-triggered Response (MER)</td>
-                    <td>
-                      "Whenever the professor flips to a new slide, tell me its title."<br>
-                      <i>The target event may appear several times, but the user prompt appears in the first turn.</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
-                  </tr>
-
-                  <!-- Process Tracking (3 rows) -->
-                  <tr>
-                    <td rowspan="3" style="vertical-align: middle; font-weight: bold; text-align: center;">Process Tracking</td>
-                    <td style="vertical-align: middle; font-weight: bold;">Step Tracking (ST)</td>
-                    <td>
-                      "I want to make this dish strictly following this example video. What should I do next?"<br>
-                      <i>To avoid ambiguity, we provide a reference (manual images or demonstration videos) at the beginning. User might ask for the next step after completing multiple steps or while halfway through one, preventing shortcut responses that merely recite the next sentence.</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">6 turns<br>in avg.</td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: middle; font-weight: bold;">Checklist Tracking (CT)</td>
-                    <td>
-                      "This is my shopping list. Which items have not been bought yet?"<br>
-                      <i>A checklist is provided at the beginning as an image rendered from text. Objects may appear in a different order compared with the list.</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: middle; font-weight: bold;">Multitask Tracking (MT)</td>
-                    <td>
-                      "Here is a TODO list and brief steps of how to finish each task. What is the progress of everything now?"<br>
-                      <i>The user constantly switch between multiple tasks. There are strict sequential steps within a task, but no dependency between tasks.</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
-                  </tr>
-
-                  <!-- Context-Aware Response (1 row) -->
-                  <tr>
-                    <td style="vertical-align: middle; font-weight: bold; text-align: center;">Context-Aware<br>Response</td>
-                    <td style="vertical-align: middle; font-weight: bold;">Context-Aware Response (CR)</td>
-                    <td>
-                      "I'm on the FFmpeg download page. How can I download FFmpeg for this computer?"<br>
-                      <i>It can be inferred from the video that the user is using a Windows machine. We prefer the model to tailor its suggestions exclusively to the Windows platform, instead of providing generic suggestions covering all major operating systems.</i>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">Single<br>turn</td>
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        </div>
-      </details>
       </ul>
 
-    <h4 style="margin-top: 2rem;">High quality data</h4>
+      <h4 style="margin-top: 2rem;">High quality data</h4>
       <ul>
-      <li><strong>Naturally Embedded Prompts:</strong> Unlike traditional benchmarks with text-only prompts, all user questions are embedded directly into the videos as realistic audio or typing/handwriting.</li>
-      <li><strong>High Quality:</strong> Creating the dataset required careful choices of source videos and heavy video editing to balance video length and to embed the user prompts. Every sample was rigorously annotated by human experts, demanding <strong>~4 hours of labor per sample</strong>. In total, this required <strong>more than 900 hours</strong> of dedicated labor to construct the whole dataset.</li>
-      <div class="columns is-centered" style="margin-top: 1.5rem;">
-            <div class="column has-text-centered">
-              <img src="labeling.png" alt="The labling process of OmniAssistBench" width="100%">
-              <p class="figure-caption">The labeling process of OmniAssistBench. For multi-turn samples, the video editing phase contains a total of four sub-steps.</p>
+        <li><strong>Naturally Embedded Prompts:</strong> Unlike traditional benchmarks with text-only prompts, all user questions are embedded directly into the videos as realistic audio or typing/handwriting.</li>
+        <li><strong>High Quality:</strong> Creating the dataset required careful choices of source videos and heavy video editing to balance video length and to embed the user prompts. Every sample was rigorously annotated by human experts, demanding <strong>~4 hours of labor per sample</strong>. In total, this required <strong>more than 900 hours</strong> of dedicated labor to construct the whole dataset.</li>
+        
+        <div class="columns is-centered" style="margin-top: 1.5rem;">
+          <div class="column has-text-centered">
+            <img src="labeling.png" alt="The labling process of OmniAssistBench" width="100%">
+            <p class="figure-caption">The labeling process of OmniAssistBench. For multi-turn samples, the video editing phase contains a total of four sub-steps.</p>
+          </div>
+        </div>
+
+        <!-- Annotation Pipeline List -->
+        <h5 class="title is-5" style="margin-top: 2rem; margin-bottom: 1.5rem;">Annotation Pipeline</h5>
+        <div class="columns is-desktop">
+          <div class="column">
+            <div class="box" style="background-color: #fff; border-left: 4px solid #3273dc; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); height: 100%;">
+              <h6 class="title is-6">Step 1: [Placeholder Title]</h6>
+              <p style="font-size: 0.9rem;">[Placeholder description for the first annotation step. Please fill in later.]</p>
             </div>
+          </div>
+          <div class="column">
+            <div class="box" style="background-color: #fff; border-left: 4px solid #00d1b2; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); height: 100%;">
+              <h6 class="title is-6">Step 2: [Placeholder Title]</h6>
+              <p style="font-size: 0.9rem;">[Placeholder description for the second annotation step. Please fill in later.]</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box" style="background-color: #fff; border-left: 4px solid #ffdd57; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); height: 100%;">
+              <h6 class="title is-6">Step 3: [Placeholder Title]</h6>
+              <p style="font-size: 0.9rem;">[Placeholder description for the third annotation step. Please fill in later.]</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box" style="background-color: #fff; border-left: 4px solid #ff3860; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); height: 100%;">
+              <h6 class="title is-6">Step 4:[Placeholder Title]</h6>
+              <p style="font-size: 0.9rem;">[Placeholder description for the fourth annotation step. Please fill in later.]</p>
+            </div>
+          </div>
         </div>
       </ul>
     </div>
@@ -408,211 +565,181 @@
     </div>
 
     <!-- ================= FIRST CAROUSEL GROUP ================= -->
-    
-    <!-- Fixed Caption for the First Group -->
     <div class="content">
-    <h4 class="has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem;">
-      Examples of Basic and Advanced Interaction Understanding Tasks
-    </h4>
+      <h4 class="has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem;">
+        Examples of Basic and Advanced Interaction Understanding Tasks
+      </h4>
 
-    <!-- Carousel Container 1 -->
-    <div class="carousel-container">
+      <!-- Carousel Container 1 -->
+      <div class="carousel-container">
+        <!-- Slide 1.1 -->
+        <div class="carousel-slide carousel-slide-1 carousel-fade" style="display: block;">
+          <img src="non_audio.png" alt="Examples for the Non-audio Prompt Following task" style="width:75%">
+        </div>
+        <!-- Slide 1.2 -->
+        <div class="carousel-slide carousel-slide-1 carousel-fade">
+          <img src="context_aware.png" alt="An example for the Context-Aware Response task" style="width:80%">
+        </div>
+        <!-- Slide 1.3 -->
+        <div class="carousel-slide carousel-slide-1 carousel-fade">
+          <img src="single_proactive.png" alt="An example for the Single Event-triggered Response task" style="width:80%">
+        </div>
+        <!-- Slide 1.4 -->
+        <div class="carousel-slide carousel-slide-1 carousel-fade">
+          <img src="multi_proactive.png" alt="An example for the Multi Event-triggered Response task" style="width:80%">
+        </div>
+        <!-- Slide 1.5 -->
+        <div class="carousel-slide carousel-slide-1 carousel-fade">
+          <img src="multitask_tracking.png" alt="An example for the multitask Tracking task" style="width:80%">
+        </div>
+
+        <!-- Next and previous buttons -->
+        <a class="carousel-prev" onclick="changeSlide(-1, 0)">&#9664;</a>
+        <a class="carousel-next" onclick="changeSlide(1, 0)">&#9654;</a>
+      </div>
       
-      <!-- Slide 1.1 -->
-      <div class="carousel-slide carousel-slide-1 carousel-fade" style="display: block;">
-        <img src="non_audio.png" alt="Examples for the Non-audio Prompt Following task" style="width:75%">
+      <!-- The Dots 1 -->
+      <div class="has-text-centered" style="margin-top: 15px;">
+        <span class="carousel-dot carousel-dot-1 active" onclick="currentSlide(1, 0)"></span> 
+        <span class="carousel-dot carousel-dot-1" onclick="currentSlide(2, 0)"></span> 
+        <span class="carousel-dot carousel-dot-1" onclick="currentSlide(3, 0)"></span>
+        <span class="carousel-dot carousel-dot-1" onclick="currentSlide(4, 0)"></span>
+        <span class="carousel-dot carousel-dot-1" onclick="currentSlide(5, 0)"></span> 
       </div>
 
-      <!-- Slide 1.2 -->
-      <div class="carousel-slide carousel-slide-1 carousel-fade">
-        <img src="context_aware.png" alt="An example for the Context-Aware Response task" style="width:80%">
+      <!-- ================= SECOND CAROUSEL GROUP ================= -->
+      <h4 class="has-text-centered" style="margin-top: 4rem; margin-bottom: 1rem;">
+        Key Plots of the Real World Cases
+      </h4>
+
+      <!-- Carousel Container 2 -->
+      <div class="carousel-container">
+        <!-- Slide 2.1 -->
+        <div class="carousel-slide carousel-slide-2 carousel-fade" style="display: block;">
+          <img src="meeting.png" alt="Example 1" style="width:75%">
+        </div>
+        <!-- Slide 2.2 -->
+        <div class="carousel-slide carousel-slide-2 carousel-fade">
+          <img src="navigation.png" alt="Example 2" style="width:75%">
+        </div>
+        <!-- Slide 2.3 -->
+        <div class="carousel-slide carousel-slide-2 carousel-fade">
+          <img src="handcraft.png" alt="Example 3" style="width:75%">
+        </div>
+
+        <!-- Next and previous buttons -->
+        <a class="carousel-prev" onclick="changeSlide(-1, 1)">&#9664;</a>
+        <a class="carousel-next" onclick="changeSlide(1, 1)">&#9654;</a>
       </div>
-
-      <!-- Slide 1.3 -->
-      <div class="carousel-slide carousel-slide-1 carousel-fade">
-        <img src="single_proactive.png" alt="An example for the Single Event-triggered Response task" style="width:80%">
-      </div>
-
-      <!-- Slide 1.4 -->
-      <div class="carousel-slide carousel-slide-1 carousel-fade">
-        <img src="multi_proactive.png" alt="An example for the Multi Event-triggered Response task" style="width:80%">
-      </div>
-
-      <!-- Slide 1.5 -->
-      <div class="carousel-slide carousel-slide-1 carousel-fade">
-        <img src="multitask_tracking.png" alt="An example for the multitask Tracking task" style="width:80%">
-      </div>
-
-      <!-- Next and previous buttons (Notice the ', 0' which tells JS this is the first group) -->
-      <a class="carousel-prev" onclick="changeSlide(-1, 0)">&#9664;</a>
-      <a class="carousel-next" onclick="changeSlide(1, 0)">&#9654;</a>
-    </div>
-    
-    <!-- The Dots 1 -->
-    <div class="has-text-centered" style="margin-top: 15px;">
-      <span class="carousel-dot carousel-dot-1 active" onclick="currentSlide(1, 0)"></span> 
-      <span class="carousel-dot carousel-dot-1" onclick="currentSlide(2, 0)"></span> 
-      <span class="carousel-dot carousel-dot-1" onclick="currentSlide(3, 0)"></span>
-      <span class="carousel-dot carousel-dot-1" onclick="currentSlide(4, 0)"></span>
-      <span class="carousel-dot carousel-dot-1" onclick="currentSlide(5, 0)"></span> 
-    </div>
-
-
-    <!-- ================= SECOND CAROUSEL GROUP ================= -->
-    
-    <!-- Fixed Caption for the Second Group -->
-    <h4 class="has-text-centered" style="margin-top: 4rem; margin-bottom: 1rem;">
-      Key Plots of the Real World Cases
-    </h4>
-
-    <!-- Carousel Container 2 -->
-    <div class="carousel-container">
       
-      <!-- Slide 2.1 -->
-      <div class="carousel-slide carousel-slide-2 carousel-fade" style="display: block;">
-        <img src="meeting.png" alt="Example 1" style="width:75%">
+      <!-- The Dots 2 -->
+      <div class="has-text-centered" style="margin-top: 15px;">
+        <span class="carousel-dot carousel-dot-2 active" onclick="currentSlide(1, 1)"></span> 
+        <span class="carousel-dot carousel-dot-2" onclick="currentSlide(2, 1)"></span> 
+        <span class="carousel-dot carousel-dot-2" onclick="currentSlide(3, 1)"></span>
       </div>
-
-      <!-- Slide 2.2 -->
-      <div class="carousel-slide carousel-slide-2 carousel-fade">
-        <img src="navigation.png" alt="Example 2" style="width:75%">
-      </div>
-
-      <!-- Slide 2.3 -->
-      <div class="carousel-slide carousel-slide-2 carousel-fade">
-        <img src="handcraft.png" alt="Example 3" style="width:75%">
-      </div>
-
-      <!-- Next and previous buttons (Notice the ', 1' which tells JS this is the second group) -->
-      <a class="carousel-prev" onclick="changeSlide(-1, 1)">&#9664;</a>
-      <a class="carousel-next" onclick="changeSlide(1, 1)">&#9654;</a>
     </div>
-    
-    <!-- The Dots 2 -->
-    <div class="has-text-centered" style="margin-top: 15px;">
-      <span class="carousel-dot carousel-dot-2 active" onclick="currentSlide(1, 1)"></span> 
-      <span class="carousel-dot carousel-dot-2" onclick="currentSlide(2, 1)"></span> 
-      <span class="carousel-dot carousel-dot-2" onclick="currentSlide(3, 1)"></span>
-    </div>
-    </div>
-
   </div>
 </section>
-
 
 <!-- LEADERBOARD -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="content">
       <h2 class="has-text-centered">Leaderboard</h2>
-      <p>OmniAssistBench requires candidate models to be capable of processing videos along with the corresponding audios. All models are graded using our LLM-as-a-Judge pipeline on a 0 - 5 scale. </p>
+      <p>OmniAssistBench requires candidate models to be capable of processing videos along with the corresponding audios. All models are graded using our LLM-as-a-Judge pipeline on a 0 - 5 scale.</p>
       <p>Please refer to the <a href="https://github.com/XianyunSun/OmniAssistBench">Github page</a> for detailed evaluation pipeline and example codes.</p>
+    </div>
+  </div>
       
-<div class="table-container">
-        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+  <!-- Main Leaderboard Table -->
+  <div class="container is-fluid" style="max-width: 95%; margin-top: 2rem;">
+    <div class="content">
+      <div class="table-container">
+        <table id="main-table" class="table is-bordered is-striped is-hoverable is-fullwidth">
           <thead>
             <tr>
-              <th>Model</th>
-              <th>Size</th>
-              <th>Basic Tier</th>
-              <th>Advanced Tier</th>
-              <th>Real Cases</th>
-              <th>Overall (/5.0)</th>
-              <th>Percentage (%)</th>
+              <th style="text-align: center; vertical-align: middle;">#</th>
+              <th style="text-align: center; vertical-align: middle;">Model</th>
+              <th style="text-align: center; vertical-align: middle;">Size</th>
+              <th style="text-align: center; vertical-align: middle;">Frames</th>
+              <th class="sortable" onclick="sortTable('main-table', 4)" style="text-align: center; vertical-align: middle;">Basic Tier</th>
+              <th class="sortable" onclick="sortTable('main-table', 5)" style="text-align: center; vertical-align: middle;">Advanced Tier</th>
+              <th class="sortable" onclick="sortTable('main-table', 6)" style="text-align: center; vertical-align: middle;">Real Cases</th>
+              <th class="sortable" onclick="sortTable('main-table', 7)" style="text-align: center; vertical-align: middle;">Overall (/5.0)</th>
+              <th class="sortable" onclick="sortTable('main-table', 8)" style="text-align: center; vertical-align: middle;">Percentage (%)</th>
             </tr>
           </thead>
           <tbody>
             <tr class="highlight-row">
-              <td>Gemini-3-Pro</td>
-              <td>-</td>
-              <td>3.18</td>
-              <td>3.41</td>
-              <td>3.40</td>
-              <td>3.32</td>
-              <td>66.4%</td>
+              <td>1</td>
+              <td style="text-align: left !important;"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a></td>
+              <td>-</td><td></td>
+              <td>3.18</td><td>3.41</td><td>3.40</td><td><strong>3.32</strong></td><td>66.4%</td>
             </tr>
             <tr>
-              <td>Gemini-2.5-Pro</td>
-              <td>-</td>
-              <td>3.27</td>
-              <td>3.32</td>
-              <td>2.24</td>
-              <td>3.23</td>
-              <td>64.6%</td>
+              <td>2</td>
+              <td style="text-align: left !important;"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a></td>
+              <td>-</td><td></td>
+              <td>3.27</td><td>3.32</td><td>2.24</td><td>3.23</td><td>64.6%</td>
             </tr>
             <tr>
-              <td>MiniCPM-o 4.5</td>
-              <td>9B</td>
-              <td>2.23</td>
-              <td>2.39</td>
-              <td>1.89</td>
-              <td>2.30</td>
-              <td>46.0%</td>
+              <td>3</td>
+              <td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a></td>
+              <td>9B</td><td></td>
+              <td>2.23</td><td>2.39</td><td>1.89</td><td><strong>2.30</strong></td><td>46.0%</td>
             </tr>
             <tr>
-              <td>Baichuan-Omni 1.5</td>
-              <td>7B</td>
-              <td>2.25</td>
-              <td>2.09</td>
-              <td>2.24</td>
-              <td>2.16</td>
-              <td>43.2%</td>
+              <td>4</td>
+              <td style="text-align: left !important;"><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></td>
+              <td>7B</td><td></td>
+              <td>2.25</td><td>2.09</td><td>2.24</td><td>2.16</td><td>43.2%</td>
             </tr>
             <tr>
-              <td>Qwen2.5-Omni</td>
-              <td>7B</td>
-              <td>1.85</td>
-              <td>2.33</td>
-              <td>2.26</td>
-              <td>2.16</td>
-              <td>43.2%</td>
+              <td>5</td>
+              <td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></td>
+              <td>7B</td><td></td>
+              <td>1.85</td><td>2.33</td><td>2.26</td><td>2.16</td><td>43.2%</td>
             </tr>
             <tr>
-              <td>MiniCPM-o 2.6</td>
-              <td>8B</td>
-              <td>2.09</td>
-              <td>2.01</td>
-              <td>1.56</td>
-              <td>2.01</td>
-              <td>40.2%</td>
+              <td>6</td>
+              <td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></td>
+              <td>8B</td><td></td>
+              <td>2.09</td><td>2.01</td><td>1.56</td><td>2.01</td><td>40.2%</td>
             </tr>
             <tr>
-              <td>Qwen3-Omni</td>
-              <td>30B-A3B</td>
-              <td>1.42</td>
-              <td>1.82</td>
-              <td>1.76</td>
-              <td>1.68</td>
-              <td>33.6%</td>
+              <td>7</td>
+              <td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></td>
+              <td>30B-A3B</td><td></td>
+              <td>1.42</td><td>1.82</td><td>1.76</td><td>1.68</td><td>33.6%</td>
             </tr>
             <tr>
-              <td>VITA 1.5</td>
-              <td>7B</td>
-              <td>1.23</td>
-              <td>1.29</td>
-              <td>0.73</td>
-              <td>1.23</td>
-              <td>24.6%</td>
+              <td>8</td>
+              <td style="text-align: left !important;"><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></td>
+              <td>7B</td><td></td>
+              <td>1.23</td><td>1.29</td><td>0.73</td><td>1.23</td><td>24.6%</td>
             </tr>
           </tbody>
         </table>
       </div>
-      
-<!-- Detailed Sub-task Evaluation Results Dropdown -->
-      <details style="background: #f9f9f9; padding: 1rem; border-radius: 8px; border: 1px solid #ddd; margin-top: 2rem;">
-        <summary style="cursor: pointer; text-align: left;">Click here for detailed sub-task level evaluation results.</summary>
+
+      <!-- Detailed Sub-task Evaluation Results Dropdown -->
+      <details class="clean-details">
+        <summary>Click here to expand for detailed sub-task level evaluation results.</summary>
         
         <!-- Table 2: Basic Interactive Understanding Tasks -->
         <div style="margin-top: 1.5rem;">
-        <h5 class="has-text-centered" style="margin-top: 2rem;">Performance comparison on Basic Interactive Understanding Tasks</h5>
+          <h5>Performance comparison on Basic Interactive Understanding tasks</h5>
           <div class="table-container" style="font-size: 0.85rem;">
-            <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+            <table id="basic-table" class="table is-bordered is-striped is-hoverable is-fullwidth">
               <thead>
                 <tr>
+                  <th rowspan="3" style="vertical-align: middle; text-align: center;">#</th>
                   <th rowspan="3" style="vertical-align: middle; text-align: center;">Model</th>
-                  <th rowspan="3" style="vertical-align: middle; text-align: center;">Overall<br>Avg.</th>
+                  <th rowspan="3" style="vertical-align: middle; text-align: center;">Frames</th>
+                  <th rowspan="3" class="sortable" onclick="sortTable('basic-table', 3)" style="vertical-align: middle; text-align: center;">Overall<br>Avg.</th>
                   <th colspan="14" style="text-align: center;">Basic Interactive Understanding Tasks</th>
-                  <th rowspan="3" style="vertical-align: middle; text-align: center;">Avg.</th>
+                  <th rowspan="3" class="sortable" onclick="sortTable('basic-table', 18)" style="vertical-align: middle; text-align: center;">Avg.</th>
                 </tr>
                 <tr>
                   <th colspan="4" style="text-align: center;">Social Perception</th>
@@ -621,100 +748,54 @@
                   <th colspan="3" style="text-align: center;">Non-audio Prompt</th>
                 </tr>
                 <tr>
-                  <th style="text-align: center;">II</th>
-                  <th style="text-align: center;">AI</th>
-                  <th style="text-align: center;">CE</th>
-                  <th style="text-align: center;">Avg.</th>
-                  <th style="text-align: center;">ER</th>
-                  <th style="text-align: center;">AO</th>
-                  <th style="text-align: center;">DC</th>
-                  <th style="text-align: center;">Avg.</th>
-                  <th style="text-align: center;">AR</th>
-                  <th style="text-align: center;">LR</th>
-                  <th style="text-align: center;">Avg.</th>
-                  <th style="text-align: center;">GPF</th>
-                  <th style="text-align: center;">OPF</th>
-                  <th style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 4)" style="text-align: center;">II</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 5)" style="text-align: center;">AI</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 6)" style="text-align: center;">CE</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 7)" style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 8)" style="text-align: center;">ER</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 9)" style="text-align: center;">AO</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 10)" style="text-align: center;">DC</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 11)" style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 12)" style="text-align: center;">AR</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 13)" style="text-align: center;">LR</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 14)" style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 15)" style="text-align: center;">GPF</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 16)" style="text-align: center;">OPF</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 17)" style="text-align: center;">Avg.</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="has-background-light">
-                  <td colspan="17" style="text-align: left !important;"><strong>Proprietary Models</strong></td>
+                <tr>
+                  <td>1</td><td style="text-align: left !important;"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a></td><td></td>
+                  <td><strong>3.32</strong></td><td>3.59</td><td><strong>3.14</strong></td><td>3.31</td><td>3.35</td><td>3.06</td><td><strong>3.73</strong></td><td>2.63</td><td>3.13</td><td>3.63</td><td>3.32</td><td>3.49</td><td><strong>2.75</strong></td><td><strong>3.33</strong></td><td><strong>2.87</strong></td><td>3.18</td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">Gemini-2.5-Pro</td>
-                  <td>3.23</td>
-                  <td><strong>3.86</strong></td><td>2.95</td><td><strong>3.48</strong></td><td><strong>3.44</strong></td>
-                  <td><strong>3.13</strong></td><td>3.60</td><td><strong>2.75</strong></td><td><strong>3.15</strong></td>
-                  <td><strong>3.70</strong></td><td><strong>3.91</strong></td><td><strong>3.80</strong></td>
-                  <td>2.74</td><td>3.27</td><td>2.84</td>
-                  <td><strong>3.27</strong></td>
+                  <td>2</td><td style="text-align: left !important;"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a></td><td></td>
+                  <td>3.23</td><td><strong>3.86</strong></td><td>2.95</td><td><strong>3.48</strong></td><td><strong>3.44</strong></td><td><strong>3.13</strong></td><td>3.60</td><td><strong>2.75</strong></td><td><strong>3.15</strong></td><td><strong>3.70</strong></td><td><strong>3.91</strong></td><td><strong>3.80</strong></td><td>2.74</td><td>3.27</td><td>2.84</td><td><strong>3.27</strong></td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">Gemini-3-Pro</td>
-                  <td><strong>3.32</strong></td>
-                  <td>3.59</td><td><strong>3.14</strong></td><td>3.31</td><td>3.35</td>
-                  <td>3.06</td><td><strong>3.73</strong></td><td>2.63</td><td>3.13</td>
-                  <td>3.63</td><td>3.32</td><td>3.49</td>
-                  <td><strong>2.75</strong></td><td><strong>3.33</strong></td><td><strong>2.87</strong></td>
-                  <td>3.18</td>
-                </tr>
-                <tr class="has-background-light">
-                  <td colspan="17" style="text-align: left !important;"><strong>Open-source Models</strong></td>
+                  <td>3</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a></td><td></td>
+                  <td>2.30</td><td><strong>3.14</strong></td><td>2.67</td><td><strong>2.54</strong></td><td><strong>2.77</strong></td><td>1.88</td><td>3.27</td><td><strong>2.19</strong></td><td><strong>2.42</strong></td><td><strong>3.00</strong></td><td><strong>2.64</strong></td><td><strong>2.84</strong></td><td>1.23</td><td>1.20</td><td>1.22</td><td>2.23</td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">MiniCPM-o 2.6</td>
-                  <td>2.01</td>
-                  <td>2.73</td><td>2.33</td><td>2.23</td><td>2.42</td>
-                  <td>1.75</td><td>2.33</td><td>1.94</td><td>2.00</td>
-                  <td>2.37</td><td>2.55</td><td>2.45</td>
-                  <td>1.69</td><td>1.27</td><td>1.61</td>
-                  <td>2.09</td>
+                  <td>4</td><td style="text-align: left !important;"><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></td><td></td>
+                  <td>2.16</td><td>2.18</td><td>2.00</td><td>2.35</td><td>2.19</td><td>2.19</td><td>2.47</td><td>2.00</td><td>2.21</td><td>2.52</td><td>2.23</td><td>2.39</td><td><strong>2.16</strong></td><td>2.60</td><td><strong>2.25</strong></td><td><strong>2.25</strong></td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">MiniCPM-o 4.5</td>
-                  <td><strong>2.30</strong></td>
-                  <td><strong>3.14</strong></td><td><strong>2.67</strong></td><td><strong>2.54</strong></td><td><strong>2.77</strong></td>
-                  <td>1.88</td><td><strong>3.27</strong></td><td><strong>2.19</strong></td><td><strong>2.42</strong></td>
-                  <td><strong>3.00</strong></td><td><strong>2.64</strong></td><td><strong>2.84</strong></td>
-                  <td>1.23</td><td>1.20</td><td>1.22</td>
-                  <td>2.23</td>
+                  <td>5</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></td><td></td>
+                  <td>2.16</td><td>1.45</td><td>2.14</td><td>2.42</td><td>2.03</td><td><strong>2.44</strong></td><td>2.60</td><td>2.13</td><td>2.38</td><td>2.44</td><td>2.00</td><td>2.24</td><td>1.08</td><td>1.20</td><td>1.11</td><td>1.85</td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">Qwen2.5-Omni</td>
-                  <td>2.16</td>
-                  <td>1.45</td><td>2.14</td><td>2.42</td><td>2.03</td>
-                  <td><strong>2.44</strong></td><td>2.60</td><td>2.13</td><td>2.38</td>
-                  <td>2.44</td><td>2.00</td><td>2.24</td>
-                  <td>1.08</td><td>1.20</td><td>1.11</td>
-                  <td>1.85</td>
+                  <td>6</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></td><td></td>
+                  <td>2.01</td><td>2.73</td><td>2.33</td><td>2.23</td><td>2.42</td><td>1.75</td><td>2.33</td><td>1.94</td><td>2.00</td><td>2.37</td><td>2.55</td><td>2.45</td><td>1.69</td><td>1.27</td><td>1.61</td><td>2.09</td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">Qwen3-Omni</td>
-                  <td>1.68</td>
-                  <td>1.50</td><td>0.62</td><td>2.00</td><td>1.42</td>
-                  <td>1.13</td><td>1.53</td><td>0.80</td><td>1.15</td>
-                  <td>1.89</td><td>1.00</td><td>1.49</td>
-                  <td>1.08</td><td><strong>3.33</strong></td><td>1.53</td>
-                  <td>1.42</td>
+                  <td>7</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></td><td></td>
+                  <td>1.68</td><td>1.50</td><td>0.62</td><td>2.00</td><td>1.42</td><td>1.13</td><td>1.53</td><td>0.80</td><td>1.15</td><td>1.89</td><td>1.00</td><td>1.49</td><td>1.08</td><td><strong>3.33</strong></td><td>1.53</td><td>1.42</td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">Baichuan-Omni 1.5</td>
-                  <td>2.16</td>
-                  <td>2.18</td><td>2.00</td><td>2.35</td><td>2.19</td>
-                  <td>2.19</td><td>2.47</td><td>2.00</td><td>2.21</td>
-                  <td>2.52</td><td>2.23</td><td>2.39</td>
-                  <td><strong>2.16</strong></td><td>2.60</td><td><strong>2.25</strong></td>
-                  <td><strong>2.25</strong></td>
-                </tr>
-                <tr>
-                  <td style="text-align: left !important;">VITA-1.5</td>
-                  <td>1.23</td>
-                  <td>1.09</td><td>1.14</td><td>1.00</td><td>1.07</td>
-                  <td>1.25</td><td>1.40</td><td>1.33</td><td>1.33</td>
-                  <td>1.59</td><td>0.73</td><td>1.20</td>
-                  <td>1.31</td><td>1.47</td><td>1.34</td>
-                  <td>1.23</td>
+                  <td>8</td><td style="text-align: left !important;"><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></td><td></td>
+                  <td>1.23</td><td>1.09</td><td>1.14</td><td>1.00</td><td>1.07</td><td>1.25</td><td>1.40</td><td>1.33</td><td>1.33</td><td>1.59</td><td>0.73</td><td>1.20</td><td>1.31</td><td>1.47</td><td>1.34</td><td>1.23</td>
                 </tr>
               </tbody>
             </table>
@@ -723,134 +804,93 @@
 
         <!-- Table 3: Advanced Interactive Understanding Tasks & Real World Cases -->
         <div style="margin-top: 3rem;">
-        <h5 class="has-text-centered" style="margin-top: 2rem;">Performance comparison on Advanced Interactive Understanding Tasks</h5>
+          <h5>Performance comparison on Advanced Interactive Understanding tasks and Real World Cases</h5>
           <div class="table-container" style="font-size: 0.85rem;">
-            <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+            <table id="adv-table" class="table is-bordered is-striped is-hoverable is-fullwidth">
               <thead>
                 <tr>
+                  <th rowspan="3" style="vertical-align: middle; text-align: center;">#</th>
                   <th rowspan="3" style="vertical-align: middle; text-align: center;">Model</th>
-                  <th rowspan="3" style="vertical-align: middle; text-align: center;">Overall<br>Avg.</th>
+                  <th rowspan="3" style="vertical-align: middle; text-align: center;">Frames</th>
+                  <th rowspan="3" class="sortable" onclick="sortTable('adv-table', 3)" style="vertical-align: middle; text-align: center;">Overall<br>Avg.</th>
                   <th colspan="9" style="text-align: center;">Advanced Interactive Understanding Tasks</th>
                   <th colspan="4" rowspan="2" style="vertical-align: middle; text-align: center;">Real World Cases</th>
                 </tr>
                 <tr>
-                  <th rowspan="2" style="vertical-align: middle; text-align: center;">CR</th>
+                  <th rowspan="2" class="sortable" onclick="sortTable('adv-table', 4)" style="vertical-align: middle; text-align: center;">CR</th>
                   <th colspan="3" style="text-align: center;">Proactive Response</th>
                   <th colspan="4" style="text-align: center;">Process Tracking</th>
-                  <th rowspan="2" style="vertical-align: middle; text-align: center;">Avg.</th>
+                  <th rowspan="2" class="sortable" onclick="sortTable('adv-table', 12)" style="vertical-align: middle; text-align: center;">Avg.</th>
                 </tr>
                 <tr>
-                  <th style="text-align: center;">SER</th>
-                  <th style="text-align: center;">MER</th>
-                  <th style="text-align: center;">Avg.</th>
-                  <th style="text-align: center;">ST</th>
-                  <th style="text-align: center;">CT</th>
-                  <th style="text-align: center;">MT</th>
-                  <th style="text-align: center;">Avg.</th>
-                  <th style="text-align: center;">Ms</th>
-                  <th style="text-align: center;">Ht</th>
-                  <th style="text-align: center;">Ba</th>
-                  <th style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 5)" style="text-align: center;">SER</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 6)" style="text-align: center;">MER</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 7)" style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 8)" style="text-align: center;">ST</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 9)" style="text-align: center;">CT</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 10)" style="text-align: center;">MT</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 11)" style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 13)" style="text-align: center;">Ms</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 14)" style="text-align: center;">Ht</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 15)" style="text-align: center;">Ba</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 16)" style="text-align: center;">Avg.</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="has-background-light">
-                  <td colspan="15" style="text-align: left !important;"><strong>Proprietary Models</strong></td>
+                <tr>
+                  <td>1</td><td style="text-align: left !important;"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a></td><td></td>
+                  <td><strong>3.32</strong></td><td><strong>3.80</strong></td><td><strong>3.39</strong></td><td><strong>2.42</strong></td><td><strong>2.93</strong></td><td><strong>3.59</strong></td><td>3.75</td><td><strong>3.51</strong></td><td><strong>3.61</strong></td><td><strong>3.41</strong></td><td><strong>3.82</strong></td><td><strong>3.29</strong></td><td><strong>3.25</strong></td><td><strong>3.40</strong></td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">Gemini-2.5-Pro</td>
-                  <td>3.23</td>
-                  <td>3.70</td>
-                  <td>3.06</td><td>2.39</td><td>2.74</td>
-                  <td>3.39</td><td><strong>4.11</strong></td><td>3.47</td><td>3.60</td>
-                  <td>3.32</td>
-                  <td>2.55</td><td>1.64</td><td>2.50</td><td>2.24</td>
+                  <td>2</td><td style="text-align: left !important;"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a></td><td></td>
+                  <td>3.23</td><td>3.70</td><td>3.06</td><td>2.39</td><td>2.74</td><td>3.39</td><td><strong>4.11</strong></td><td>3.47</td><td>3.60</td><td>3.32</td><td>2.55</td><td>1.64</td><td>2.50</td><td>2.24</td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">Gemini-3-Pro</td>
-                  <td><strong>3.32</strong></td>
-                  <td><strong>3.80</strong></td>
-                  <td><strong>3.39</strong></td><td><strong>2.42</strong></td><td><strong>2.93</strong></td>
-                  <td><strong>3.59</strong></td><td>3.75</td><td><strong>3.51</strong></td><td><strong>3.61</strong></td>
-                  <td><strong>3.41</strong></td>
-                  <td><strong>3.82</strong></td><td><strong>3.29</strong></td><td><strong>3.25</strong></td><td><strong>3.40</strong></td>
-                </tr>
-                <tr class="has-background-light">
-                  <td colspan="15" style="text-align: left !important;"><strong>Open-source Models</strong></td>
+                  <td>3</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a></td><td></td>
+                  <td>2.30</td><td><strong>3.15</strong></td><td>2.66</td><td>2.65</td><td>2.65</td><td>2.23</td><td>2.30</td><td>2.01</td><td>2.19</td><td>2.39</td><td>0.27</td><td>2.50</td><td>2.35</td><td>1.89</td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">MiniCPM-o 2.6</td>
-                  <td>2.01</td>
-                  <td>1.95</td>
-                  <td>2.10</td><td>1.63</td><td>1.87</td>
-                  <td>2.16</td><td>2.19</td><td>1.88</td><td>2.09</td>
-                  <td>2.01</td>
-                  <td>0.45</td><td>1.71</td><td>2.05</td><td>1.56</td>
+                  <td>4</td><td style="text-align: left !important;"><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></td><td></td>
+                  <td>2.16</td><td>1.75</td><td><strong>2.84</strong></td><td>2.42</td><td><strong>2.64</strong></td><td>1.60</td><td>2.02</td><td>2.03</td><td>1.83</td><td>2.09</td><td><strong>1.91</strong></td><td>2.57</td><td>2.20</td><td>2.24</td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">MiniCPM-o 4.5</td>
-                  <td><strong>2.30</strong></td>
-                  <td><strong>3.15</strong></td>
-                  <td>2.66</td><td>2.65</td><td>2.65</td>
-                  <td>2.23</td><td><strong>2.30</strong></td><td>2.01</td><td>2.19</td>
-                  <td><strong>2.39</strong></td>
-                  <td>0.27</td><td>2.50</td><td>2.35</td><td>1.89</td>
+                  <td>5</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></td><td></td>
+                  <td>2.16</td><td>2.25</td><td>2.36</td><td><strong>2.77</strong></td><td>2.56</td><td>2.55</td><td>1.64</td><td><strong>2.22</strong></td><td><strong>2.22</strong></td><td>2.33</td><td>0.91</td><td><strong>3.00</strong></td><td><strong>2.45</strong></td><td><strong>2.26</strong></td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">Qwen2.5-Omni</td>
-                  <td>2.16</td>
-                  <td>2.25</td>
-                  <td>2.36</td><td><strong>2.77</strong></td><td>2.56</td>
-                  <td>2.55</td><td>1.64</td><td><strong>2.22</strong></td><td><strong>2.22</strong></td>
-                  <td>2.33</td>
-                  <td>0.91</td><td><strong>3.00</strong></td><td><strong>2.45</strong></td><td><strong>2.26</strong></td>
+                  <td>6</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></td><td></td>
+                  <td>2.01</td><td>1.95</td><td>2.10</td><td>1.63</td><td>1.87</td><td>2.16</td><td>2.19</td><td>1.88</td><td>2.09</td><td>2.01</td><td>0.45</td><td>1.71</td><td>2.05</td><td>1.56</td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">Qwen3-Omni</td>
-                  <td>1.68</td>
-                  <td>1.05</td>
-                  <td>1.51</td><td>1.97</td><td>1.73</td>
-                  <td><strong>2.76</strong></td><td>1.20</td><td>1.26</td><td>1.94</td>
-                  <td>1.82</td>
-                  <td>1.18</td><td>1.36</td><td>2.35</td><td>1.76</td>
+                  <td>7</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></td><td></td>
+                  <td>1.68</td><td>1.05</td><td>1.51</td><td>1.97</td><td>1.73</td><td><strong>2.76</strong></td><td>1.20</td><td>1.26</td><td>1.94</td><td>1.82</td><td>1.18</td><td>1.36</td><td>2.35</td><td>1.76</td>
                 </tr>
                 <tr>
-                  <td style="text-align: left !important;">Baichuan-Omni 1.5</td>
-                  <td>2.16</td>
-                  <td>1.75</td>
-                  <td><strong>2.84</strong></td><td>2.42</td><td><strong>2.64</strong></td>
-                  <td>1.60</td><td>2.02</td><td>2.03</td><td>1.83</td>
-                  <td>2.09</td>
-                  <td><strong>1.91</strong></td><td>2.57</td><td>2.20</td><td>2.24</td>
-                </tr>
-                <tr>
-                  <td style="text-align: left !important;">VITA-1.5</td>
-                  <td>1.23</td>
-                  <td>0.65</td>
-                  <td>1.19</td><td>1.72</td><td>1.44</td>
-                  <td>1.71</td><td>0.80</td><td>0.91</td><td>1.25</td>
-                  <td>1.29</td>
-                  <td>0.55</td><td>0.79</td><td>0.80</td><td>0.73</td>
+                  <td>8</td><td style="text-align: left !important;"><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></td><td></td>
+                  <td>1.23</td><td>0.65</td><td>1.19</td><td>1.72</td><td>1.44</td><td>1.71</td><td>0.80</td><td>0.91</td><td>1.25</td><td>1.29</td><td>0.55</td><td>0.79</td><td>0.80</td><td>0.73</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-
       </details>
-
-      <div class="content" style="margin-top: 1.5rem;">
-        <p>OmniAssistBench is highly challenging. Current evaluations show that even the most advanced models have substantial room for improvement before they can serve as reliable real-world assistants. From the evaluation results, we observe the following <strong>key bottlenecks</strong> in current Omni-LLMs</p>
-        <ul>
-          <li> <strong>Deficiency in Gesture Instruction Following:</strong> Models struggle significantly with gesture-based commands. This reveals a critical weakness in in terpreting visual instructions, as models usually fail to distinguish intentional symbolic gestures from other incidental motion information in the dynamic scene.</li>
-          <li> <strong>Long-Context Interaction Disparity:</strong> Proprietary models substantially outperform open source alternatives on Process Tracking tasks, exposing a pronounced weakness in long-term memory retention and sustained context man agement among current open-source systems.</li>
-          <li> <strong>Failure of Keep Silence:</strong> Models systematically struggle to determine when a response is unnecessary, frequently giving video captions which are less  related to the user prompt, in stead of appropriately remaining silent when the visual input provides insufficient evidence.</li>
-          <li> <strong>Over-reliance on text:</strong> Open-source models tend to echo their own replies during multi-turn tasks. This suggests an over-reliance on the text modality (the assistant's past replies) and an inability to dynamically update their context using the complex visual changes in the video.</li>
-        </ul>
-      </div>
-      
     </div>
   </div>
+  
+  <!-- INSIGHTS SUBSECTION -->
+  <div class="container is-max-desktop" style="margin-top: 3.5rem;">
+    <div class="content">
+      <h3 class="title is-4">Insights</h3>
+      <p>OmniAssistBench is highly challenging. Current evaluations show that even the most advanced models have substantial room for improvement before they can serve as reliable real-world assistants. From the evaluation results, we observe the following <strong>key bottlenecks</strong> in current Omni-LLMs:</p>
+      <ul>
+        <li> <strong>Deficiency in Gesture Instruction Following:</strong> Models struggle significantly with gesture-based commands. This reveals a critical weakness in interpreting visual instructions, as models usually fail to distinguish intentional symbolic gestures from other incidental motion information in the dynamic scene.</li>
+        <li> <strong>Long-Context Interaction Disparity:</strong> Proprietary models substantially outperform open source alternatives on Process Tracking tasks, exposing a pronounced weakness in long-term memory retention and sustained context management among current open-source systems.</li>
+        <li> <strong>Failure of Keep Silence:</strong> Models systematically struggle to determine when a response is unnecessary, frequently giving video captions which are less related to the user prompt, instead of appropriately remaining silent when the visual input provides insufficient evidence.</li>
+        <li> <strong>Over-reliance on text:</strong> Open-source models tend to echo their own replies during multi-turn tasks. This suggests an over-reliance on the text modality (the assistant's past replies) and an inability to dynamically update their context using the complex visual changes in the video.</li>
+      </ul>
+    </div>
+  </div>
+
 </section>
 
 <!-- FOOTER -->
@@ -864,53 +904,80 @@
   </div>
 </footer>
 
-<!-- CAROUSEL JAVASCRIPT -->
+<!-- JAVASCRIPT LOGIC -->
 <script>
-  // We have two carousels, so we track two slide indexes. Both start at slide 1.
-  let slideIndex = [1, 1];
-  
-  // Class names for slides and dots to keep the carousels separated
+  // -- Carousel Logic --
+  let slideIndex =[1, 1];
   let slideId = ["carousel-slide-1", "carousel-slide-2"];
-  let dotId = ["carousel-dot-1", "carousel-dot-2"];
+  let dotId =["carousel-dot-1", "carousel-dot-2"];
 
-  // Initialize both carousels immediately
-  showSlides(1, 0); // Initializes Group 1
-  showSlides(1, 1); // Initializes Group 2
+  showSlides(1, 0); 
+  showSlides(1, 1); 
 
-  // Next/previous controls
   function changeSlide(n, groupNo) {
     showSlides(slideIndex[groupNo] += n, groupNo);
   }
 
-  // Dot controls
   function currentSlide(n, groupNo) {
     showSlides(slideIndex[groupNo] = n, groupNo);
   }
 
   function showSlides(n, groupNo) {
     let i;
-    // Get only the slides and dots for the specific carousel group
     let slides = document.getElementsByClassName(slideId[groupNo]);
     let dots = document.getElementsByClassName(dotId[groupNo]);
     
-    // Loop back to the beginning or end for this specific carousel
     if (n > slides.length) {slideIndex[groupNo] = 1}    
     if (n < 1) {slideIndex[groupNo] = slides.length}
     
-    // Hide all slides in this carousel
     for (i = 0; i < slides.length; i++) {
       slides[i].style.display = "none";  
     }
     
-    // Remove "active" class from all dots in this carousel
     for (i = 0; i < dots.length; i++) {
       dots[i].className = dots[i].className.replace(" active", "");
     }
     
-    // Show the specific slide and set matching dot to active
     slides[slideIndex[groupNo]-1].style.display = "block";  
     dots[slideIndex[groupNo]-1].className += " active";
   }
+
+  // -- Table Expand/Toggle Logic for the Tier Cards --
+  function toggleTierTable(tableId, arrowId) {
+    const tableContainer = document.getElementById(tableId);
+    const arrow = document.getElementById(arrowId);
+    
+    if (tableContainer.style.display === "none" || tableContainer.style.display === "") {
+      tableContainer.style.display = "block";
+      arrow.innerHTML = "▼";
+    } else {
+      tableContainer.style.display = "none";
+      arrow.innerHTML = "►";
+    }
+  }
+
+  // -- Table Sorting Logic --
+  function sortTable(tableId, colIndex) {
+    const table = document.getElementById(tableId);
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    rows.sort((a, b) => {
+      const aText = a.children[colIndex].innerText.replace('%', '').trim();
+      const bText = b.children[colIndex].innerText.replace('%', '').trim();
+
+      const aVal = parseFloat(aText);
+      const bVal = parseFloat(bText);
+
+      if (!isNaN(aVal) && !isNaN(bVal)) {
+        return bVal - aVal;
+      }
+      return bText.localeCompare(aText);
+    });
+
+    rows.forEach(row => tbody.appendChild(row));
+  }
+
 </script>
 
 </body>
