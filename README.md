@@ -6,6 +6,7 @@
 
 [![Paper](https://img.shields.io/badge/Arxiv-Under_Review-red)](#)
 [![Dataset](https://img.shields.io/badge/HuggingFace-Under_Review-yellow)](#)
+[![Project Page](https://img.shields.io/badge/Project_Page-green)]((https://XianyunSun.github.io/OmniAssistBench/))
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](#)
 
 The first benchmerk specially designed to evaluate Omni-LLMs under assistant-style, real-time video chat scenarios.
