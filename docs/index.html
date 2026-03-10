@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
+  <!-- ECharts Library for Radar Chart -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+
   <style>
     body { font-family: 'Noto Sans', sans-serif; }
     .title.is-1 { font-family: 'Google Sans', sans-serif; font-weight: 700; }
@@ -27,37 +30,21 @@
     pre { background-color: #f4f4f4; padding: 1rem; border-radius: 5px; overflow-x: auto; font-size: 0.9em; }
     .highlight-row { font-weight: bold; background-color: #fdfdfd; }
 
-    /* --- Table Settings & Custom Width Parameters --- */
-    :root {
-      /* Adjust this parameter to change the minimum width of the leaderboard tables */
-      --table-min-width: 1200px;
-      /* Adjust this to change the TOTAL width of the Basic/Advanced task tables */
-      --task-table-width: 1300px; 
-      /* Adjust this to change the PERCENTAGE width of the Description column */
-      --desc-col-width: 65%; 
+    /* --- Table Settings --- */
+    :root{
+      --radar-width: 40%; 
     }
+    
     .table-container { 
       overflow-x: auto; 
-      margin-top: 1.5rem; 
-      width: 100%;
+      margin: 1.5rem auto; 
+      width: 90%;
     }
     table { border-collapse: collapse; }
+    
+    /* Make all tables fluid and responsive to the viewport */
     .table-container table {
       width: 100%;
-      min-width: var(--table-min-width); 
-    }
-    /* Specific class for the task detail tables to control their width separately */
-    .task-table-wrapper table {
-      width: var(--task-table-width);
-      min-width: var(--task-table-width);
-    }
-  
-    /* Target the Description column (the 4th column) in the task tables */
-    .task-table-wrapper table th:nth-child(4),
-    .task-table-wrapper table td:nth-child(4) {
-      width: var(--desc-col-width);
-      text-align: left !important;
-      white-space: normal; /* Allows text to wrap normally alongside your manual <br> tags */
     }
     
     th, td { 
@@ -68,10 +55,16 @@
     }
     th { background-color: #f5f5f5; }
     
-    /* Force tables to stay on one line unless <br> is used manually */
+    /* Keep data rows on one line (enables horizontal scrolling on small screens like Video-MME) */
     .table-container table th, 
     .table-container table td {
       white-space: nowrap;
+    }
+    
+    /* Allow the 'Description' column (4th column) in the Tier tasks to wrap naturally */
+    .task-table-wrapper table td:last-child{
+      text-align: left !important;
+      white-space: normal; 
     }
 
     /* --- Tier Card Styles --- */
@@ -112,12 +105,13 @@
     }
     details.clean-details > summary {
       cursor: pointer;
-      font-weight: bold;
+      /*font-weight: bold;*/
       text-align: left;
       font-size: 1.1rem;
-      color: #3273dc; /* Makes it look clickable like a link */
+      /*color: #3273dc;  Makes it look clickable like a link */
       outline: none;
       list-style: none; /* Removes the default HTML triangle marker */
+      display: block;
     }
     details.clean-details > summary::-webkit-details-marker {
       display: none; /* Removes the default HTML triangle marker in Webkit browsers */
@@ -125,7 +119,7 @@
     details.clean-details > summary::before {
       content: "► ";
       font-size: 0.8em;
-      color: #3273dc;
+      /*color: #3273dc;*/
       display: inline-block;
       margin-right: 5px;
     }
@@ -216,7 +210,7 @@
       background-color: #e8e8e8 !important;
     }
     th.sortable::after {
-      content: ' \25BC';
+      content: ' \2193';
       font-size: 0.7em;
       color: #888;
       margin-left: 4px;
@@ -283,18 +277,346 @@
   </div>
 </section>
 
+<!-- LEADERBOARD -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="content">
+      <h2 class="has-text-centered">Leaderboard</h2>
+    </div>
+  </div>
+      
+    <!-- Interactive Radar Chart -->
+      <div style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 3rem; margin-bottom: 2rem;">
+        <div id="radar-chart" style="width: var(--radar-width); aspect-ratio: 1 / 0.95;"></div>
+        <p class="figure-caption" style="margin-top: 1rem;">
+          <i>Sub-task level performance comparison of evaluated models.</i>
+        </p>
+      </div>
+
+  <!-- Main Leaderboard Table -->
+  <div class="container is-fluid" style="margin-top: 2rem;">
+    <div class="content">
+      <div class="table-container">
+        <table id="main-table" class="table is-bordered is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th style="text-align: center; vertical-align: middle;">#</th>
+              <th style="text-align: center; vertical-align: middle;">Model</th>
+              <th style="text-align: center; vertical-align: middle;">Size</th>
+              <th style="text-align: center; vertical-align: middle;">Frames</th>
+              <th class="sortable" onclick="sortTable('main-table', 4)" style="text-align: center; vertical-align: middle;">Basic Tier</th>
+              <th class="sortable" onclick="sortTable('main-table', 5)" style="text-align: center; vertical-align: middle;">Advanced Tier</th>
+              <th class="sortable" onclick="sortTable('main-table', 6)" style="text-align: center; vertical-align: middle;">Real Cases</th>
+              <th class="sortable" onclick="sortTable('main-table', 7)" style="text-align: center; vertical-align: middle;">Overall (/5.0)</th>
+              <th class="sortable" onclick="sortTable('main-table', 8)" style="text-align: center; vertical-align: middle;">Percentage (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td>1</td>
+              <td style="text-align: left !important;"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a></td>
+              <td>-</td><td>-</td>
+              <td>3.18</td><td>3.41</td><td>3.40</td><td><strong>3.32</strong></td><td>66.4%</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td style="text-align: left !important;"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a></td>
+              <td>-</td><td>-</td>
+              <td>3.27</td><td>3.32</td><td>2.24</td><td>3.23</td><td>64.6%</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a></td>
+              <td>9B</td><td>1fps</td>
+              <td>2.23</td><td>2.39</td><td>1.89</td><td><strong>2.30</strong></td><td>46.0%</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td style="text-align: left !important;"><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></td>
+              <td>7B</td><td>32</td>
+              <td>2.25</td><td>2.09</td><td>2.24</td><td>2.16</td><td>43.2%</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></td>
+              <td>7B</td><td>1fps</td>
+              <td>1.85</td><td>2.33</td><td>2.26</td><td>2.16</td><td>43.2%</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></td>
+              <td>8B</td><td>1fps</td>
+              <td>2.09</td><td>2.01</td><td>1.56</td><td>2.01</td><td>40.2%</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></td>
+              <td>30B-A3B</td><td>1fps</td>
+              <td>1.42</td><td>1.82</td><td>1.76</td><td>1.68</td><td>33.6%</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td style="text-align: left !important;"><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></td>
+              <td>7B</td><td>4</td>
+              <td>1.23</td><td>1.29</td><td>0.73</td><td>1.23</td><td>24.6%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+      <!-- Detailed Sub-task Evaluation Results Dropdown -->
+    <div class="content">
+      <details class="clean-details">
+        <summary class="container is-max-desktop">Click here to expand for detailed sub-task level evaluation results.</summary>
+        
+        <!-- Table 2: Basic Interactive Understanding Tasks -->
+        <div style="margin-top: 1.5rem;">
+          <h5 class="has-text-centered">Performance comparison on Basic Interactive Understanding tasks</h5>
+          <div class="table-container" style="font-size: 0.85rem;">
+            <table id="basic-table" class="table is-bordered is-striped is-hoverable is-fullwidth">
+              <thead>
+                <tr>
+                  <th rowspan="3" style="vertical-align: middle; text-align: center;">#</th>
+                  <th rowspan="3" style="vertical-align: middle; text-align: center;">Model</th>
+                  <th rowspan="3" class="sortable" onclick="sortTable('basic-table', 3)" style="vertical-align: middle; text-align: center;">Overall<br>Avg.</th>
+                  <th colspan="14" style="text-align: center;">Basic Interactive Understanding Tasks</th>
+                  <th rowspan="3" class="sortable" onclick="sortTable('basic-table', 18)" style="vertical-align: middle; text-align: center;">Avg.</th>
+                </tr>
+                <tr>
+                  <th colspan="4" style="text-align: center;">Social Perception</th>
+                  <th colspan="4" style="text-align: center;">Temporal Perception</th>
+                  <th colspan="3" style="text-align: center;">Referential Perception</th>
+                  <th colspan="3" style="text-align: center;">Non-audio Prompt</th>
+                </tr>
+                <tr>
+                  <th class="sortable" onclick="sortTable('basic-table', 4)" style="text-align: center;">II</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 5)" style="text-align: center;">AI</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 6)" style="text-align: center;">CE</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 7)" style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 8)" style="text-align: center;">ER</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 9)" style="text-align: center;">AO</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 10)" style="text-align: center;">DC</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 11)" style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 12)" style="text-align: center;">AR</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 13)" style="text-align: center;">LR</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 14)" style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 15)" style="text-align: center;">GPF</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 16)" style="text-align: center;">OPF</th>
+                  <th class="sortable" onclick="sortTable('basic-table', 17)" style="text-align: center;">Avg.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td><td style="text-align: left !important;"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a></td>
+                  <td><strong>3.32</strong></td><td>3.59</td><td><strong>3.14</strong></td><td>3.31</td><td>3.35</td><td>3.06</td><td><strong>3.73</strong></td><td>2.63</td><td>3.13</td><td>3.63</td><td>3.32</td><td>3.49</td><td><strong>2.75</strong></td><td><strong>3.33</strong></td><td><strong>2.87</strong></td><td>3.18</td>
+                </tr>
+                <tr>
+                  <td>2</td><td style="text-align: left !important;"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a></td>
+                  <td>3.23</td><td><strong>3.86</strong></td><td>2.95</td><td><strong>3.48</strong></td><td><strong>3.44</strong></td><td><strong>3.13</strong></td><td>3.60</td><td><strong>2.75</strong></td><td><strong>3.15</strong></td><td><strong>3.70</strong></td><td><strong>3.91</strong></td><td><strong>3.80</strong></td><td>2.74</td><td>3.27</td><td>2.84</td><td><strong>3.27</strong></td>
+                </tr>
+                <tr>
+                  <td>3</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a></td>
+                  <td>2.30</td><td><strong>3.14</strong></td><td>2.67</td><td><strong>2.54</strong></td><td><strong>2.77</strong></td><td>1.88</td><td>3.27</td><td><strong>2.19</strong></td><td><strong>2.42</strong></td><td><strong>3.00</strong></td><td><strong>2.64</strong></td><td><strong>2.84</strong></td><td>1.23</td><td>1.20</td><td>1.22</td><td>2.23</td>
+                </tr>
+                <tr>
+                  <td>4</td><td style="text-align: left !important;"><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></td>
+                  <td>2.16</td><td>2.18</td><td>2.00</td><td>2.35</td><td>2.19</td><td>2.19</td><td>2.47</td><td>2.00</td><td>2.21</td><td>2.52</td><td>2.23</td><td>2.39</td><td><strong>2.16</strong></td><td>2.60</td><td><strong>2.25</strong></td><td><strong>2.25</strong></td>
+                </tr>
+                <tr>
+                  <td>5</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></td>
+                  <td>2.16</td><td>1.45</td><td>2.14</td><td>2.42</td><td>2.03</td><td><strong>2.44</strong></td><td>2.60</td><td>2.13</td><td>2.38</td><td>2.44</td><td>2.00</td><td>2.24</td><td>1.08</td><td>1.20</td><td>1.11</td><td>1.85</td>
+                </tr>
+                <tr>
+                  <td>6</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></td>
+                  <td>2.01</td><td>2.73</td><td>2.33</td><td>2.23</td><td>2.42</td><td>1.75</td><td>2.33</td><td>1.94</td><td>2.00</td><td>2.37</td><td>2.55</td><td>2.45</td><td>1.69</td><td>1.27</td><td>1.61</td><td>2.09</td>
+                </tr>
+                <tr>
+                  <td>7</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></td>
+                  <td>1.68</td><td>1.50</td><td>0.62</td><td>2.00</td><td>1.42</td><td>1.13</td><td>1.53</td><td>0.80</td><td>1.15</td><td>1.89</td><td>1.00</td><td>1.49</td><td>1.08</td><td><strong>3.33</strong></td><td>1.53</td><td>1.42</td>
+                </tr>
+                <tr>
+                  <td>8</td><td style="text-align: left !important;"><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></td>
+                  <td>1.23</td><td>1.09</td><td>1.14</td><td>1.00</td><td>1.07</td><td>1.25</td><td>1.40</td><td>1.33</td><td>1.33</td><td>1.59</td><td>0.73</td><td>1.20</td><td>1.31</td><td>1.47</td><td>1.34</td><td>1.23</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Table 3: Advanced Interactive Understanding Tasks & Real World Cases -->
+        <div style="margin-top: 3rem;">
+          <h5 class="has-text-centered">Performance comparison on Advanced Interactive Understanding tasks and Real World Cases</h5>
+          <div class="table-container" style="font-size: 0.85rem;">
+            <table id="adv-table" class="table is-bordered is-striped is-hoverable is-fullwidth">
+              <thead>
+                <tr>
+                  <th rowspan="3" style="vertical-align: middle; text-align: center;">#</th>
+                  <th rowspan="3" style="vertical-align: middle; text-align: center;">Model</th>
+                  <th rowspan="3" class="sortable" onclick="sortTable('adv-table', 3)" style="vertical-align: middle; text-align: center;">Overall<br>Avg.</th>
+                  <th colspan="9" style="text-align: center;">Advanced Interactive Understanding Tasks</th>
+                  <th colspan="4" rowspan="2" style="vertical-align: middle; text-align: center;">Real World Cases</th>
+                </tr>
+                <tr>
+                  <th rowspan="2" class="sortable" onclick="sortTable('adv-table', 4)" style="vertical-align: middle; text-align: center;">CR</th>
+                  <th colspan="3" style="text-align: center;">Proactive Response</th>
+                  <th colspan="4" style="text-align: center;">Process Tracking</th>
+                  <th rowspan="2" class="sortable" onclick="sortTable('adv-table', 12)" style="vertical-align: middle; text-align: center;">Avg.</th>
+                </tr>
+                <tr>
+                  <th class="sortable" onclick="sortTable('adv-table', 5)" style="text-align: center;">SER</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 6)" style="text-align: center;">MER</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 7)" style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 8)" style="text-align: center;">ST</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 9)" style="text-align: center;">CT</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 10)" style="text-align: center;">MT</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 11)" style="text-align: center;">Avg.</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 13)" style="text-align: center;">Ms</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 14)" style="text-align: center;">Ht</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 15)" style="text-align: center;">Ba</th>
+                  <th class="sortable" onclick="sortTable('adv-table', 16)" style="text-align: center;">Avg.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td><td style="text-align: left !important;"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a></td>
+                  <td><strong>3.32</strong></td><td><strong>3.80</strong></td><td><strong>3.39</strong></td><td><strong>2.42</strong></td><td><strong>2.93</strong></td><td><strong>3.59</strong></td><td>3.75</td><td><strong>3.51</strong></td><td><strong>3.61</strong></td><td><strong>3.41</strong></td><td><strong>3.82</strong></td><td><strong>3.29</strong></td><td><strong>3.25</strong></td><td><strong>3.40</strong></td>
+                </tr>
+                <tr>
+                  <td>2</td><td style="text-align: left !important;"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a></td>
+                  <td>3.23</td><td>3.70</td><td>3.06</td><td>2.39</td><td>2.74</td><td>3.39</td><td><strong>4.11</strong></td><td>3.47</td><td>3.60</td><td>3.32</td><td>2.55</td><td>1.64</td><td>2.50</td><td>2.24</td>
+                </tr>
+                <tr>
+                  <td>3</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a></td>
+                  <td>2.30</td><td><strong>3.15</strong></td><td>2.66</td><td>2.65</td><td>2.65</td><td>2.23</td><td>2.30</td><td>2.01</td><td>2.19</td><td>2.39</td><td>0.27</td><td>2.50</td><td>2.35</td><td>1.89</td>
+                </tr>
+                <tr>
+                  <td>4</td><td style="text-align: left !important;"><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></td>
+                  <td>2.16</td><td>1.75</td><td><strong>2.84</strong></td><td>2.42</td><td><strong>2.64</strong></td><td>1.60</td><td>2.02</td><td>2.03</td><td>1.83</td><td>2.09</td><td><strong>1.91</strong></td><td>2.57</td><td>2.20</td><td>2.24</td>
+                </tr>
+                <tr>
+                  <td>5</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></td>
+                  <td>2.16</td><td>2.25</td><td>2.36</td><td><strong>2.77</strong></td><td>2.56</td><td>2.55</td><td>1.64</td><td><strong>2.22</strong></td><td><strong>2.22</strong></td><td>2.33</td><td>0.91</td><td><strong>3.00</strong></td><td><strong>2.45</strong></td><td><strong>2.26</strong></td>
+                </tr>
+                <tr>
+                  <td>6</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></td>
+                  <td>2.01</td><td>1.95</td><td>2.10</td><td>1.63</td><td>1.87</td><td>2.16</td><td>2.19</td><td>1.88</td><td>2.09</td><td>2.01</td><td>0.45</td><td>1.71</td><td>2.05</td><td>1.56</td>
+                </tr>
+                <tr>
+                  <td>7</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></td>
+                  <td>1.68</td><td>1.05</td><td>1.51</td><td>1.97</td><td>1.73</td><td><strong>2.76</strong></td><td>1.20</td><td>1.26</td><td>1.94</td><td>1.82</td><td>1.18</td><td>1.36</td><td>2.35</td><td>1.76</td>
+                </tr>
+                <tr>
+                  <td>8</td><td style="text-align: left !important;"><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></td>
+                  <td>1.23</td><td>0.65</td><td>1.19</td><td>1.72</td><td>1.44</td><td>1.71</td><td>0.80</td><td>0.91</td><td>1.25</td><td>1.29</td><td>0.55</td><td>0.79</td><td>0.80</td><td>0.73</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="container is-max-desktop">
+    <div class="content">
+      <p>OmniAssistBench requires candidate models to be capable of processing videos along with the corresponding audios. All models are graded using our LLM-as-a-Judge pipeline on a 0 - 5 scale.</p>
+      <p>Please refer to the <a href="https://github.com/XianyunSun/OmniAssistBench">Github page</a> for detailed evaluation pipeline and example codes.</p>
+    </div>
+    </div>
+  
+<!-- INSIGHTS SUBSECTION -->
+  <div class="container is-max-desktop" style="margin-top: 3.5rem;">
+    <div class="content">
+      <h3 class="title is-4 has-text-centered">Key Insights</h3>
+      <p class="has-text-centered" style="margin-bottom: 2rem;">
+        OmniAssistBench is highly challenging. Current evaluations show that even the most advanced models have substantial room for improvement before they can serve as reliable real-world assistants. From the evaluation results, we observe the following <strong>key bottlenecks</strong> in current Omni-LLMs:
+      </p>
+
+      <!-- 2x2 Grid using Bulma Columns -->
+      <div class="columns is-multiline is-desktop">
+        
+        <!-- Insight 1 -->
+        <div class="column is-half">
+          <div class="box" style="border-left: 5px solid #A9D18E; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong style="font-size: 1.05rem;">Deficiency in Gesture Instruction Following</strong><br>
+                    <span style="font-size: 0.95rem;">Models struggle significantly with gesture-based commands. This reveals a critical weakness in interpreting visual instructions, as models usually fail to distinguish intentional symbolic gestures from other incidental motion information in the dynamic scene.</span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Insight 2 -->
+        <div class="column is-half">
+          <div class="box" style="border-left: 5px solid #F3C59A; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong style="font-size: 1.05rem;">Long-Context Interaction Disparity</strong><br>
+                    <span style="font-size: 0.95rem;">Proprietary models substantially outperform open source alternatives on Process Tracking tasks, exposing a pronounced weakness in long-term memory retention and sustained context management among current open-source systems.</span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Insight 3 -->
+        <div class="column is-half">
+          <div class="box" style="border-left: 5px solid #9BC2E6; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong style="font-size: 1.05rem;">Failure to Keep Silent</strong><br>
+                    <span style="font-size: 0.95rem;">Models systematically struggle to determine when a response is unnecessary, frequently giving video captions which are less related to the user prompt, instead of appropriately remaining silent when the visual input provides insufficient evidence.</span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Insight 4 -->
+        <div class="column is-half">
+          <div class="box" style="border-left: 5px solid #9BC2E6; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong style="font-size: 1.05rem;">Over-reliance on Text</strong><br>
+                    <span style="font-size: 0.95rem;">Open-source models tend to echo their own replies during multi-turn tasks. This suggests an over-reliance on the text modality (the assistant's past replies) and an inability to dynamically update their context using the complex visual changes in the video.</span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
 <!-- FRAMEWORK AND DATASET HIGHLIGHTS -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="content">
       <h2 class="has-text-centered"> Dataset and Annotation</h2>
 
-      <h4>Task Design</h4>
-      <ul>
-        OmniAssistBench decomposes real-world assistant capabilities into two complementary levels. Evaluation tasks are designed base on this two-tier framework.
-        <li><strong>Scale: </strong>There are a total of <strong>687</strong> open-ended question-answer pairs from <strong>300</strong> videos, covering 7 major task types and <strong>17</strong> fine-grained tasks.</li>
-        <li><strong>Real world cases: </strong>There are also <strong>three</strong> comprehensive multi-turn <strong>real world interaction case studies filmed by our team</strong>  to reflect genuine assistant usage.</li>
-
+<!-- TASK DESIGN SUBSECTION -->
+      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem;">Dataset Design</h3>
+      <p class="has-text-centered" style="margin-bottom: 2rem;">
+        OmniAssistBench decomposes real-world assistant capabilities into two complementary levels. Evaluation tasks are designed based on this two-tier framework.
+      </p>
 
         <!-- Side-by-side Basic and Advanced Tiers -->
         <div class="columns is-desktop" style="margin-top: 1.5rem; margin-bottom: 1rem;">
@@ -325,10 +647,52 @@
             </div>
           </div>
         </div>
+    </div>
+  </div>
+    <div class="container is-max-desktop">
+  <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
+        <!-- Scale Card -->
+        <div class="column is-half">
+          <div class="box" style="border-left: 5px solid #F3C59A; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong style="font-size: 1.05rem;">Scale & Diversity</strong><br>
+                    <span style="font-size: 0.95rem;">There are a total of <strong>687</strong> open-ended question-answer pairs from <strong>300</strong> videos, covering 7 major task types and <strong>17</strong> fine-grained tasks.</span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
 
-        <!-- Hidden Detail Tables (Positioned beneath the tier cards) -->
+        <!-- Real World Cases Card -->
+        <div class="column is-half">
+          <div class="box" style="border-left: 5px solid #F3C59A; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong style="font-size: 1.05rem;">Real World Cases</strong><br>
+                    <span style="font-size: 0.95rem;">There are also <strong>three</strong> comprehensive multi-turn <strong>real world interaction case studies filmed by our team</strong> to reflect genuine assistant usage.</span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+
+      <!-- Hidden Detail Tables (Positioned beneath the tier cards) -->
+      <div class="container is-fluid">
         <div id="basic-tier-details" style="display: none; margin-top: 1.5rem; margin-bottom: 2rem;">
-          <h5 class="has-text-centered" style="margin-bottom: 1rem;">Basic Interactive Understanding Tasks</h5>
+          <div class="content">
+            <h5 class="has-text-centered" style="margin-bottom: 0.5rem;">Basic Interactive Understanding Tasks</h5>
+          </div>
           <div class="table-container task-table-wrapper" style="margin-top: 0;">
             <table class="table is-bordered is-striped is-hoverable is-fullwidth">
               <thead>
@@ -426,8 +790,11 @@
         </div>
 
         <!-- Hidden Detail Tables (Positioned beneath the tier cards) -->
+
         <div id="adv-tier-details" style="display: none; margin-top: 1.5rem; margin-bottom: 2rem;">
-          <h5 class="has-text-centered" style="margin-bottom: 1rem;">Advanced Interactive Understanding Tasks</h5>
+        <div class="content">
+          <h5 class="has-text-centered" style="margin-bottom: 0.5rem;">Advanced Interactive Understanding Tasks</h5>
+        </div>
           <div class="table-container task-table-wrapper" style="margin-top: 0;">
             <table class="table is-bordered is-striped is-hoverable is-fullwidth">
               <thead>
@@ -499,21 +866,18 @@
             </table>
           </div>
         </div>
-        
+      </div>
 
-
+  <div class="container is-max-desktop">
+    <div class="content">
       <div class="columns is-centered" style="margin-top: 1.5rem;">
         <div class="column has-text-centered">
-          <img src="statis.png" alt="Task construction and statistics" width="80%">
+          <img src="statis.png" alt="Task construction and statistics" width="50%">
           <p class="figure-caption">Task construction and statistics of OmniAssistBench.</p>
         </div>
       </div>
 
-
-      </ul>
-
       <h4 style="margin-top: 2rem;">High quality data</h4>
-      <ul>
         <li><strong>Naturally Embedded Prompts:</strong> Unlike traditional benchmarks with text-only prompts, all user questions are embedded directly into the videos as realistic audio or typing/handwriting.</li>
         <li><strong>High Quality:</strong> Creating the dataset required careful choices of source videos and heavy video editing to balance video length and to embed the user prompts. Every sample was rigorously annotated by human experts, demanding <strong>~4 hours of labor per sample</strong>. In total, this required <strong>more than 900 hours</strong> of dedicated labor to construct the whole dataset.</li>
         
@@ -552,13 +916,12 @@
             </div>
           </div>
         </div>
-      </ul>
     </div>
   </div>
 </section>
 
 <!-- DATA EXAMPLES CAROUSEL -->
-<section class="section has-background-light">
+<section class="section">
   <div class="container is-max-desktop">
     <div class="content">
       <h2 class="has-text-centered">Data Examples</h2>
@@ -642,256 +1005,7 @@
   </div>
 </section>
 
-<!-- LEADERBOARD -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="content">
-      <h2 class="has-text-centered">Leaderboard</h2>
-      <p>OmniAssistBench requires candidate models to be capable of processing videos along with the corresponding audios. All models are graded using our LLM-as-a-Judge pipeline on a 0 - 5 scale.</p>
-      <p>Please refer to the <a href="https://github.com/XianyunSun/OmniAssistBench">Github page</a> for detailed evaluation pipeline and example codes.</p>
-    </div>
-  </div>
-      
-  <!-- Main Leaderboard Table -->
-  <div class="container is-fluid" style="max-width: 95%; margin-top: 2rem;">
-    <div class="content">
-      <div class="table-container">
-        <table id="main-table" class="table is-bordered is-striped is-hoverable is-fullwidth">
-          <thead>
-            <tr>
-              <th style="text-align: center; vertical-align: middle;">#</th>
-              <th style="text-align: center; vertical-align: middle;">Model</th>
-              <th style="text-align: center; vertical-align: middle;">Size</th>
-              <th style="text-align: center; vertical-align: middle;">Frames</th>
-              <th class="sortable" onclick="sortTable('main-table', 4)" style="text-align: center; vertical-align: middle;">Basic Tier</th>
-              <th class="sortable" onclick="sortTable('main-table', 5)" style="text-align: center; vertical-align: middle;">Advanced Tier</th>
-              <th class="sortable" onclick="sortTable('main-table', 6)" style="text-align: center; vertical-align: middle;">Real Cases</th>
-              <th class="sortable" onclick="sortTable('main-table', 7)" style="text-align: center; vertical-align: middle;">Overall (/5.0)</th>
-              <th class="sortable" onclick="sortTable('main-table', 8)" style="text-align: center; vertical-align: middle;">Percentage (%)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="highlight-row">
-              <td>1</td>
-              <td style="text-align: left !important;"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a></td>
-              <td>-</td><td></td>
-              <td>3.18</td><td>3.41</td><td>3.40</td><td><strong>3.32</strong></td><td>66.4%</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td style="text-align: left !important;"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a></td>
-              <td>-</td><td></td>
-              <td>3.27</td><td>3.32</td><td>2.24</td><td>3.23</td><td>64.6%</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a></td>
-              <td>9B</td><td></td>
-              <td>2.23</td><td>2.39</td><td>1.89</td><td><strong>2.30</strong></td><td>46.0%</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td style="text-align: left !important;"><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></td>
-              <td>7B</td><td></td>
-              <td>2.25</td><td>2.09</td><td>2.24</td><td>2.16</td><td>43.2%</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></td>
-              <td>7B</td><td></td>
-              <td>1.85</td><td>2.33</td><td>2.26</td><td>2.16</td><td>43.2%</td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></td>
-              <td>8B</td><td></td>
-              <td>2.09</td><td>2.01</td><td>1.56</td><td>2.01</td><td>40.2%</td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></td>
-              <td>30B-A3B</td><td></td>
-              <td>1.42</td><td>1.82</td><td>1.76</td><td>1.68</td><td>33.6%</td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td style="text-align: left !important;"><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></td>
-              <td>7B</td><td></td>
-              <td>1.23</td><td>1.29</td><td>0.73</td><td>1.23</td><td>24.6%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
 
-      <!-- Detailed Sub-task Evaluation Results Dropdown -->
-      <details class="clean-details">
-        <summary>Click here to expand for detailed sub-task level evaluation results.</summary>
-        
-        <!-- Table 2: Basic Interactive Understanding Tasks -->
-        <div style="margin-top: 1.5rem;">
-          <h5>Performance comparison on Basic Interactive Understanding tasks</h5>
-          <div class="table-container" style="font-size: 0.85rem;">
-            <table id="basic-table" class="table is-bordered is-striped is-hoverable is-fullwidth">
-              <thead>
-                <tr>
-                  <th rowspan="3" style="vertical-align: middle; text-align: center;">#</th>
-                  <th rowspan="3" style="vertical-align: middle; text-align: center;">Model</th>
-                  <th rowspan="3" style="vertical-align: middle; text-align: center;">Frames</th>
-                  <th rowspan="3" class="sortable" onclick="sortTable('basic-table', 3)" style="vertical-align: middle; text-align: center;">Overall<br>Avg.</th>
-                  <th colspan="14" style="text-align: center;">Basic Interactive Understanding Tasks</th>
-                  <th rowspan="3" class="sortable" onclick="sortTable('basic-table', 18)" style="vertical-align: middle; text-align: center;">Avg.</th>
-                </tr>
-                <tr>
-                  <th colspan="4" style="text-align: center;">Social Perception</th>
-                  <th colspan="4" style="text-align: center;">Temporal Perception</th>
-                  <th colspan="3" style="text-align: center;">Referential Perception</th>
-                  <th colspan="3" style="text-align: center;">Non-audio Prompt</th>
-                </tr>
-                <tr>
-                  <th class="sortable" onclick="sortTable('basic-table', 4)" style="text-align: center;">II</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 5)" style="text-align: center;">AI</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 6)" style="text-align: center;">CE</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 7)" style="text-align: center;">Avg.</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 8)" style="text-align: center;">ER</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 9)" style="text-align: center;">AO</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 10)" style="text-align: center;">DC</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 11)" style="text-align: center;">Avg.</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 12)" style="text-align: center;">AR</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 13)" style="text-align: center;">LR</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 14)" style="text-align: center;">Avg.</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 15)" style="text-align: center;">GPF</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 16)" style="text-align: center;">OPF</th>
-                  <th class="sortable" onclick="sortTable('basic-table', 17)" style="text-align: center;">Avg.</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td><td style="text-align: left !important;"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a></td><td></td>
-                  <td><strong>3.32</strong></td><td>3.59</td><td><strong>3.14</strong></td><td>3.31</td><td>3.35</td><td>3.06</td><td><strong>3.73</strong></td><td>2.63</td><td>3.13</td><td>3.63</td><td>3.32</td><td>3.49</td><td><strong>2.75</strong></td><td><strong>3.33</strong></td><td><strong>2.87</strong></td><td>3.18</td>
-                </tr>
-                <tr>
-                  <td>2</td><td style="text-align: left !important;"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a></td><td></td>
-                  <td>3.23</td><td><strong>3.86</strong></td><td>2.95</td><td><strong>3.48</strong></td><td><strong>3.44</strong></td><td><strong>3.13</strong></td><td>3.60</td><td><strong>2.75</strong></td><td><strong>3.15</strong></td><td><strong>3.70</strong></td><td><strong>3.91</strong></td><td><strong>3.80</strong></td><td>2.74</td><td>3.27</td><td>2.84</td><td><strong>3.27</strong></td>
-                </tr>
-                <tr>
-                  <td>3</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a></td><td></td>
-                  <td>2.30</td><td><strong>3.14</strong></td><td>2.67</td><td><strong>2.54</strong></td><td><strong>2.77</strong></td><td>1.88</td><td>3.27</td><td><strong>2.19</strong></td><td><strong>2.42</strong></td><td><strong>3.00</strong></td><td><strong>2.64</strong></td><td><strong>2.84</strong></td><td>1.23</td><td>1.20</td><td>1.22</td><td>2.23</td>
-                </tr>
-                <tr>
-                  <td>4</td><td style="text-align: left !important;"><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></td><td></td>
-                  <td>2.16</td><td>2.18</td><td>2.00</td><td>2.35</td><td>2.19</td><td>2.19</td><td>2.47</td><td>2.00</td><td>2.21</td><td>2.52</td><td>2.23</td><td>2.39</td><td><strong>2.16</strong></td><td>2.60</td><td><strong>2.25</strong></td><td><strong>2.25</strong></td>
-                </tr>
-                <tr>
-                  <td>5</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></td><td></td>
-                  <td>2.16</td><td>1.45</td><td>2.14</td><td>2.42</td><td>2.03</td><td><strong>2.44</strong></td><td>2.60</td><td>2.13</td><td>2.38</td><td>2.44</td><td>2.00</td><td>2.24</td><td>1.08</td><td>1.20</td><td>1.11</td><td>1.85</td>
-                </tr>
-                <tr>
-                  <td>6</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></td><td></td>
-                  <td>2.01</td><td>2.73</td><td>2.33</td><td>2.23</td><td>2.42</td><td>1.75</td><td>2.33</td><td>1.94</td><td>2.00</td><td>2.37</td><td>2.55</td><td>2.45</td><td>1.69</td><td>1.27</td><td>1.61</td><td>2.09</td>
-                </tr>
-                <tr>
-                  <td>7</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></td><td></td>
-                  <td>1.68</td><td>1.50</td><td>0.62</td><td>2.00</td><td>1.42</td><td>1.13</td><td>1.53</td><td>0.80</td><td>1.15</td><td>1.89</td><td>1.00</td><td>1.49</td><td>1.08</td><td><strong>3.33</strong></td><td>1.53</td><td>1.42</td>
-                </tr>
-                <tr>
-                  <td>8</td><td style="text-align: left !important;"><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></td><td></td>
-                  <td>1.23</td><td>1.09</td><td>1.14</td><td>1.00</td><td>1.07</td><td>1.25</td><td>1.40</td><td>1.33</td><td>1.33</td><td>1.59</td><td>0.73</td><td>1.20</td><td>1.31</td><td>1.47</td><td>1.34</td><td>1.23</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Table 3: Advanced Interactive Understanding Tasks & Real World Cases -->
-        <div style="margin-top: 3rem;">
-          <h5>Performance comparison on Advanced Interactive Understanding tasks and Real World Cases</h5>
-          <div class="table-container" style="font-size: 0.85rem;">
-            <table id="adv-table" class="table is-bordered is-striped is-hoverable is-fullwidth">
-              <thead>
-                <tr>
-                  <th rowspan="3" style="vertical-align: middle; text-align: center;">#</th>
-                  <th rowspan="3" style="vertical-align: middle; text-align: center;">Model</th>
-                  <th rowspan="3" style="vertical-align: middle; text-align: center;">Frames</th>
-                  <th rowspan="3" class="sortable" onclick="sortTable('adv-table', 3)" style="vertical-align: middle; text-align: center;">Overall<br>Avg.</th>
-                  <th colspan="9" style="text-align: center;">Advanced Interactive Understanding Tasks</th>
-                  <th colspan="4" rowspan="2" style="vertical-align: middle; text-align: center;">Real World Cases</th>
-                </tr>
-                <tr>
-                  <th rowspan="2" class="sortable" onclick="sortTable('adv-table', 4)" style="vertical-align: middle; text-align: center;">CR</th>
-                  <th colspan="3" style="text-align: center;">Proactive Response</th>
-                  <th colspan="4" style="text-align: center;">Process Tracking</th>
-                  <th rowspan="2" class="sortable" onclick="sortTable('adv-table', 12)" style="vertical-align: middle; text-align: center;">Avg.</th>
-                </tr>
-                <tr>
-                  <th class="sortable" onclick="sortTable('adv-table', 5)" style="text-align: center;">SER</th>
-                  <th class="sortable" onclick="sortTable('adv-table', 6)" style="text-align: center;">MER</th>
-                  <th class="sortable" onclick="sortTable('adv-table', 7)" style="text-align: center;">Avg.</th>
-                  <th class="sortable" onclick="sortTable('adv-table', 8)" style="text-align: center;">ST</th>
-                  <th class="sortable" onclick="sortTable('adv-table', 9)" style="text-align: center;">CT</th>
-                  <th class="sortable" onclick="sortTable('adv-table', 10)" style="text-align: center;">MT</th>
-                  <th class="sortable" onclick="sortTable('adv-table', 11)" style="text-align: center;">Avg.</th>
-                  <th class="sortable" onclick="sortTable('adv-table', 13)" style="text-align: center;">Ms</th>
-                  <th class="sortable" onclick="sortTable('adv-table', 14)" style="text-align: center;">Ht</th>
-                  <th class="sortable" onclick="sortTable('adv-table', 15)" style="text-align: center;">Ba</th>
-                  <th class="sortable" onclick="sortTable('adv-table', 16)" style="text-align: center;">Avg.</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td><td style="text-align: left !important;"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a></td><td></td>
-                  <td><strong>3.32</strong></td><td><strong>3.80</strong></td><td><strong>3.39</strong></td><td><strong>2.42</strong></td><td><strong>2.93</strong></td><td><strong>3.59</strong></td><td>3.75</td><td><strong>3.51</strong></td><td><strong>3.61</strong></td><td><strong>3.41</strong></td><td><strong>3.82</strong></td><td><strong>3.29</strong></td><td><strong>3.25</strong></td><td><strong>3.40</strong></td>
-                </tr>
-                <tr>
-                  <td>2</td><td style="text-align: left !important;"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a></td><td></td>
-                  <td>3.23</td><td>3.70</td><td>3.06</td><td>2.39</td><td>2.74</td><td>3.39</td><td><strong>4.11</strong></td><td>3.47</td><td>3.60</td><td>3.32</td><td>2.55</td><td>1.64</td><td>2.50</td><td>2.24</td>
-                </tr>
-                <tr>
-                  <td>3</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a></td><td></td>
-                  <td>2.30</td><td><strong>3.15</strong></td><td>2.66</td><td>2.65</td><td>2.65</td><td>2.23</td><td>2.30</td><td>2.01</td><td>2.19</td><td>2.39</td><td>0.27</td><td>2.50</td><td>2.35</td><td>1.89</td>
-                </tr>
-                <tr>
-                  <td>4</td><td style="text-align: left !important;"><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></td><td></td>
-                  <td>2.16</td><td>1.75</td><td><strong>2.84</strong></td><td>2.42</td><td><strong>2.64</strong></td><td>1.60</td><td>2.02</td><td>2.03</td><td>1.83</td><td>2.09</td><td><strong>1.91</strong></td><td>2.57</td><td>2.20</td><td>2.24</td>
-                </tr>
-                <tr>
-                  <td>5</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></td><td></td>
-                  <td>2.16</td><td>2.25</td><td>2.36</td><td><strong>2.77</strong></td><td>2.56</td><td>2.55</td><td>1.64</td><td><strong>2.22</strong></td><td><strong>2.22</strong></td><td>2.33</td><td>0.91</td><td><strong>3.00</strong></td><td><strong>2.45</strong></td><td><strong>2.26</strong></td>
-                </tr>
-                <tr>
-                  <td>6</td><td style="text-align: left !important;"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></td><td></td>
-                  <td>2.01</td><td>1.95</td><td>2.10</td><td>1.63</td><td>1.87</td><td>2.16</td><td>2.19</td><td>1.88</td><td>2.09</td><td>2.01</td><td>0.45</td><td>1.71</td><td>2.05</td><td>1.56</td>
-                </tr>
-                <tr>
-                  <td>7</td><td style="text-align: left !important;"><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></td><td></td>
-                  <td>1.68</td><td>1.05</td><td>1.51</td><td>1.97</td><td>1.73</td><td><strong>2.76</strong></td><td>1.20</td><td>1.26</td><td>1.94</td><td>1.82</td><td>1.18</td><td>1.36</td><td>2.35</td><td>1.76</td>
-                </tr>
-                <tr>
-                  <td>8</td><td style="text-align: left !important;"><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></td><td></td>
-                  <td>1.23</td><td>0.65</td><td>1.19</td><td>1.72</td><td>1.44</td><td>1.71</td><td>0.80</td><td>0.91</td><td>1.25</td><td>1.29</td><td>0.55</td><td>0.79</td><td>0.80</td><td>0.73</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </details>
-    </div>
-  </div>
-  
-  <!-- INSIGHTS SUBSECTION -->
-  <div class="container is-max-desktop" style="margin-top: 3.5rem;">
-    <div class="content">
-      <h3 class="title is-4">Insights</h3>
-      <p>OmniAssistBench is highly challenging. Current evaluations show that even the most advanced models have substantial room for improvement before they can serve as reliable real-world assistants. From the evaluation results, we observe the following <strong>key bottlenecks</strong> in current Omni-LLMs:</p>
-      <ul>
-        <li> <strong>Deficiency in Gesture Instruction Following:</strong> Models struggle significantly with gesture-based commands. This reveals a critical weakness in interpreting visual instructions, as models usually fail to distinguish intentional symbolic gestures from other incidental motion information in the dynamic scene.</li>
-        <li> <strong>Long-Context Interaction Disparity:</strong> Proprietary models substantially outperform open source alternatives on Process Tracking tasks, exposing a pronounced weakness in long-term memory retention and sustained context management among current open-source systems.</li>
-        <li> <strong>Failure of Keep Silence:</strong> Models systematically struggle to determine when a response is unnecessary, frequently giving video captions which are less related to the user prompt, instead of appropriately remaining silent when the visual input provides insufficient evidence.</li>
-        <li> <strong>Over-reliance on text:</strong> Open-source models tend to echo their own replies during multi-turn tasks. This suggests an over-reliance on the text modality (the assistant's past replies) and an inability to dynamically update their context using the complex visual changes in the video.</li>
-      </ul>
-    </div>
-  </div>
-
-</section>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -978,7 +1092,191 @@
     rows.forEach(row => tbody.appendChild(row));
   }
 
-</script>
+// Rader chart
+document.addEventListener("DOMContentLoaded", function() {
+  const chartDom = document.getElementById('radar-chart');
+  if (!chartDom) return;
+  const myChart = echarts.init(chartDom);
 
+  // --- 0. ADJUSTABLE CHART PARAMETERS ---
+  const RADAR_RADIUS = '75%';               // Radius of the inner grid
+  const LABEL_DISTANCE = 30;                // Pushes labels outward (increase to move further outside the ring)
+  const RING_INNER_RADIUS = '75%';          // Inner edge of the color ring
+  const RING_OUTER_RADIUS = '82%';          // Outer edge of the color ring
+  const RING_GAP_SIZE = 8;                  // Margin size between the three ring parts
+  // --------------------------------------
+
+  // 1. Model Colors: Commercial (Blue-Greens), Open-source (Reds/Roses)
+  const colors = {
+    'Gemini-3-Pro': '#5A7B7D',
+    'Gemini-2.5-Pro': '#82A2A4',
+    'MiniCPM-o 4.5': '#A05A58',
+    'Baichuan-Omni 1.5': '#B87572',
+    'Qwen2.5-Omni': '#CE8F8C',
+    'MiniCPM-o 2.6': '#DFABA8',
+    'Qwen3-Omni': '#EBC5C3',
+    'VITA 1.5': '#F5DFDD'
+  };
+
+  // 2. Define original indicators (clockwise from top)
+  const originalIndicators =['II', 'AI', 'CE', 'ER', 'AO', 'DC', 'AR', 'LR', 'GPF', 'OPF', 'CR', 'SER', 'MER', 'ST', 'CT', 'MT', 'RC'];
+  
+  // Map index to force ECharts to draw clockwise
+  const cwIndices =[0, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+  const indicatorNames = cwIndices.map(i => originalIndicators[i]);
+
+  // 3. Raw data for models (in original clockwise order)
+  const rawData =[
+    { name: 'Gemini-3-Pro', value:[3.59, 3.14, 3.31, 3.06, 3.73, 2.63, 3.63, 3.32, 2.75, 3.33, 3.80, 3.39, 2.42, 3.59, 3.75, 3.51, 3.40] },
+    { name: 'Gemini-2.5-Pro', value:[3.86, 2.95, 3.48, 3.13, 3.60, 2.75, 3.70, 3.91, 2.74, 3.27, 3.70, 3.06, 2.39, 3.39, 4.11, 3.47, 2.24] },
+    { name: 'MiniCPM-o 4.5', value:[3.14, 2.67, 2.54, 1.88, 3.27, 2.19, 3.00, 2.64, 1.23, 1.20, 3.15, 2.66, 2.65, 2.23, 2.30, 2.01, 1.89] },
+    { name: 'Baichuan-Omni 1.5', value:[2.18, 2.00, 2.35, 2.19, 2.47, 2.00, 2.52, 2.23, 2.16, 2.60, 1.75, 2.84, 2.42, 1.60, 2.02, 2.03, 2.24] },
+    { name: 'Qwen2.5-Omni', value:[1.45, 2.14, 2.42, 2.44, 2.60, 2.13, 2.44, 2.00, 1.08, 1.20, 2.25, 2.36, 2.77, 2.55, 1.64, 2.22, 2.26] },
+    { name: 'MiniCPM-o 2.6', value:[2.73, 2.33, 2.23, 1.75, 2.33, 1.94, 2.37, 2.55, 1.69, 1.27, 1.95, 2.10, 1.63, 2.16, 2.19, 1.88, 1.56] },
+    { name: 'Qwen3-Omni', value:[1.50, 0.62, 2.00, 1.13, 1.53, 0.80, 1.89, 1.00, 1.08, 3.33, 1.05, 1.51, 1.97, 2.76, 1.20, 1.26, 1.76] },
+    { name: 'VITA 1.5', value:[1.09, 1.14, 1.00, 1.25, 1.40, 1.33, 1.59, 0.73, 1.31, 1.47, 0.65, 1.19, 1.72, 1.71, 0.80, 0.91, 0.73] }
+  ];
+
+  const echartsRadarData = rawData.map(d => ({
+    name: d.name,
+    value: cwIndices.map(i => d.value[i]), 
+    itemStyle: { color: colors[d.name], opacity: 1 },
+    lineStyle: { color: colors[d.name], width: 2, opacity: 1 },
+    symbol: 'circle', 
+    symbolSize: 6
+  }));
+
+  // 4. Track mouse angle for the tooltip
+  let hoveredAxisIndex = 0;
+  myChart.getZr().on('mousemove', function (params) {
+    let width = myChart.getWidth();
+    let height = myChart.getHeight();
+    let cx = width * 0.5;
+    let cy = height * 0.45; 
+    
+    let dx = params.offsetX - cx;
+    let dy = params.offsetY - cy;
+    
+    let angle = Math.atan2(dy, dx) + Math.PI / 2;
+    if (angle < 0) angle += 2 * Math.PI;
+    
+    let sliceAngle = (2 * Math.PI) / 17;
+    hoveredAxisIndex = Math.round((2 * Math.PI - angle) / sliceAngle) % 17;
+  });
+
+  // 5. Build ECharts configuration
+  const option = {
+    tooltip: {
+      trigger: 'item',
+      confine: true,
+      formatter: function(params) {
+        if (Array.isArray(params.value)) {
+          let idx = hoveredAxisIndex || 0;
+          let val = params.value[idx];
+          return `<div style="text-align:center;"><strong>${params.name}</strong><br/>${indicatorNames[idx]}: <span style="font-weight:bold; color:${params.color}">${val}</span></div>`;
+        }
+        return params.name;
+      }
+    },
+    legend: {
+      bottom: '0%',
+      left: 'center',
+      icon: 'circle',
+      data: Object.keys(colors)
+    },
+    radar: {
+      radius: RADAR_RADIUS,              // Updated to use the variable
+      center:['50%', '45%'],
+      splitNumber: 5,
+      shape: 'polygon',
+      nameGap: LABEL_DISTANCE,           // Updated to use the variable
+      axisName: { color: '#2c3e50', fontWeight: 'bold', fontSize: 13 },
+      splitArea: { areaStyle: { color: ['#f4f4f4'] } },
+      splitLine: { lineStyle: { color: '#ccc', type: 'dashed' } },
+      axisLine: { lineStyle: { color: '#ccc', type: 'dashed' } },
+      indicator: indicatorNames.map(name => ({ name: name, max: 5, axisLabel: { show: name === 'II', color: '#888', fontSize: 11 } }))
+    },
+    series:[
+      { // The outer color rings
+        type: 'pie',
+        radius:[RING_INNER_RADIUS, RING_OUTER_RADIUS], // Updated to use the variables
+        center: ['50%', '45%'],
+        startAngle: 100.588,
+        silent: true,
+        label: { show: false },
+        itemStyle: { 
+          borderColor: '#ffffff', // Matches page background to create the visual gap
+          borderWidth: RING_GAP_SIZE // Updated to use the variable
+        },
+        data:[
+          { value: 10, itemStyle: { color: '#E4F3DD' }, name: 'Basic Tier' },
+          { value: 6, itemStyle: { color: '#E0EDF5' }, name: 'Advanced Tier' },
+          { value: 1, itemStyle: { color: '#FCE2D1' }, name: 'Real World Cases' }
+        ]
+      },
+      { // The Radar Lines
+        type: 'radar',
+        data: echartsRadarData,
+        emphasis: { disabled: true } 
+      }
+    ]
+  };
+  myChart.setOption(option);
+
+  // 6. Shared Functions to Highlight / Restore Models
+  let currentHighlight = null; 
+  const allModels = Object.keys(colors);
+
+  function highlightModel(modelName) {
+    if (currentHighlight === modelName) return; 
+    currentHighlight = modelName;
+    
+    const hoveredData = echartsRadarData.map(d => {
+      if (d.name === modelName) {
+        return { 
+          ...d, 
+          lineStyle: { color: colors[d.name], width: 4, opacity: 1 }, 
+          itemStyle: { color: colors[d.name], opacity: 1 } 
+        };
+      } else {
+        return { 
+          ...d, 
+          lineStyle: { color: colors[d.name], width: 2, opacity: 0.15 }, 
+          itemStyle: { color: colors[d.name], opacity: 0.15 } 
+        };
+      }
+    });
+    myChart.setOption({ series:[ {}, { data: hoveredData } ] }); 
+  }
+
+  function restoreModels() {
+    if (!currentHighlight) return;
+    currentHighlight = null;
+    myChart.setOption({ series:[ {}, { data: echartsRadarData } ] });
+  }
+
+  // 7. Link Chart Hover Events
+  myChart.on('mouseover', function(params) {
+    if (allModels.includes(params.name)) highlightModel(params.name);
+  });
+  myChart.on('mouseout', function(params) {
+    if (allModels.includes(params.name)) restoreModels();
+  });
+
+  // 8. Robust Table Hover Link 
+  document.querySelectorAll('table tbody tr').forEach(tr => {
+    const rowText = tr.textContent; 
+    const matchedModel = allModels.find(m => rowText.includes(m));
+
+    if (matchedModel) {
+      tr.addEventListener('mouseenter', () => highlightModel(matchedModel));
+      tr.addEventListener('mouseleave', restoreModels);
+    }
+  });
+  
+  window.addEventListener('resize', () => myChart.resize());
+});
+
+</script>
 </body>
 </html>
