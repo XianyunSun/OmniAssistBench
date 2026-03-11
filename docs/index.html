@@ -284,19 +284,12 @@
       <h2 class="has-text-centered">Leaderboard</h2>
     </div>
   </div>
-      
-    <!-- Interactive Radar Chart -->
-      <div style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 3rem; margin-bottom: 2rem;">
-        <div id="radar-chart" style="width: var(--radar-width); aspect-ratio: 1 / 0.95;"></div>
-        <p class="figure-caption" style="margin-top: 1rem;">
-          <i>Sub-task level performance comparison of evaluated models.</i>
-        </p>
-      </div>
+    
 
   <!-- Main Leaderboard Table -->
   <div class="container is-fluid" style="margin-top: 2rem;">
     <div class="content">
-      <div class="table-container">
+      <div class="table-container" style="width: 80%;">
         <table id="main-table" class="table is-bordered is-striped is-hoverable is-fullwidth">
           <thead>
             <tr>
@@ -369,7 +362,7 @@
       <!-- Detailed Sub-task Evaluation Results Dropdown -->
     <div class="content">
       <details class="clean-details">
-        <summary class="container is-max-desktop">Click here to expand for detailed sub-task level evaluation results.</summary>
+        <summary class="container is-max-desktop"><u>Click here to expand for detailed sub-task level evaluation results.</u></summary>
         
         <!-- Table 2: Basic Interactive Understanding Tasks -->
         <div style="margin-top: 1.5rem;">
@@ -518,6 +511,14 @@
       </details>
     </div>
 
+    <!-- Interactive Radar Chart -->
+      <div style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 3rem; margin-bottom: 2rem;">
+        <div id="radar-chart" style="width: var(--radar-width); aspect-ratio: 1 / 0.95;"></div>
+        <p class="figure-caption" style="margin-top: 1rem;">
+          <i>Sub-task level performance comparison of evaluated models.</i>
+        </p>
+      </div>
+
     <div class="container is-max-desktop">
     <div class="content">
       <p>OmniAssistBench requires candidate models to be capable of processing videos along with the corresponding audios. All models are graded using our LLM-as-a-Judge pipeline on a 0 - 5 scale.</p>
@@ -529,8 +530,8 @@
   <div class="container is-max-desktop" style="margin-top: 3.5rem;">
     <div class="content">
       <h3 class="title is-4 has-text-centered">Key Insights</h3>
-      <p class="has-text-centered" style="margin-bottom: 2rem;">
-        OmniAssistBench is highly challenging. Current evaluations show that even the most advanced models have substantial room for improvement before they can serve as reliable real-world assistants. From the evaluation results, we observe the following <strong>key bottlenecks</strong> in current Omni-LLMs:
+      <p  style="margin-bottom: 2rem;">
+        OmniAssistBench is highly challenging. Current evaluations show that even the most advanced models have substantial room for improvement before they can serve as reliable real-world assistants. According to our scoring rubric, average scores ranged from 2-3 suggest that models generally succeed in understanding what to do but struggle with providing accurate and comprehensive answers.<br>From the evaluation results, we observe the following <strong>key bottlenecks</strong> in current Omni-LLMs:
       </p>
 
       <!-- 2x2 Grid using Bulma Columns -->
@@ -613,7 +614,7 @@
       <h2 class="has-text-centered"> Dataset and Annotation</h2>
 
 <!-- TASK DESIGN SUBSECTION -->
-      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem;">Dataset Design</h3>
+      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem;">Task Design</h3>
       <p class="has-text-centered" style="margin-bottom: 2rem;">
         OmniAssistBench decomposes real-world assistant capabilities into two complementary levels. Evaluation tasks are designed based on this two-tier framework.
       </p>
@@ -629,7 +630,7 @@
               
               <!-- Inside Expand Button for Basic Tier -->
               <div class="expand-btn" onclick="toggleTierTable('basic-tier-details', 'basic-arrow')">
-                <span id="basic-arrow">►</span> Click here to expand for Basic tasks
+                <span id="basic-arrow">►</span> <u>Click here to expand for Basic tasks</u>
               </div>
             </div>
           </div>
@@ -642,14 +643,14 @@
               
               <!-- Inside Expand Button for Advanced Tier -->
               <div class="expand-btn" onclick="toggleTierTable('adv-tier-details', 'adv-arrow')">
-                <span id="adv-arrow">►</span> Click here to expand for Advanced tasks
+                <span id="adv-arrow">►</span> <u>Click here to expand for Advanced tasks</u>
               </div>
             </div>
           </div>
         </div>
     </div>
   </div>
-    <div class="container is-max-desktop">
+  <div class="container is-max-desktop">
   <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
         <!-- Scale Card -->
         <div class="column is-half">
@@ -659,7 +660,7 @@
                 <div class="content">
                   <p>
                     <strong style="font-size: 1.05rem;">Scale & Diversity</strong><br>
-                    <span style="font-size: 0.95rem;">There are a total of <strong>687</strong> open-ended question-answer pairs from <strong>300</strong> videos, covering 7 major task types and <strong>17</strong> fine-grained tasks.</span>
+                    <span style="font-size: 0.95rem;">There are a total of <strong>687</strong> open-ended question-answer pairs from <strong>300</strong> videos, covering 7 major task types and <strong>16</strong> fine-grained tasks.</span>
                   </p>
                 </div>
               </div>
@@ -683,12 +684,11 @@
           </div>
         </div>
       </div>
-    </div>
-  
+  </div>
 
 
-      <!-- Hidden Detail Tables (Positioned beneath the tier cards) -->
-      <div class="container is-fluid">
+    <!-- Hidden Detail Tables (Positioned beneath the tier cards) -->
+    <div class="container is-fluid">
         <div id="basic-tier-details" style="display: none; margin-top: 1.5rem; margin-bottom: 2rem;">
           <div class="content">
             <h5 class="has-text-centered" style="margin-bottom: 0.5rem;">Basic Interactive Understanding Tasks</h5>
@@ -866,58 +866,198 @@
             </table>
           </div>
         </div>
-      </div>
+    </div>
 
-  <div class="container is-max-desktop">
-    <div class="content">
-      <div class="columns is-centered" style="margin-top: 1.5rem;">
-        <div class="column has-text-centered">
-          <img src="statis.png" alt="Task construction and statistics" width="50%">
-          <p class="figure-caption">Task construction and statistics of OmniAssistBench.</p>
-        </div>
-      </div>
+    <div class="container is-max-desktop">
+        <div class="content">
+          <!-- 
+            PROPORTION PARAMETER:
+            Bulma uses a 12-column grid. Currently it's set to is-6 (left) and is-6 (right), making it 50/50.
+            To change the proportion, adjust the numbers so they add up to 12.
+            Examples: 
+            - is-7 (left) and is-5 (right)
+            - is-8 (left) and is-4 (right)
+          -->
+          <div class="columns is-centered is-vcentered" style="margin-top: 1.5rem;">
+            <!-- ================= LEFT HALF ================= -->
+            <div class="column is-5 has-text-centered">
+              <!-- LEFT IMAGE SIZE PARAMETER: Adjust the 'width' percentage here -->
+              <img src="statis.png" alt="Task construction and statistics" style="width: 90%; height: auto; margin: 0 auto;">
+              <p class="figure-caption" style="margin-top: 0.5rem;">Task construction of OmniAssistBench.</p>
+            </div>
 
-      <h4 style="margin-top: 2rem;">High quality data</h4>
-        <li><strong>Naturally Embedded Prompts:</strong> Unlike traditional benchmarks with text-only prompts, all user questions are embedded directly into the videos as realistic audio or typing/handwriting.</li>
-        <li><strong>High Quality:</strong> Creating the dataset required careful choices of source videos and heavy video editing to balance video length and to embed the user prompts. Every sample was rigorously annotated by human experts, demanding <strong>~4 hours of labor per sample</strong>. In total, this required <strong>more than 900 hours</strong> of dedicated labor to construct the whole dataset.</li>
-        
-        <div class="columns is-centered" style="margin-top: 1.5rem;">
-          <div class="column has-text-centered">
-            <img src="labeling.png" alt="The labling process of OmniAssistBench" width="100%">
-            <p class="figure-caption">The labeling process of OmniAssistBench. For multi-turn samples, the video editing phase contains a total of four sub-steps.</p>
-          </div>
-        </div>
-
-        <!-- Annotation Pipeline List -->
-        <h5 class="title is-5" style="margin-top: 2rem; margin-bottom: 1.5rem;">Annotation Pipeline</h5>
-        <div class="columns is-desktop">
-          <div class="column">
-            <div class="box" style="background-color: #fff; border-left: 4px solid #3273dc; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); height: 100%;">
-              <h6 class="title is-6">Step 1: [Placeholder Title]</h6>
-              <p style="font-size: 0.9rem;">[Placeholder description for the first annotation step. Please fill in later.]</p>
-            </div>
-          </div>
-          <div class="column">
-            <div class="box" style="background-color: #fff; border-left: 4px solid #00d1b2; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); height: 100%;">
-              <h6 class="title is-6">Step 2: [Placeholder Title]</h6>
-              <p style="font-size: 0.9rem;">[Placeholder description for the second annotation step. Please fill in later.]</p>
-            </div>
-          </div>
-          <div class="column">
-            <div class="box" style="background-color: #fff; border-left: 4px solid #ffdd57; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); height: 100%;">
-              <h6 class="title is-6">Step 3: [Placeholder Title]</h6>
-              <p style="font-size: 0.9rem;">[Placeholder description for the third annotation step. Please fill in later.]</p>
-            </div>
-          </div>
-          <div class="column">
-            <div class="box" style="background-color: #fff; border-left: 4px solid #ff3860; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); height: 100%;">
-              <h6 class="title is-6">Step 4:[Placeholder Title]</h6>
-              <p style="font-size: 0.9rem;">[Placeholder description for the fourth annotation step. Please fill in later.]</p>
+            <!-- ================= RIGHT HALF ================= -->
+            <div class="column is-7">
+              <!-- Top Image -->
+              <div class="has-text-centered" style="margin-bottom: 2rem;">
+                <!-- RIGHT TOP IMAGE SIZE PARAMETER: Adjust the 'width' percentage here -->
+                <img src="class_videocount_bar.png" alt="Description of Figure 2" style="width: 90%; height: auto; margin: 0 auto;">
+                <p class="figure-caption" style="margin-top: 0.5rem;">Number of test samples in each sub-task.</p>
+              </div>
+              
+              <!-- Bottom Image -->
+              <div class="has-text-centered">
+                <!-- RIGHT BOTTOM IMAGE SIZE PARAMETER: Adjust the 'width' percentage here -->
+                <img src="refined_duration_distribution.png" alt="Description of Figure 3" style="width: 90%; height: auto; margin: 0 auto;">
+                <p class="figure-caption" style="margin-top: 0.5rem;">Statistics of video durations. For multi-turn tasks, durations are calculated as the sum of each turn.</p>
+              </div>
             </div>
           </div>
         </div>
     </div>
-  </div>
+
+    <div class="container is-max-desktop">
+          <h3 class="title is-4 has-text-centered" style="margin-top: 3.5rem; margin-bottom: 2rem;">Data Format</h3>
+          <div class="content">
+            <div style="font-size: 0.95rem; margin-bottom: 2rem; text-align: center;">
+              OmniAssistBench adopts open-ended questions. A typical QA pair contains a video clip embedded with a user question, a Ground Truth (GT) answer, and a group of key points of the GT answer. There are both single and multi-turn samples depending on the tasks.
+            </div>
+            
+            <!-- Two Cards in a Row -->
+            <div class="columns is-desktop is-centered">
+              
+              <!-- LEFT CARD (Image under the text) -->
+              <div class="column is-half">
+                <div class="box" style="border-left: 5px solid #F3C59A; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+                  <article class="media" style="height: 100%;">
+                    <div class="media-content">
+                      <div class="content">
+                        
+                        <!-- Text Section -->
+                        <div style="margin-bottom: 0.5rem;">
+                          <strong style="font-size: 1.05rem;">Data Format</strong>
+                        </div>
+                        <div style="font-size: 0.95rem; margin-bottom: 1.5rem;">
+                          Unlike traditional benchmarks with text-only prompts, all user questions are embedded directly into the videos as realistic audio or typing/handwriting. Only the videos are input into the candidate models.
+                        </div>
+                        
+                        <!-- Image Section (Underneath) -->
+                        <div class="has-text-centered">
+                          <!-- Adjust width percentage or max-width as needed -->
+                          <img src="data_format.png" alt="Single-Turn Example" style="width: 100%; height: auto; border-radius: 6px;">
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <!-- RIGHT CARD (Image to the right of the text) -->
+              <div class="column is-half">
+                <div class="box" style="border-left: 5px solid #F3C59A; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+                  <article class="media" style="height: 100%;">
+                    <div class="media-content">
+                      <div class="content">
+                        
+                        <!-- Nested columns to put text on left, image on right -->
+                        <div class="columns is-vcentered is-mobile" style="margin: 0; height: 100%;">
+                          
+                          <!-- Text Section (Left Side) -->
+                          <div class="column" style="padding-left: 0; padding-top: 0;">
+                            <div style="margin-bottom: 0.5rem;">
+                              <strong style="font-size: 1.05rem;">Offline Simulation of Online Interaction</strong>
+                            </div>
+                            <div style="font-size: 0.95rem;">
+                              We adopt multi-turn interaction format to simulate online interaction in an offline manner. To mimic the temporal causality of online streaming interactions, user prompt is always embedded at the very end of each video clip.
+                            </div>
+                          </div>
+                          
+                          <!-- Image Section (Right Side) -->
+                          <div class="column is-5 has-text-centered" style="padding-right: 0;">
+                            <!-- Adjust width percentage or max-width as needed -->
+                            <img src="multi-turn.png" alt="Multi-Turn Example" style="width: 100%; height: auto; border-radius: 6px;">
+                          </div>
+                          
+                        </div>
+
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+            </div> <!-- End of columns -->
+          </div>
+    </div>
+    
+    <div class="container is-max-desktop">
+        <!-- Annotation Pipeline List -->
+        <h3 class="title is-4 has-text-centered" style="margin-top: 3.5rem; margin-bottom: 2rem;">Annotation Pipeline</h3>
+        <div class="content">
+          OmniAssistBench follows a 4-phases annotation pipeline to ensure data quality. Every sample was rigorously annotated by human experts, demanding <strong>~4 hours of labor per sample</strong>. In total, this required <strong>more than 900 hours</strong> of dedicated labor to construct the whole dataset.</li>
+        </div>
+        <div class="columns is-centered" style="margin-top: 1.5rem;">
+          <div class="column has-text-centered">
+            <img src="labeling.png" alt="The labling process of OmniAssistBench" width="100%">
+            <p class="figure-caption">The annotation process of OmniAssistBench. For multi-turn samples, the video editing phase contains a total of four sub-steps.</p>
+          </div>
+        </div>
+        
+        <!-- Single Column Full-Width Layout -->
+        <div class="columns is-multiline">
+          <div class="column is-12">
+            <!-- Step 1 -->
+            <div class="box" style="border-left: 5px solid #F3C59A; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); margin-bottom: 1.5rem;">
+              <article class="media">
+                <div class="media-content">
+                  <div class="content">
+                      <div style="margin-bottom: 0.5rem;"><strong style="font-size: 1.05rem;">Step 1: Raw Video Collection</strong></div>
+                      <div style="font-size: 0.95rem; margin-bottom: 0.75rem;">
+                        For each task category, human experts collaborate with LLMs to brainstorm key scenarios that challenge specific model capabilities. We then source raw footage containing these key plots from the Internet. </div>
+                        <div style="font-size: 0.95rem;">
+                        Since we search for videos based on detailed plots rather than broad topics or keywords, the video collection phase can be time-consuming. Annotators may meed to watch entire videos to verify if a certain plot is present. We also include several home-filmed samples for scenarios where the required plots are difficult to locate online.</div>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="box" style="border-left: 5px solid #F3C59A; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); margin-bottom: 1.5rem;">
+              <article class="media">
+                <div class="media-content">
+                  <div class="content">
+                      <div style="margin-bottom: 0.5rem;"><strong style="font-size: 1.05rem;">Step 2: QA Design</strong></div>
+                      <div style="font-size: 0.95rem; margin-bottom: 0.75rem;">
+                        Experts design QA pairs based on both the source video and the task type. For Advanced Interactive Understanding tasks, where assistant models are expected to help human users achieve specific goals, annotators must first summarize these user goals from the source videos and then design QA pairs around them.</div>
+                      <div style="font-size: 0.95rem;">
+                        To address the evaluation challenges of open-ended QA, we annotate each sample with two components: a Ground Truth (GT) Sentence and Key Points. The Key Points consist of 1-3 essential phrases that must be present in a correct answer.</div>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="box" style="border-left: 5px solid #F3C59A; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); margin-bottom: 1.5rem;">
+              <article class="media">
+                <div class="media-content">
+                  <div class="content">
+                      <div style="margin-bottom: 0.5rem;"><strong style="font-size: 1.05rem;">Step 3: Video Editing</strong></div>
+                      <div style="font-size: 0.95rem; margin-bottom: 0.75rem;">
+                        The video editing phase primarily consists of 3-4 sub-steps. To balance video length, annotators may remove parts of the source videos that are less relevant to the QAs. Next, user prompts and user goals are embedded. For most tasks, user prompts are converted to speech via TTS and embedded as audio. For Non-audio Prompt Following tasks, user prompts are embedded visually using a picture-in-picture format. For tasks requiring multi-turn interaction, source videos are divided into clips corresponding to each QA turn. Additionally, for Advanced Interactive Understanding tasks, user goals are embedded as on-screen subtitles. </div>
+                      <div style="font-size: 0.95rem;">
+                        This comprehensive editing process typically takes an annotator 1-2 hours per sample. </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="box" style="border-left: 5px solid #F3C59A; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); margin-bottom: 0;">
+              <article class="media">
+                <div class="media-content">
+                  <div class="content">
+                      <div style="margin-bottom: 0.5rem;"><strong style="font-size: 1.05rem;">Step 4: Quality Refinement</strong></div>
+                      <div style="font-size: 0.95rem; margin-bottom: 0.75rem;">
+                        We employ state-of-the-art MLLMs (e.g., Gemini-1.5-Pro) to assess annotation completeness. If a model generates a response that is logically correct yet diverges significantly in phrasing from our initial ground truth, we manually verify and append this output as an alternative reference to improve evaluation robustness.</div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+    </div>
+
 </section>
 
 <!-- DATA EXAMPLES CAROUSEL -->
