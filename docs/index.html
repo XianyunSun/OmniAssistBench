@@ -216,6 +216,14 @@
       margin-left: 4px;
       vertical-align: middle;
     }
+
+    /* --- Interactive Table Row Highlight --- */
+    tr.task-row {
+      transition: background-color 0.2s ease;
+    }
+    tr.task-row.row-highlight {
+      background-color: #fcece0 !important; /* Soft orange/peach highlight */
+    }
   </style>
 </head>
 <body>
@@ -224,7 +232,7 @@
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop has-text-centered">
-      <h1 class="title is-1 publication-title">OmniAssistBench</h1>
+      <h1 class="title is-1 publication-title">🤖🤝OmniAssistBench</h1>
       <h2 class="title is-3">Assistant-style Interaction Benchmark for Omni-LLMs</h2>
 
       <!-- Links/Badges -->
@@ -260,21 +268,85 @@
 
 <!-- INTRODUCTION -->
 <section class="section">
-  <div class="container is-max-desktop">
+<!-- INTRODUCTION SECTION -->
+  <div class="container is-max-desktop" style="margin-top: 2rem; margin-bottom: 3.5rem;">
     <div class="content">
-      <h2 class="has-text-centered"> Introduction</h2>
-      <p>
-        Recent advances in Omni-LLMs are paving the way for real-time video chat applications, such as visual assistance for visually impaired users. However, existing benchmarks fail to systematically evaluate models under these dynamic, interactive settings. To bridge this gap, <strong>OmniAssistBench</strong> quantifies model's omni-assistant capabilities by summarizing critical abilities and tasks from common real world Omni-MLLM application scenarios.
-      </p>
+      
+      <!-- 1. Background (Full Width) -->
+      <div style="margin-bottom: 2.5rem;">
+        
+        <!-- Center the section title -->
+        <h2 class="title is-3 has-text-centered" style="margin-bottom: 1.5rem;">Introduction</h2>
 
+        <div class="has-text-left">
+          <div style="background: linear-gradient(to right, #f4f7fb, #ffffff); border-left: 5px solid #e2e2e2; padding: 1.5rem 2rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
+            <p style="font-size: 1.05rem; font-weight: 600; color: #2c3e50; line-height: 1.5; margin: 0;">
+              Are current Omni-LLMs truly ready to serve as real-time video assistants?<br>
+              And what are the critical frontiers for their future evolution?
+            </p>
+        </div>
+        
+        <!-- Left-aligned paragraphs -->
+        <div class="has-text-left" style="margin-bottom: 1.5rem;">
+          <p style="font-size: 1rem; color: #4a4a4a; line-height: 1.6;">
+            Recent advances in Omni-LLMs are paving the way for real-time video chat applications, such as tracking and summarizing meetings, guiding users step-by-step throughout the process of cooking a dish, or assisting visually impaired individuals by continuously describing their surroundings. However, existing benchmarks fail to systematically evaluate models under these dynamic, interactive settings. <br><strong>OmniAssistBench</strong> is designed to bridge this gap by answering two critical questions:
+          </p>
+        </div>
+      </div>
+      
+      <!-- 2. Research Problems & Solutions (2 Cards in One Row) -->
+      <div class="columns is-desktop is-centered" style="margin-bottom: 1.5rem;">
+        
+        <!-- Question 1 Card -->
+        <div class="column is-half">
+          <div class="box" style="border-left: 5px solid #F3C59A; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong style="font-size: 1.05rem;">What abilities should be evaluated?</strong><br>
+                    <span style="font-size: 0.95rem;">
+                      Under the scenario of a video assistant, we systematically summarize and categorize the core capabilities required by common, real-world application scenarios to form a comprehensive evaluation taxonomy.
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Question 2 Card -->
+        <div class="column is-half">
+          <div class="box" style="border-left: 5px solid #F3C59A; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong style="font-size: 1.05rem;">How should we evaluate them?</strong><br>
+                    <span style="font-size: 0.95rem;">
+                      To mimic genuine real-world interactions, we adopt open-ended questions and seamlessly embed user prompts directly into the source videos as audio or visual elements, rather than providing them as separate text.
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+      </div>
+      
       <!-- Main Image -->
       <div class="has-text-centered" style="margin: 2rem 0;">
         <img src="general.png" alt="OmniAssistBench summarizes critical abilities" width="85%">
         <p class="figure-caption">OmniAssistBench summarizes critical abilities and tasks from real world Omni-LLM applications <br> to provide quantified evaluation of Omni-LLMs as assistants.</p>
       </div>
 
+      <div class="has-text-left">
+      <strong>OmniAssistBench is highly challenging</strong> . According to our scoring rubrics, even state-of-the-art commercial Omni-LLMs only provide partially correct answers. They frequently fail to understand user gestures, struggle to wait for the appropriate time to respond, or fail to track the status of objects during long-term ineractions which may last for over ten minutes. Evaluation results indicate that there is <strong>substantial room for improvement</strong> before Omni-LLMs can become reliable real-world assistants.
+      </div>
     </div>
   </div>
+
 </section>
 
 <!-- LEADERBOARD -->
@@ -615,8 +687,8 @@
 
 <!-- TASK DESIGN SUBSECTION -->
       <h3 class="title is-4 has-text-centered" style="margin-top: 2rem;">Task Design</h3>
-      <p class="has-text-centered" style="margin-bottom: 2rem;">
-        OmniAssistBench decomposes real-world assistant capabilities into two complementary levels. Evaluation tasks are designed based on this two-tier framework.
+      <p class="has-text-left" style="margin-bottom: 2rem;">
+        OmniAssistBench decomposes real-world assistant capabilities into two complementary levels.<br>Evaluation tasks are designed based on this two-tier framework.
       </p>
 
         <!-- Side-by-side Basic and Advanced Tiers -->
@@ -626,7 +698,7 @@
           <div class="column">
             <div class="tier-card basic-tier">
               <h5 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Basic Tier</h5>
-              <p style="font-size: 0.95rem;">Core perception and multimodal instruction following (e.g., social understanding, temporal perception, and gesture-based prompts).</p>
+              <p style="font-size: 0.95rem;">This tier focuses on core perception and multimodal instruction following capabilities that are frequently encountered in real-world interactions but are under represented in existing video benchmarks.</p>
               
               <!-- Inside Expand Button for Basic Tier -->
               <div class="expand-btn" onclick="toggleTierTable('basic-tier-details', 'basic-arrow')">
@@ -639,7 +711,7 @@
           <div class="column">
             <div class="tier-card adv-tier">
               <h5 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Advanced Tier</h5>
-              <p style="font-size: 0.95rem;">Higher-level interactive skills (e.g., procedural guidance and proactive response).</p>
+              <p style="font-size: 0.95rem;">This tier evaluates the higher-level capabilities required for an interactive assistant. Unlike the Basic Tier, which focuses on objective perception, the QA pairs in this tier are user-goal-driven. Consequently, models need to go beyond accurate perception; they need to actively extract and align information to fulfill the user's objectives. </p>
               
               <!-- Inside Expand Button for Advanced Tier -->
               <div class="expand-btn" onclick="toggleTierTable('adv-tier-details', 'adv-arrow')">
@@ -705,18 +777,18 @@
               </thead>
               <tbody>
                 <!-- Social Perception (3 rows) -->
-                <tr>
+                <tr class="task-row" data-task="II">
                   <td rowspan="3" style="vertical-align: middle; font-weight: bold; text-align: center;">Social<br>Perception</td>
                   <td style="vertical-align: middle; font-weight: bold;">Identity Identification (II)</td>
                   <td style="vertical-align: middle; text-align: center;">Single</td>
                   <td>"Who said that sentence? Who performed that action?"</td>
                 </tr>
-                <tr>
+                <tr class="task-row" data-task="AI">
                   <td style="vertical-align: middle; font-weight: bold;">Addressee<br>Identification (AI)</td>
                   <td style="vertical-align: middle; text-align: center;">Single</td>
                   <td>"Who is he/she talking to?"</td>
                 </tr>
-                <tr>
+                <tr class="task-row" data-task="CE">
                   <td style="vertical-align: middle; font-weight: bold;">Complex Emotion<br>Understanding (CE)</td>
                   <td style="vertical-align: middle; text-align: center;">Single</td>
                   <td>
@@ -726,7 +798,7 @@
                 </tr>
 
                 <!-- Temporal Perception (3 rows) -->
-                <tr>
+                <tr class="task-row" data-task="ER">
                   <td rowspan="3" style="vertical-align: middle; font-weight: bold; text-align: center;">Temporal<br>Perception</td>
                   <td style="vertical-align: middle; font-weight: bold;">Event Retrieval (ER)</td>
                   <td style="vertical-align: middle; text-align: center;">Single</td>
@@ -735,7 +807,7 @@
                     <i>The model needs to establish temporal correlations between the main and non-salient objects or details.</i>
                   </td>
                 </tr>
-                <tr>
+                <tr class="task-row" data-task="AO">
                   <td style="vertical-align: middle; font-weight: bold;">Appearance Order<br>Perception (AO)</td>
                   <td style="vertical-align: middle; text-align: center;">Single</td>
                   <td>
@@ -743,7 +815,7 @@
                     <i>Model may need to distinguish the target object from similar ones.<br>For example, the blogger may have picked up a lot of clothes but only tried on a part of them.</i>
                   </td>
                 </tr>
-                <tr>
+                <tr class="task-row" data-task="DC">
                   <td style="vertical-align: middle; font-weight: bold;">Dynamic Counting (DC)</td>
                   <td style="vertical-align: middle; text-align: center;">Single</td>
                   <td>
@@ -753,7 +825,7 @@
                 </tr>
 
                 <!-- Referential Perception (2 rows) -->
-                <tr>
+                <tr class="task-row" data-task="CE">
                   <td rowspan="2" style="vertical-align: middle; font-weight: bold; text-align: center;">Referential<br>Perception</td>
                   <td style="vertical-align: middle; font-weight: bold;">Action Reference<br>Perception (AR)</td>
                   <td style="vertical-align: middle; text-align: center;">Single</td>
@@ -762,14 +834,14 @@
                     <i>The "pointing" action alone might be ambiguous, so contextual information may be required by the correct answer.</i>
                   </td>
                 </tr>
-                <tr>
+                <tr class="task-row" data-task="LR">
                   <td style="vertical-align: middle; font-weight: bold;">Linguistic Reference<br>Perception (LR)</td>
                   <td style="vertical-align: middle; text-align: center;">Single</td>
                   <td>"What is the title of the second book on the right?"</td>
                 </tr>
 
                 <!-- Non-audio Prompt Following (2 rows) -->
-                <tr>
+                <tr class="task-row" data-task="GPF">
                   <td rowspan="2" style="vertical-align: middle; font-weight: bold; text-align: center;">Non-audio<br>Prompt Following</td>
                   <td style="vertical-align: middle; font-weight: bold;">Gesture-based Prompt<br>Following (GPF)</td>
                   <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
@@ -777,7 +849,7 @@
                     <i>4 gestures are defined at the beginning of the video,<br>then these gestures are embedded using a picture-in-picture layout as prompts.<br>The gestures as prompts may be made by a different person.<br>Not all pre-defined gestures necessarily appear as prompts, nor do they strictly follow the defined order</i>
                   </td>
                 </tr>
-                <tr>
+                <tr class="task-row" data-task="OPF">
                   <td style="vertical-align: middle; font-weight: bold;">OCR-based Prompt<br>Following (OPF)</td>
                   <td style="vertical-align: middle; text-align: center;">Single</td>
                   <td>
@@ -807,7 +879,7 @@
               </thead>
               <tbody>
                 <!-- Proactive Response (2 rows) -->
-                <tr>
+                <tr class="task-row" data-task="SER">
                   <td rowspan="2" style="vertical-align: middle; font-weight: bold; text-align: center;">Proactive<br>Response</td>
                   <td style="vertical-align: middle; font-weight: bold;">Single Event-triggered<br>Response (SER)</td>
                   <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
@@ -816,7 +888,7 @@
                     <i>We DO NOT explicitly ask the model whether to respond at the end of each turn.<br>Instead, the user prompt is provided only in the first turn, followed by raw video clips in subsequent turns.<br>The model must autonomously determine the appropriate timing for a response.</i>
                   </td>
                 </tr>
-                <tr>
+                <tr class="task-row" data-task="MER">
                   <td style="vertical-align: middle; font-weight: bold;">Multi Event-triggered<br>Response (MER)</td>
                   <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
                   <td>
@@ -826,7 +898,7 @@
                 </tr>
 
                 <!-- Process Tracking (3 rows) -->
-                <tr>
+                <tr class="task-row" data-task="ST">
                   <td rowspan="3" style="vertical-align: middle; font-weight: bold; text-align: center;">Process<br>Tracking</td>
                   <td style="vertical-align: middle; font-weight: bold;">Step Tracking (ST)</td>
                   <td style="vertical-align: middle; text-align: center;">6 turns<br>in avg.</td>
@@ -835,7 +907,7 @@
                     <i>To avoid ambiguity, we provide a reference (manual images or demonstration videos) at the beginning.<br>User might ask for the next step after completing multiple steps or while halfway through one,<br>preventing shortcut responses that merely recite the next sentence.</i>
                   </td>
                 </tr>
-                <tr>
+                <tr class="task-row" data-task="CT">
                   <td style="vertical-align: middle; font-weight: bold;">Checklist Tracking (CT)</td>
                   <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
                   <td>
@@ -843,7 +915,7 @@
                     <i>A checklist is provided at the beginning as an image rendered from text.<br>Objects may appear in a different order compared with the list.</i>
                   </td>
                 </tr>
-                <tr>
+                <tr class="task-row" data-task="MT">
                   <td style="vertical-align: middle; font-weight: bold;">Multitask Tracking (MT)</td>
                   <td style="vertical-align: middle; text-align: center;">4 turns<br>in avg.</td>
                   <td>
@@ -853,7 +925,7 @@
                 </tr>
 
                 <!-- Context-Aware Response (1 row) -->
-                <tr>
+                <tr class="task-row" data-task="CR">
                   <td style="vertical-align: middle; font-weight: bold; text-align: center;">Context-Aware<br>Response</td>
                   <td style="vertical-align: middle; font-weight: bold;">Context-Aware<br>Response (CR)</td>
                   <td style="vertical-align: middle; text-align: center;">Single<br>turn</td>
@@ -868,117 +940,102 @@
         </div>
     </div>
 
+    <!-- ================= LEFT HALF ================= -->
     <div class="container is-max-desktop">
-        <div class="content">
-          <!-- 
-            PROPORTION PARAMETER:
-            Bulma uses a 12-column grid. Currently it's set to is-6 (left) and is-6 (right), making it 50/50.
-            To change the proportion, adjust the numbers so they add up to 12.
-            Examples: 
-            - is-7 (left) and is-5 (right)
-            - is-8 (left) and is-4 (right)
-          -->
-          <div class="columns is-centered is-vcentered" style="margin-top: 1.5rem;">
-            <!-- ================= LEFT HALF ================= -->
-            <div class="column is-5 has-text-centered">
-              <!-- LEFT IMAGE SIZE PARAMETER: Adjust the 'width' percentage here -->
-              <img src="statis.png" alt="Task construction and statistics" style="width: 90%; height: auto; margin: 0 auto;">
-              <p class="figure-caption" style="margin-top: 0.5rem;">Task construction of OmniAssistBench.</p>
-            </div>
-
-            <!-- ================= RIGHT HALF ================= -->
-            <div class="column is-7">
-              <!-- Top Image -->
-              <div class="has-text-centered" style="margin-bottom: 2rem;">
-                <!-- RIGHT TOP IMAGE SIZE PARAMETER: Adjust the 'width' percentage here -->
-                <img src="class_videocount_bar.png" alt="Description of Figure 2" style="width: 90%; height: auto; margin: 0 auto;">
-                <p class="figure-caption" style="margin-top: 0.5rem;">Number of test samples in each sub-task.</p>
-              </div>
-              
-              <!-- Bottom Image -->
-              <div class="has-text-centered">
-                <!-- RIGHT BOTTOM IMAGE SIZE PARAMETER: Adjust the 'width' percentage here -->
-                <img src="refined_duration_distribution.png" alt="Description of Figure 3" style="width: 90%; height: auto; margin: 0 auto;">
-                <p class="figure-caption" style="margin-top: 0.5rem;">Statistics of video durations. For multi-turn tasks, durations are calculated as the sum of each turn.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="content">
+    <div class="columns is-centered is-vcentered" style="margin-top: 1.5rem;">
+    <div class="column is-5 has-text-centered">
+      <!-- Sunburst Chart Container -->
+      <div id="sunburst-chart-interactive" style="width: 100%; height: 500px; margin: 0 auto;"></div>
+      <p class="figure-caption" style="margin-top: 0.5rem;">Task construction of OmniAssistBench.</p>
     </div>
 
+    <!-- ================= RIGHT HALF ================= -->
+    <div class="column is-7">
+      <!-- Top Bar Chart Container -->
+      <div class="has-text-centered" style="margin-bottom: 2rem;">
+        <div id="bar-chart-tasks" style="width: 100%; height: 260px; margin: 0 auto;"></div>
+        <p class="figure-caption" style="margin-top: 0.5rem;">Number of test samples in each sub-task.</p>
+      </div>
+      
+      <!-- Bottom Bar Chart Container -->
+      <div class="has-text-centered">
+        <div id="bar-chart-duration" style="width: 100%; height: 260px; margin: 0 auto;"></div>
+        <p class="figure-caption" style="margin-top: 0.5rem;">Statistics of video durations. For multi-turn tasks, durations are calculated as the sum of each turn.</p>
+      </div>
+    </div>
+    </div></div></div>
+
     <div class="container is-max-desktop">
-          <h3 class="title is-4 has-text-centered" style="margin-top: 3.5rem; margin-bottom: 2rem;">Data Format</h3>
-          <div class="content">
-            <div style="font-size: 0.95rem; margin-bottom: 2rem; text-align: center;">
-              OmniAssistBench adopts open-ended questions. A typical QA pair contains a video clip embedded with a user question, a Ground Truth (GT) answer, and a group of key points of the GT answer. There are both single and multi-turn samples depending on the tasks.
-            </div>
-            
-            <!-- Two Cards in a Row -->
-            <div class="columns is-desktop is-centered">
-              
-              <!-- LEFT CARD (Image under the text) -->
-              <div class="column is-half">
-                <div class="box" style="border-left: 5px solid #F3C59A; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
-                  <article class="media" style="height: 100%;">
-                    <div class="media-content">
-                      <div class="content">
-                        
-                        <!-- Text Section -->
-                        <div style="margin-bottom: 0.5rem;">
-                          <strong style="font-size: 1.05rem;">Data Format</strong>
-                        </div>
-                        <div style="font-size: 0.95rem; margin-bottom: 1.5rem;">
-                          Unlike traditional benchmarks with text-only prompts, all user questions are embedded directly into the videos as realistic audio or typing/handwriting. Only the videos are input into the candidate models.
-                        </div>
-                        
-                        <!-- Image Section (Underneath) -->
-                        <div class="has-text-centered">
-                          <!-- Adjust width percentage or max-width as needed -->
-                          <img src="data_format.png" alt="Single-Turn Example" style="width: 100%; height: auto; border-radius: 6px;">
-                        </div>
-                        
-                      </div>
-                    </div>
-                  </article>
-                </div>
-              </div>
-
-              <!-- RIGHT CARD (Image to the right of the text) -->
-              <div class="column is-half">
-                <div class="box" style="border-left: 5px solid #F3C59A; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
-                  <article class="media" style="height: 100%;">
-                    <div class="media-content">
-                      <div class="content">
-                        
-                        <!-- Nested columns to put text on left, image on right -->
-                        <div class="columns is-vcentered is-mobile" style="margin: 0; height: 100%;">
-                          
-                          <!-- Text Section (Left Side) -->
-                          <div class="column" style="padding-left: 0; padding-top: 0;">
+      <h3 class="title is-4 has-text-centered" style="margin-top: 3.5rem; margin-bottom: 2rem;">Data Format</h3>
+      <div class="content">
+        <div style="font-size: 0.95rem; margin-bottom: 2rem; text-align: center;">
+          OmniAssistBench adopts open-ended questions. A typical QA pair contains a video clip embedded with a user question, a Ground Truth (GT) answer, and a group of key points of the GT answer. There are both single and multi-turn samples depending on the tasks.
+        </div>
+                
+        <!-- Two Cards in a Row -->
+        <div class="columns is-desktop is-centered">
+                  
+        <!-- LEFT CARD (Image under the text) -->
+        <div class="column is-half">
+          <div class="box" style="border-left: 5px solid #F3C59A; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+                      <article class="media" style="height: 100%;">
+                        <div class="media-content">
+                          <div class="content">
+                            
+                            <!-- Text Section -->
                             <div style="margin-bottom: 0.5rem;">
-                              <strong style="font-size: 1.05rem;">Offline Simulation of Online Interaction</strong>
+                              <strong style="font-size: 1.05rem;">Data Format</strong>
                             </div>
-                            <div style="font-size: 0.95rem;">
-                              We adopt multi-turn interaction format to simulate online interaction in an offline manner. To mimic the temporal causality of online streaming interactions, user prompt is always embedded at the very end of each video clip.
+                            <div style="font-size: 0.95rem; margin-bottom: 1.5rem;">
+                              Unlike traditional benchmarks with text-only prompts, all user questions are embedded directly into the videos as realistic audio or typing/handwriting. Only the videos are input into the candidate models.
                             </div>
+                            
+                            <!-- Image Section (Underneath) -->
+                            <div class="has-text-centered">
+                              <!-- Adjust width percentage or max-width as needed -->
+                              <img src="data_format.png" alt="Single-Turn Example" style="width: 100%; height: auto; border-radius: 6px;">
+                            </div>
+                            
                           </div>
-                          
-                          <!-- Image Section (Right Side) -->
-                          <div class="column is-5 has-text-centered" style="padding-right: 0;">
-                            <!-- Adjust width percentage or max-width as needed -->
-                            <img src="multi-turn.png" alt="Multi-Turn Example" style="width: 100%; height: auto; border-radius: 6px;">
-                          </div>
-                          
                         </div>
-
-                      </div>
-                    </div>
-                  </article>
-                </div>
-              </div>
-
-            </div> <!-- End of columns -->
+                      </article>
           </div>
+        </div>
+
+        <!-- RIGHT CARD (Image to the right of the text) -->
+        <div class="column is-half">
+          <div class="box" style="border-left: 5px solid #F3C59A; height: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+                      <article class="media" style="height: 100%;">
+                        <div class="media-content">
+                          <div class="content">
+                            
+                            <!-- Nested columns to put text on left, image on right -->
+                            <div class="columns is-vcentered is-mobile" style="margin: 0; height: 100%;">
+                              
+                              <!-- Text Section (Left Side) -->
+                              <div class="column" style="padding-left: 0; padding-top: 0;">
+                                <div style="margin-bottom: 0.5rem;">
+                                  <strong style="font-size: 1.05rem;">Offline Simulation of Online Interaction</strong>
+                                </div>
+                                <div style="font-size: 0.95rem;">
+                                  We adopt multi-turn interaction format to simulate online interaction in an offline manner. To mimic the temporal causality of online streaming interactions, user prompt is always embedded at the very end of each video clip. Also, the video clip in the current turn always starts at where the video in the previous turn ends.
+                                </div>
+                              </div>
+                              
+                              <!-- Image Section (Right Side) -->
+                              <div class="column is-5 has-text-centered" style="padding-right: 0;">
+                                <!-- Adjust width percentage or max-width as needed -->
+                                <img src="multi-turn.png" alt="Multi-Turn Example" style="width: 100%; height: auto; border-radius: 6px;">
+                              </div>  
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+          </div>
+          </div>
+        </div> <!-- End of columns -->
+      </div>
     </div>
     
     <div class="container is-max-desktop">
@@ -1034,7 +1091,11 @@
                   <div class="content">
                       <div style="margin-bottom: 0.5rem;"><strong style="font-size: 1.05rem;">Step 3: Video Editing</strong></div>
                       <div style="font-size: 0.95rem; margin-bottom: 0.75rem;">
-                        The video editing phase primarily consists of 3-4 sub-steps. To balance video length, annotators may remove parts of the source videos that are less relevant to the QAs. Next, user prompts and user goals are embedded. For most tasks, user prompts are converted to speech via TTS and embedded as audio. For Non-audio Prompt Following tasks, user prompts are embedded visually using a picture-in-picture format. For tasks requiring multi-turn interaction, source videos are divided into clips corresponding to each QA turn. Additionally, for Advanced Interactive Understanding tasks, user goals are embedded as on-screen subtitles. </div>
+                        The video editing phase primarily consists of 3-4 sub-steps:
+                        <ul>
+                          1) Annotators may remove parts of the source videos that are less relevant to the QAs to balance video length.<br>
+                          2) User prompts and user goals are then embedded. For most tasks, user prompts are converted to speech via TTS and embedded as audio. For Non-audio Prompt Following tasks, user prompts are embedded visually using a picture-in-picture format. Additionally, for Advanced Interactive Understanding tasks, user goals are embedded as on-screen subtitles. <br>
+                          3) For tasks requiring multi-turn interaction, source videos are divided into clips corresponding to each QA turn. </ul> </div>
                       <div style="font-size: 0.95rem;">
                         This comprehensive editing process typically takes an annotator 1-2 hours per sample. </div>
                   </div>
@@ -1415,6 +1476,194 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   
   window.addEventListener('resize', () => myChart.resize());
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  // 1. Initialize ECharts instances
+  const sunburstChart = echarts.init(document.getElementById('sunburst-chart-interactive'));
+  const barChartTasks = echarts.init(document.getElementById('bar-chart-tasks'));
+  const barChartDuration = echarts.init(document.getElementById('bar-chart-duration'));
+
+  // 2. Data Mappings for Linkage
+  // Maps the data-task ID to the Sunburst node name and Bar Chart Data Index
+  const taskMap = {
+    'ER':  { barIdx: 0,  sunburst: 'ER' },
+    'DC':  { barIdx: 1,  sunburst: 'DC' },
+    'AO':  { barIdx: 2,  sunburst: 'AO' },
+    'II':  { barIdx: 3,  sunburst: 'II' },
+    'CE':  { barIdx: 4,  sunburst: 'CE' },
+    'AI':  { barIdx: 5,  sunburst: 'AI' },
+    'LR':  { barIdx: 6,  sunburst: 'LR' },
+    'AR':  { barIdx: 7,  sunburst: 'AR' },
+    'OPF': { barIdx: 8,  sunburst: 'OPF' },
+    'GPF': { barIdx: 9,  sunburst: 'GPF' },
+    'ST':  { barIdx: 10, sunburst: 'ST' },
+    'MT':  { barIdx: 11, sunburst: 'MT' },
+    'CT':  { barIdx: 12, sunburst: 'CT' },
+    'SER': { barIdx: 13, sunburst: 'SER' },
+    'MER': { barIdx: 14, sunburst: 'MER' },
+    'CR':  { barIdx: 15, sunburst: 'CR' },
+    'RC':  { barIdx: 16, sunburst: 'Real World\nCases' }, 
+    'Ms':  { barIdx: 16, sunburst: 'Ms' }, // Maps RC sub-tasks to the single RC bar
+    'Ba':  { barIdx: 16, sunburst: 'Ba' },
+    'Ht':  { barIdx: 16, sunburst: 'Ht' }
+  };
+
+  // 3. Sunburst Chart Configuration
+  const sunburstOption = {
+    series: {
+      type: 'sunburst',
+      radius: ['15%', '95%'],
+      itemStyle: { borderColor: '#fff', borderWidth: 2 },
+      label: { rotate: 'radial', color: '#333', fontSize: 10 },
+      emphasis: { focus: 'ancestor' }, // Naturally dims non-related branches!
+      data:[
+        {
+          name: 'Basic Interactive\nUnderstanding', itemStyle: { color: '#8DC766' },
+          children:[
+            { name: 'Non-audio\nPrompt', itemStyle: { color: '#A9D18E' }, children:[{ name: 'OPF', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'GPF', value: 1, itemStyle: { color: '#C5E0B4' } }] },
+            { name: 'Referential\nPerception', itemStyle: { color: '#A9D18E' }, children:[{ name: 'AR', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'LR', value: 1, itemStyle: { color: '#C5E0B4' } }] },
+            { name: 'Social\nPerception', itemStyle: { color: '#A9D18E' }, children:[{ name: 'AI', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'CE', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'II', value: 1, itemStyle: { color: '#C5E0B4' } }] },
+            { name: 'Temporal\nPerception', itemStyle: { color: '#A9D18E' }, children:[{ name: 'AO', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'DC', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'ER', value: 1, itemStyle: { color: '#C5E0B4' } }] }
+          ]
+        },
+        {
+          name: 'Advanced Interactive\nUnderstanding', itemStyle: { color: '#78B4E2' },
+          children:[
+            { name: 'Process\nTracking', itemStyle: { color: '#9BC2E6' }, children:[{ name: 'ST', value: 1, itemStyle: { color: '#BDD7EE' } }, { name: 'MT', value: 1, itemStyle: { color: '#BDD7EE' } }, { name: 'CT', value: 1, itemStyle: { color: '#BDD7EE' } }] },
+            { name: 'Proactive\nResponse', itemStyle: { color: '#9BC2E6' }, children:[{ name: 'SER', value: 1, itemStyle: { color: '#BDD7EE' } }, { name: 'MER', value: 1, itemStyle: { color: '#BDD7EE' } }] },
+            { name: 'Context-aware\nResponse', itemStyle: { color: '#9BC2E6' }, children:[{ name: 'CR', value: 1, itemStyle: { color: '#BDD7EE' } }] }
+          ]
+        },
+        {
+          name: 'Real World\nCases', itemStyle: { color: '#F7B064' },
+          children:[
+            { name: 'Ms', value: 1, itemStyle: { color: '#FAD0A1' } }, { name: 'Ba', value: 1, itemStyle: { color: '#FAD0A1' } }, { name: 'Ht', value: 1, itemStyle: { color: '#FAD0A1' } }
+          ]
+        }
+      ]
+    }
+  };
+  sunburstChart.setOption(sunburstOption);
+
+  // 4. Top-Right Bar Chart (Task Counts) Configuration
+  const barTasksOption = {
+    tooltip: { trigger: 'item', formatter: '{b}: {c}' },
+    grid: { left: '5%', right: '5%', bottom: '15%', top: '15%', containLabel: true },
+    xAxis: {
+      type: 'category',
+      data:['ER','DC','AO','II','CE','AI','LR','AR','OPF','GPF','ST','MT','CT','SER','MER','CR','RC'],
+      axisLabel: { interval: 0, rotate: 30, fontSize: 10 }
+    },
+    yAxis: { type: 'value', name: '# Videos', nameTextStyle: { fontSize: 10 } },
+    series:[
+      {
+        type: 'bar',
+        emphasis: { focus: 'self' }, // Dims other bars
+        label: { show: true, position: 'top', fontSize: 10, color: '#555' },
+        data:[
+          { value: 12, itemStyle: { color: '#8DC766' }, name: 'ER' },
+          { value: 15, itemStyle: { color: '#8DC766' }, name: 'DC' },
+          { value: 14, itemStyle: { color: '#8DC766' }, name: 'AO' },
+          { value: 19, itemStyle: { color: '#8DC766' }, name: 'II' },
+          { value: 26, itemStyle: { color: '#8DC766' }, name: 'CE' },
+          { value: 16, itemStyle: { color: '#8DC766' }, name: 'AI' },
+          { value: 18, itemStyle: { color: '#8DC766' }, name: 'LR' },
+          { value: 15, itemStyle: { color: '#8DC766' }, name: 'AR' },
+          { value: 15, itemStyle: { color: '#8DC766' }, name: 'OPF' },
+          { value: 15, itemStyle: { color: '#8DC766' }, name: 'GPF' },
+          { value: 20, itemStyle: { color: '#78B4E2' }, name: 'ST' },
+          { value: 16, itemStyle: { color: '#78B4E2' }, name: 'MT' },
+          { value: 16, itemStyle: { color: '#78B4E2' }, name: 'CT' },
+          { value: 16, itemStyle: { color: '#78B4E2' }, name: 'SER' },
+          { value: 16, itemStyle: { color: '#78B4E2' }, name: 'MER' },
+          { value: 14, itemStyle: { color: '#78B4E2' }, name: 'CR' },
+          { value: 3,  itemStyle: { color: '#F7B064' }, name: 'RC' }
+        ]
+      }
+    ]
+  };
+  barChartTasks.setOption(barTasksOption);
+
+  // 5. Bottom-Right Bar Chart (Durations) Configuration
+  const barDurationOption = {
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    legend: { data: ['Single-turn', 'Multi-turn'], top: 0, right: 0, itemWidth: 14, textStyle: { fontSize: 11 } },
+    grid: { left: '5%', right: '5%', bottom: '15%', top: '25%', containLabel: true },
+    xAxis: {
+      type: 'category',
+      data:['0-15s', '15-30s', '30-45s', '45-60s', '60-90s', '90-120s', '120-150s', '150-180s', '180-360s', '300-420s', '>420s'],
+      axisLabel: { interval: 0, fontSize: 9 }
+    },
+    yAxis: { type: 'value', name: '# Videos', nameTextStyle: { fontSize: 10 } },
+    series:[
+      {
+        name: 'Single-turn', type: 'bar', itemStyle: { color: '#A9D18E' },
+        data:[4, 29, 44, 39, 41, 28, 10, 9, 11, 2, 0],
+        label: { show: true, position: 'top', formatter: (p) => p.value > 0 ? p.value : '', fontSize: 9 }
+      },
+      {
+        name: 'Multi-turn', type: 'bar', itemStyle: { color: '#9BC2E6' },
+        data:[0, 2, 1, 3, 10, 9, 11, 13, 29, 14, 14],
+        label: { show: true, position: 'top', formatter: (p) => p.value > 0 ? p.value : '', fontSize: 9 }
+      }
+    ]
+  };
+  barChartDuration.setOption(barDurationOption);
+
+  // 6. Interaction / Highlighting Logic
+  const taskRows = document.querySelectorAll('tr[data-task]');
+
+  function crossHighlight(taskId) {
+    if (!taskId || !taskMap[taskId]) return;
+    const mapInfo = taskMap[taskId];
+
+    // Highlight Table Row
+    taskRows.forEach(el => {
+      if (el.getAttribute('data-task') === taskId) el.classList.add('row-highlight');
+      else el.classList.remove('row-highlight');
+    });
+
+    // Highlight Sunburst Slice (this automatically highlights ancestors due to focus: 'ancestor')
+    sunburstChart.dispatchAction({ type: 'highlight', name: mapInfo.sunburst });
+
+    // Highlight Top-Right Bar
+    barChartTasks.dispatchAction({ type: 'highlight', seriesIndex: 0, dataIndex: mapInfo.barIdx });
+  }
+
+  function crossDownplay() {
+    taskRows.forEach(el => el.classList.remove('row-highlight'));
+    sunburstChart.dispatchAction({ type: 'downplay' });
+    barChartTasks.dispatchAction({ type: 'downplay' });
+  }
+
+  // Bind to Table Rows
+  taskRows.forEach(el => {
+    el.addEventListener('mouseenter', () => crossHighlight(el.getAttribute('data-task')));
+    el.addEventListener('mouseleave', crossDownplay);
+  });
+
+  // Bind to Sunburst Chart
+  sunburstChart.on('mouseover', (params) => {
+    let targetId = Object.keys(taskMap).find(key => taskMap[key].sunburst === params.name);
+    if (targetId) crossHighlight(targetId);
+  });
+  sunburstChart.on('mouseout', crossDownplay);
+
+  // Bind to Top-Right Bar Chart
+  barChartTasks.on('mouseover', (params) => {
+    let targetId = Object.keys(taskMap).find(key => taskMap[key].barIdx === params.dataIndex);
+    if (targetId) crossHighlight(targetId);
+  });
+  barChartTasks.on('mouseout', crossDownplay);
+
+  // Responsive Resizing
+  window.addEventListener('resize', () => {
+    sunburstChart.resize();
+    barChartTasks.resize();
+    barChartDuration.resize();
+  });
 });
 
 </script>
