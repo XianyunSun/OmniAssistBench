@@ -944,24 +944,24 @@
     <div class="container is-max-desktop">
     <div class="content">
     <div class="columns is-centered is-vcentered" style="margin-top: 1.5rem;">
-    <div class="column is-5 has-text-centered">
+    <div class="column is-6 has-text-centered">
       <!-- Sunburst Chart Container -->
-      <div id="sunburst-chart-interactive" style="width: 100%; height: 500px; margin: 0 auto;"></div>
+      <div id="sunburst-chart-interactive" style="width: 100%; height: 600px; margin: 0 auto;"></div>
       <p class="figure-caption" style="margin-top: 0.5rem;">Task construction of OmniAssistBench.</p>
     </div>
 
     <!-- ================= RIGHT HALF ================= -->
-    <div class="column is-7">
+    <div class="column is-6">
       <!-- Top Bar Chart Container -->
       <div class="has-text-centered" style="margin-bottom: 2rem;">
-        <div id="bar-chart-tasks" style="width: 100%; height: 260px; margin: 0 auto;"></div>
-        <p class="figure-caption" style="margin-top: 0.5rem;">Number of test samples in each sub-task.</p>
+        <div id="bar-chart-tasks" style="width: 100%; height: 300px; margin: 0 auto; margin-bottom: -2rem;"></div>
+        <p class="figure-caption" style="margin-top: 0rem;">Number of test samples in each sub-task.</p>
       </div>
       
       <!-- Bottom Bar Chart Container -->
       <div class="has-text-centered">
-        <div id="bar-chart-duration" style="width: 100%; height: 260px; margin: 0 auto;"></div>
-        <p class="figure-caption" style="margin-top: 0.5rem;">Statistics of video durations. For multi-turn tasks, durations are calculated as the sum of each turn.</p>
+        <div id="bar-chart-duration" style="width: 100%; height: 300px; margin: 0 auto; margin-bottom: -2rem;"></div>
+        <p class="figure-caption" style="margin-top: 0rem;">Statistics of video durations. For multi-turn tasks, durations are calculated as the sum of each turn.</p>
       </div>
     </div>
     </div></div></div>
@@ -1510,41 +1510,175 @@ document.addEventListener("DOMContentLoaded", function() {
     'Ht':  { barIdx: 16, sunburst: 'Ht' }
   };
 
-  // 3. Sunburst Chart Configuration
-  const sunburstOption = {
-    series: {
-      type: 'sunburst',
-      radius: ['15%', '95%'],
-      itemStyle: { borderColor: '#fff', borderWidth: 2 },
-      label: { rotate: 'radial', color: '#333', fontSize: 10 },
-      emphasis: { focus: 'ancestor' }, // Naturally dims non-related branches!
-      data:[
+  // 3. Sunburst Chart Configuration (4 Rings)
+  // Here is where you change the words (the "name" properties). 
+  // The depth of the "children" determines which ring it appears in.
+  const sunburstData =[
+    {
+      name: 'Basic Interactive\nUnderstanding', itemStyle: { color: '#8DC766' },
+      children:[
         {
-          name: 'Basic Interactive\nUnderstanding', itemStyle: { color: '#8DC766' },
+          name: 'Non-audio\nPrompt', itemStyle: { color: '#A9D18E' },
           children:[
-            { name: 'Non-audio\nPrompt', itemStyle: { color: '#A9D18E' }, children:[{ name: 'OPF', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'GPF', value: 1, itemStyle: { color: '#C5E0B4' } }] },
-            { name: 'Referential\nPerception', itemStyle: { color: '#A9D18E' }, children:[{ name: 'AR', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'LR', value: 1, itemStyle: { color: '#C5E0B4' } }] },
-            { name: 'Social\nPerception', itemStyle: { color: '#A9D18E' }, children:[{ name: 'AI', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'CE', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'II', value: 1, itemStyle: { color: '#C5E0B4' } }] },
-            { name: 'Temporal\nPerception', itemStyle: { color: '#A9D18E' }, children:[{ name: 'AO', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'DC', value: 1, itemStyle: { color: '#C5E0B4' } }, { name: 'ER', value: 1, itemStyle: { color: '#C5E0B4' } }] }
+            { name: 'OCR-based\nPrompt', itemStyle: { color: '#C5E0B4' }, children:[{ name: 'OPF', value: 1, itemStyle: { color: '#E2F0D9' } }] },
+            { name: 'Gesture-based\nPrompt', itemStyle: { color: '#C5E0B4' }, children:[{ name: 'GPF', value: 1, itemStyle: { color: '#E2F0D9' } }] }
           ]
         },
         {
-          name: 'Advanced Interactive\nUnderstanding', itemStyle: { color: '#78B4E2' },
+          name: 'Referential\nPerception', itemStyle: { color: '#A9D18E' },
           children:[
-            { name: 'Process\nTracking', itemStyle: { color: '#9BC2E6' }, children:[{ name: 'ST', value: 1, itemStyle: { color: '#BDD7EE' } }, { name: 'MT', value: 1, itemStyle: { color: '#BDD7EE' } }, { name: 'CT', value: 1, itemStyle: { color: '#BDD7EE' } }] },
-            { name: 'Proactive\nResponse', itemStyle: { color: '#9BC2E6' }, children:[{ name: 'SER', value: 1, itemStyle: { color: '#BDD7EE' } }, { name: 'MER', value: 1, itemStyle: { color: '#BDD7EE' } }] },
-            { name: 'Context-aware\nResponse', itemStyle: { color: '#9BC2E6' }, children:[{ name: 'CR', value: 1, itemStyle: { color: '#BDD7EE' } }] }
+            { name: 'Action\nReference', itemStyle: { color: '#C5E0B4' }, children:[{ name: 'AR', value: 1, itemStyle: { color: '#E2F0D9' } }] },
+            { name: 'Linguistic\nReference', itemStyle: { color: '#C5E0B4' }, children:[{ name: 'LR', value: 1, itemStyle: { color: '#E2F0D9' } }] }
           ]
         },
         {
-          name: 'Real World\nCases', itemStyle: { color: '#F7B064' },
+          name: 'Social\nPerception', itemStyle: { color: '#A9D18E' },
           children:[
-            { name: 'Ms', value: 1, itemStyle: { color: '#FAD0A1' } }, { name: 'Ba', value: 1, itemStyle: { color: '#FAD0A1' } }, { name: 'Ht', value: 1, itemStyle: { color: '#FAD0A1' } }
+            { name: 'Addressee\nIdent.', itemStyle: { color: '#C5E0B4' }, children:[{ name: 'AI', value: 1, itemStyle: { color: '#E2F0D9' } }] },
+            { name: 'Complex\nEmotion', itemStyle: { color: '#C5E0B4' }, children:[{ name: 'CE', value: 1, itemStyle: { color: '#E2F0D9' } }] },
+            { name: 'Identity\nIdent.', itemStyle: { color: '#C5E0B4' }, children:[{ name: 'II', value: 1, itemStyle: { color: '#E2F0D9' } }] }
+          ]
+        },
+        {
+          name: 'Temporal\nPerception', itemStyle: { color: '#A9D18E' },
+          children:[
+            { name: 'Appearance\nOrder', itemStyle: { color: '#C5E0B4' }, children:[{ name: 'AO', value: 1, itemStyle: { color: '#E2F0D9' } }] },
+            { name: 'Dynamic\nCounting', itemStyle: { color: '#C5E0B4' }, children:[{ name: 'DC', value: 1, itemStyle: { color: '#E2F0D9' } }] },
+            { name: 'Event\nRetrieval', itemStyle: { color: '#C5E0B4' }, children:[{ name: 'ER', value: 1, itemStyle: { color: '#E2F0D9' } }] }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Advanced Interactive\nUnderstanding', itemStyle: { color: '#78B4E2', borderWidth: 2 },
+      children:[
+        {
+          name: 'Process\nTracking', itemStyle: { color: '#9BC2E6' },
+          children:[
+            { name: 'Step Tracking', itemStyle: { color: '#BDD7EE' }, children:[{ name: 'ST', value: 1, itemStyle: { color: '#DEEBF7' } }] },
+            { name: 'Multitask\nTracking', itemStyle: { color: '#BDD7EE' }, children:[{ name: 'MT', value: 1, itemStyle: { color: '#DEEBF7' } }] },
+            { name: 'Checklist\nTracking', itemStyle: { color: '#BDD7EE' }, children:[{ name: 'CT', value: 1, itemStyle: { color: '#DEEBF7' } }] }
+          ]
+        },
+        {
+          name: 'Proactive\nResponse', itemStyle: { color: '#9BC2E6' },
+          children:[
+            { name: 'Single\nEvent', itemStyle: { color: '#BDD7EE' }, children:[{ name: 'SER', value: 1, itemStyle: { color: '#DEEBF7' } }] },
+            { name: 'Multi\nEvent', itemStyle: { color: '#BDD7EE' }, children:[{ name: 'MER', value: 1, itemStyle: { color: '#DEEBF7' } }] }
+          ]
+        },
+        
+        {
+          name: '', itemStyle: { color: '#9BC2E6', borderWidth: 0},
+          children:[
+            { name: 'Context-aware\nResponse', itemStyle: { color: '#9BC2E6', borderWidth: 0}, children:[{ name: 'CR', value: 1, itemStyle: { color: '#DEEBF7' } }] }
+          ]
+        }
+      
+      ]
+    },
+    {
+      name: 'Real World\nCases', itemStyle: { color: '#F7B064' },
+      children:[
+        {
+          name: '', itemStyle: { color: '#FAD0A1', borderWidth: 0 },
+          children:[
+            { name: 'Meeting\nSimulation', itemStyle: { color: '#FAD0A1', borderWidth: 0 }, children:[{ name: 'Ms', value: 1, itemStyle: { color: '#FCE4CC' } }] }
+          ]
+        },
+        {
+          name: '', itemStyle: { color: '#FAD0A1', borderWidth: 0 },
+          children:[
+            { name: 'Blind\nAssistance', itemStyle: { color: '#FAD0A1', borderWidth: 0 }, children:[{ name: 'Ba', value: 1, itemStyle: { color: '#FCE4CC' } }] }
+          ]
+        },
+        {
+          name: '', itemStyle: { color: '#FAD0A1', borderWidth: 0 },
+          children:[
+            { name: 'Handcraft\nProcess', itemStyle: { color: '#FAD0A1', borderWidth: 0 }, children:[{ name: 'Ht', value: 1, itemStyle: { color: '#FCE4CC' } }] }
           ]
         }
       ]
     }
+  ];
+
+  const sunburstOption = {
+    series: [
+      {
+      type: 'sunburst',
+      data: sunburstData,
+      radius: ['0%', '100%'], // Uses 100% of the container div
+      nodeClick: false,
+      itemStyle: { borderColor: '#fff', borderWidth: 2 },
+      emphasis: { focus: 'ancestor' },
+      
+      // HERE IS WHERE YOU CHANGE WIDTHS AND ROTATION!
+      levels:[
+        {}, // Level 0: The blank center hole
+        {   // Level 1: Tier (Basic/Adv/RC)
+          r0: '13%', r: '30%', // r0 is inner radius, r is outer radius
+          label: { rotate: 'tangential', fontSize: 10, fontWeight: 'bold', color: '#333' }
+        },
+        {   // Level 2: Major Task (Social/Process...)
+          r0: '30%', r: '50%', 
+          label: { rotate: 'tangential', fontSize: 10, color: '#333' }
+        },
+        {   // Level 3: Sub Task Full Name
+          r0: '50%', r: '85%', 
+          label: { rotate: 'radial', fontSize: 10, color: '#333' }
+        },
+        {   // Level 4: Abbreviation (II, AI...)
+          r0: '85%', r: '100%', 
+          label: { rotate: 'radial', fontSize: 10, fontWeight: 'bold', color: '#333' }
+        }
+      ]
+    },
+      // --- THE OVERLAY TRICK ---
+      // A transparent Pie chart placed exactly over Level 1 to draw the borders "on top"
+      {
+        type: 'pie',
+        radius: ['13%', '30%'], // Exactly matches Level 1 radii
+        silent: true,           // Ignores mouse hover so it doesn't break the sunburst interactivity
+        label: { show: false }, // Hides pie labels
+        animation: false,       // Prevents double-animation on load
+        nodeClick: false,
+        data:[
+          // 10, 6, and 3 are the exact total mathematical values of the 3 main branches.
+          // This ensures the overlay lines up perfectly with the Sunburst angles.
+          { value: 10, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }, // Basic
+          { value: 6, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } },  // Advanced
+          { value: 3, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }   // Real World
+        ]
+      },
+      {
+        type: 'pie',
+        radius: ['30%', '85%'], // Spans from the 1&2 boundary to the 3&4 boundary
+        silent: true,
+        label: { show: false },
+        animation: false,
+        nodeClick: false,
+        data:[
+          // Basic Interactive Understanding (10)
+          { value: 3, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }, // Social
+          { value: 3, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }, // Temporal
+          { value: 2, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }, // Non-audio 
+          { value: 2, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }, // Referential
+          
+          // Advanced Interactive Understanding (6)
+          { value: 3, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }, // Process
+          { value: 2, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }, // Proactive
+          { value: 1, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }, // Context-aware
+          
+          // Real World Cases (3)
+          { value: 1, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }, // Ms
+          { value: 1, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }, // Ba
+          { value: 1, itemStyle: { color: 'transparent', borderColor: '#fff', borderWidth: 2 } }  // Ht
+        ]
+      }
+  ]
   };
+
+  
   sunburstChart.setOption(sunburstOption);
 
   // 4. Top-Right Bar Chart (Task Counts) Configuration
