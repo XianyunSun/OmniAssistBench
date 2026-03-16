@@ -53,7 +53,7 @@ Click here for the key plots of the real world cases</summary>
 * 🔵 **Advanced Tier:** Higher-level interactive skills (e.g., procedural guidance and proactive response).
 
 <div align="center">
-  <img src="docs/statis.png" alt="Task construction and statistics of OmniAssistBench" width="80%">
+  <img src="docs/statis_table.png" alt="Task construction and statistics of OmniAssistBench" width="80%">
   <p>
 <i>Task construction and statistics of OmniAssistBench.
 </i></p>
