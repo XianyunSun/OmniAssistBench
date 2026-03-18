@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Evaluating paralinguistic-aware speech generation">
+  <meta name="keywords" content="OmniAssistBench">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> OmniAssistBench</title>
+
+  <!--<link rel="icon" href="./static/images/icon.png">-->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <!-- ECharts Library for Radar Chart -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/leaderboard.css">
+  <link rel="stylesheet" href="./static/css/example-container.css">
+  <script type="text/javascript" src="static/js/sort-table.js" defer></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/explorer-index.js"></script>
+
+  <script src="./static/js/leaderboard_testmini.js"></script>  
+  <script src="./static/js/example-shower.js"></script>
+  <script src="./static/js/radar-chart.js"></script>
+  <script src="./static/js/statis.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          
+          <!-- Title and Subtitle -->
+          <h1 class="title is-1 publication-title">OmniAssistBench</h1>
+          <h2 class="title is-3 publication-title" style="margin-top: -10px; margin-bottom: 20px;">
+            Assistant-style Interaction Benchmark for Omni-LLMs
+          </h2>
+
+          <!-- Authors -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="#">Xianyun Sun</a><sup>1, *</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=4A1xYQwAAAAJ&hl=en&oi=ao">Chaoyou Fu</a><sup>1, *&dagger;</sup>,</span>
+            <span class="author-block">
+              <a href="#">Zhengye Zhang</a><sup>1, *</sup>,</span>
+            <span class="author-block">
+              <a href="#">Feiyang Duan</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Qingyuan Cao</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Yonghui Niu</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=UhJwHRAAAAAJ&hl=en&oi=ao">Zijian Liu</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Sihang Yuan</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=qyTrq4kAAAAJ&hl=en&oi=ao">Ge Zhang</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=ayrg9AUAAAAJ&hl=en&oi=ao">Ran He</a><sup>3</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=fIXA_SsAAAAJ&hl=en&oi=sra">Caifeng Shan</a><sup>1</sup></span>
+          </div>
+
+          <!-- Contribution Notes / Legend -->
+          <div class="is-size-6 has-text-grey" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+            <span class="author-block" style="margin-right: 15px;"><sup>&dagger;</sup>Project Leader</span>
+            <span class="author-block"><sup>*</sup>Equal Contribution</span>
+          </div>
+
+          <!-- Institutions -->
+          <div class="is-size-5 publication-authors" style="margin-top: 0.5rem;">
+            <span class="author-block"><sup>1</sup>Nanjing University,</span>
+            <span class="author-block"><sup>2</sup>ByteDance Seed,</span>
+            <span class="author-block"><sup>3</sup>CASIA</span>
+          </div>
+
+          <!-- Links/Badges -->
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              
+              <!-- Paper Link. -->
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>Dataset</span>
+                </a>
+              </span>
+
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/XianyunSun/OmniAssistBench" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Title -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Introduction</h2>
+      </div>
+    </div>
+
+    <!-- 1. Background -->
+    <div class="columns is-centered">
+      <div class="column is-full">
+        
+        <!-- Main Image -->
+        <div class="has-text-centered" style="margin-bottom: 2rem;">
+          <img src="./static/img/general_cases.png" alt="OmniAssistBench summarizes critical abilities" width="90%" style="border-radius: 8px;">
+          <p class="has-text-centered has-text-grey" style="margin-top: 1rem;">
+            OmniAssistBench summarizes critical abilities and tasks from real world Omni-LLM applications <br> to provide quantified evaluation of Omni-LLMs as assistants.
+          </p>
+        </div>
+
+        <!-- Left-aligned paragraphs -->
+        <div class="content has-text-justified" style="margin-bottom: 2rem;">         
+          <p>
+            Recent advances in Omni-LLMs are paving the way for real-time video chat applications. However, existing benchmarks fail to systematically evaluate models under these dynamic, interactive settings. 
+            <strong>OmniAssistBench is the first benchmark specially designed to evaluate Omni-LLMs under these assistant-style, real-time video chat scenarios</strong> by discussing two critical questions:
+          </p>
+        </div>
+
+      </div>
+    </div>
+      
+    <!-- 2. Research Problems & Solutions (2 Cards in One Row) -->
+    <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
+      
+      <!-- Question 1 Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong style="font-size: 1.1rem; color: #363636;">What abilities should be evaluated?</strong><br>
+                  <span style="display: inline-block; margin-top: 0.5rem; font-size: 0.95rem; color: #4a4a4a;">
+                    Under the scenario of a video assistant, we systematically summarize and categorize the core capabilities required by common, real-world applications to form a two-tier evaluation taxonomy.
+                  </span>
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Question 2 Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong style="font-size: 1.1rem; color: #363636;">How should we evaluate them?</strong><br>
+                  <span style="display: inline-block; margin-top: 0.5rem; font-size: 0.95rem; color: #4a4a4a;">
+                    To mimic genuine real-world interactions, we adopt open-ended questions and seamlessly embed user prompts directly into the source videos as audio or visual elements, rather than providing them as separate text.
+                  </span>
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Final paragraph -->
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content has-text-justified">
+          <p>
+            <strong>OmniAssistBench is highly challenging</strong>. According to our scoring rubrics, even state-of-the-art commercial Omni-LLMs only provide partially correct answers, indicating that there is substantial room for improvement before Omni-LLMs can become reliable real-world assistants.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    
+    <!-- Title -->
+    <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="leaderboard">Leaderboard</h2>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content has-text-justified">
+          <p>
+            OmniAssistBench requires candidate models to be capable of processing videos along with the corresponding audios. All models are graded using our LLM-as-a-Judge pipeline on a 0 - 5 scale.</p>
+          <p>
+            Please refer to the <a href="https://github.com/XianyunSun/OmniAssistBench">Github page</a> for detailed evaluation pipeline and example codes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Leaderboard Table -->
+  <div class="columns is-centered">
+  <div class="column is-full has-text-centered content" style="margin-top: 2rem; width: 80%;">
+    <div class="content">       
+        <table class="js-sort-table" id="results">
+              <tr>
+                <td class="js-sort-number"><strong>#</strong></td>
+                <td class="js-sort-number"><strong>Model</strong></td>
+                <td class="js-sort-number"><strong>Size</strong></td>
+                <td class="js-sort-number"><strong>Frames</strong></td>
+                <td class="js-sort-number"><strong>Basic Tier</strong></td>
+                <td class="js-sort-number"><strong>Advanced Tier</strong></td>
+                <td class="js-sort-number"><strong>Real Cases</strong></td>
+                <td class="js-sort-number"><strong>Overall (/5.0)</strong></td>
+                <td class="js-sort-number"><strong>Percentage (%)</strong></td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td><b class="best-score-text"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a> 🥇</b></td>
+                <td>-</td>
+                <td>-</td>
+                <td>3.18</td>
+                <td>3.41</td>
+                <td>3.40</td>
+                <td><b class="best-score-text">3.32</b></td>
+                <td>66.4%</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><b class="best-score-text"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a> 🥈</b></td>
+                <td>-</td>
+                <td>-</td>
+                <td>3.27</td>
+                <td>3.32</td>
+                <td>2.24</td>
+                <td><b class="best-score-text">3.23</b></td>
+                <td>64.6%</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><b class="best-score-text"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a> 🥉</b></td>
+                <td>9B</td>
+                <td>1fps</td>
+                <td>2.23</td>
+                <td>2.39</td>
+                <td>1.89</td>
+                <td><b class="best-score-text">2.30</b></td>
+                <td>46.0%</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><b><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></b></td>
+                <td>7B</td>
+                <td>32</td>
+                <td>2.25</td>
+                <td>2.09</td>
+                <td>2.24</td>
+                <td><b>2.16</b></td>
+                <td>43.2%</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><b><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></b></td>
+                <td>7B</td>
+                <td>1fps</td>
+                <td>1.85</td>
+                <td>2.33</td>
+                <td>2.26</td>
+                <td><b>2.16</b></td>
+                <td>43.2%</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td><b><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></b></td>
+                <td>8B</td>
+                <td>1fps</td>
+                <td>2.09</td>
+                <td>2.01</td>
+                <td>1.56</td>
+                <td><b>2.01</b></td>
+                <td>40.2%</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td><b><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></b></td>
+                <td>30B-A3B</td>
+                <td>1fps</td>
+                <td>1.42</td>
+                <td>1.82</td>
+                <td>1.76</td>
+                <td><b>1.68</b></td>
+                <td>33.6%</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td><b><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></b></td>
+                <td>7B</td>
+                <td>4</td>
+                <td>1.23</td>
+                <td>1.29</td>
+                <td>0.73</td>
+                <td><b>1.23</b></td>
+                <td>24.6%</td>
+              </tr>
+        </table>
+      </div>
+  </div>
+  </div>
+
+  <!-- Inside Expand Button for Advanced Tier -->
+  <div class="container is-max-desktop">
+  <div class="columns is-centered">
+    <div class="column is-full">
+      <div class="content has-text-justified">
+        <div class="expand-btn" onclick="toggleTierTable('detailed-results', 'detailed-arrow')">
+          <span id="detailed-arrow">►</span><u>Click here to expand for detailed sub-task level evaluation results.</u>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Detailed Sub-task Evaluation Results Dropdown -->
+  <div class="content">
+  <div id="detailed-results" style="display: none;">
+  
+    <!-- Table 2: Basic Interactive Understanding Tasks -->
+  <div style="margin-top: 1.5rem;">
+    <h5 class="has-text-centered">Performance comparison on Basic Interactive Understanding tasks</h5>
+    <div class="container is-fluid" style="margin-top: 2rem; margin-bottom: 3rem;">
+      <div class="content">
+        <div class="table-container" style="width: 85%; overflow-x: auto; margin: auto; font-size: 0.8rem;">     
+          <table class="js-sort-table " id="results_detail">
+            <thead>
+              <tr style="text-align: center; vertical-align: top;">
+                <td rowspan="3" class="js-sort-number"><strong>#</strong></td>
+                <td rowspan="3" class="js-sort-number"><strong>Model</strong></td>
+                <td rowspan="3" class="js-sort-number"><strong>Overall<br>Avg.</strong></td>
+                <td colspan="14" class="js-sort-none"><strong>Basic Interactive Understanding Tasks</strong></td>
+                <td rowspan="3" class="js-sort-number"><strong>Basic<br>Tier<br>Avg.</strong></td>
+              </tr>
+              <tr style="text-align: center; vertical-align: middle;">
+                <td colspan="4" class="js-sort-none"><strong>Social Perception</strong></td>
+                <td colspan="4" class="js-sort-none"><strong>Temporal Perception</strong></td>
+                <td colspan="3" class="js-sort-none"><strong>Referential Perception</strong></td>
+                <td colspan="3" class="js-sort-none"><strong>Non-audio Prompt</strong></td>
+              </tr>
+              <tr style="text-align: center; vertical-align: middle;">
+                <td class="js-sort-number"><strong>II</strong></td>
+                <td class="js-sort-number"><strong>AI</strong></td>
+                <td class="js-sort-number"><strong>CE</strong></td>
+                <td class="js-sort-number"><strong>Avg.</strong></td>
+                
+                <td class="js-sort-number"><strong>ER</strong></td>
+                <td class="js-sort-number"><strong>AO</strong></td>
+                <td class="js-sort-number"><strong>DC</strong></td>
+                <td class="js-sort-number"><strong>Avg.</strong></td>
+                
+                <td class="js-sort-number"><strong>AR</strong></td>
+                <td class="js-sort-number"><strong>LR</strong></td>
+                <td class="js-sort-number"><strong>Avg.</strong></td>
+                
+                <td class="js-sort-number"><strong>GPF</strong></td>
+                <td class="js-sort-number"><strong>OPF</strong></td>
+                <td class="js-sort-number"><strong>Avg.</strong></td>
+              </tr>
+            </thead>
+            <tbody style="text-align: center; vertical-align: middle;">
+              <tr>
+                <td >1</td>
+                <td><b class="best-score-text"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a> 🥇</b></td>
+                <td ><b class="best-score-text">3.32</b></td>
+                <td >3.59</td>
+                <td ><b class="best-score-text">3.14</b></td>
+                <td >3.31</td>
+                <td >3.35</td>
+                <td >3.06</td>
+                <td ><b class="best-score-text">3.73</b></td>
+                <td >2.63</td>
+                <td >3.13</td>
+                <td >3.63</td>
+                <td >3.32</td>
+                <td >3.49</td>
+                <td ><b class="best-score-text">2.75</b></td>
+                <td ><b class="best-score-text">3.33</b></td>
+                <td ><b class="best-score-text">2.87</b></td>
+                <td >3.18</td>
+              </tr>
+              <tr>
+                <td >2</td>
+                <td><b class="best-score-text"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a> 🥈</b></td>
+                <td >3.23</td>
+                <td ><b class="best-score-text">3.86</b></td>
+                <td >2.95</td>
+                <td ><b class="best-score-text">3.48</b></td>
+                <td ><b class="best-score-text">3.44</b></td>
+                <td ><b class="best-score-text">3.13</b></td>
+                <td >3.60</td>
+                <td ><b class="best-score-text">2.75</b></td>
+                <td ><b class="best-score-text">3.15</b></td>
+                <td ><b class="best-score-text">3.70</b></td>
+                <td ><b class="best-score-text">3.91</b></td>
+                <td ><b class="best-score-text">3.80</b></td>
+                <td >2.74</td>
+                <td >3.27</td>
+                <td >2.84</td>
+                <td ><b class="best-score-text">3.27</b></td>
+              </tr>
+              <tr>
+                <td >3</td>
+                <td><b class="best-score-text"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a> 🥉</b></td>
+                <td >2.30</td>
+                <td ><b class="best-score-text">3.14</b></td>
+                <td >2.67</td>
+                <td ><b class="best-score-text">2.54</b></td>
+                <td ><b class="best-score-text">2.77</b></td>
+                <td >1.88</td>
+                <td >3.27</td>
+                <td ><b class="best-score-text">2.19</b></td>
+                <td ><b class="best-score-text">2.42</b></td>
+                <td ><b class="best-score-text">3.00</b></td>
+                <td ><b class="best-score-text">2.64</b></td>
+                <td ><b class="best-score-text">2.84</b></td>
+                <td >1.23</td>
+                <td >1.20</td>
+                <td >1.22</td>
+                <td >2.23</td>
+              </tr>
+              <tr>
+                <td >4</td>
+                <td><b><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></b></td>
+                <td >2.16</td>
+                <td >2.18</td>
+                <td >2.00</td>
+                <td >2.35</td>
+                <td >2.19</td>
+                <td >2.19</td>
+                <td >2.47</td>
+                <td >2.00</td>
+                <td >2.21</td>
+                <td >2.52</td>
+                <td >2.23</td>
+                <td >2.39</td>
+                <td ><b class="best-score-text">2.16</b></td>
+                <td >2.60</td>
+                <td ><b class="best-score-text">2.25</b></td>
+                <td ><b class="best-score-text">2.25</b></td>
+              </tr>
+              <tr>
+                <td >5</td>
+                <td><b><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></b></td>
+                <td >2.16</td>
+                <td >1.45</td>
+                <td >2.14</td>
+                <td >2.42</td>
+                <td >2.03</td>
+                <td ><b class="best-score-text">2.44</b></td>
+                <td >2.60</td>
+                <td >2.13</td>
+                <td >2.38</td>
+                <td >2.44</td>
+                <td >2.00</td>
+                <td >2.24</td>
+                <td >1.08</td>
+                <td >1.20</td>
+                <td >1.11</td>
+                <td >1.85</td>
+              </tr>
+              <tr>
+                <td >6</td>
+                <td><b><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></b></td>
+                <td >2.01</td>
+                <td >2.73</td>
+                <td >2.33</td>
+                <td >2.23</td>
+                <td >2.42</td>
+                <td >1.75</td>
+                <td >2.33</td>
+                <td >1.94</td>
+                <td >2.00</td>
+                <td >2.37</td>
+                <td >2.55</td>
+                <td >2.45</td>
+                <td >1.69</td>
+                <td >1.27</td>
+                <td >1.61</td>
+                <td >2.09</td>
+              </tr>
+              <tr>
+                <td >7</td>
+                <td><b><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></b></td>
+                <td >1.68</td>
+                <td >1.50</td>
+                <td >0.62</td>
+                <td >2.00</td>
+                <td >1.42</td>
+                <td >1.13</td>
+                <td >1.53</td>
+                <td >0.80</td>
+                <td >1.15</td>
+                <td >1.89</td>
+                <td >1.00</td>
+                <td >1.49</td>
+                <td >1.08</td>
+                <td ><b class="best-score-text">3.33</b></td>
+                <td >1.53</td>
+                <td >1.42</td>
+              </tr>
+              <tr>
+                <td >8</td>
+                <td><b><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></b></td>
+                <td >1.23</td>
+                <td >1.09</td>
+                <td >1.14</td>
+                <td >1.00</td>
+                <td >1.07</td>
+                <td >1.25</td>
+                <td >1.40</td>
+                <td >1.33</td>
+                <td >1.33</td>
+                <td >1.59</td>
+                <td >0.73</td>
+                <td >1.20</td>
+                <td >1.31</td>
+                <td >1.47</td>
+                <td >1.34</td>
+                <td >1.23</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table 3: Advanced Interactive Understanding Tasks & Real World Cases -->
+  <div style="margin-top: 3rem;">
+    <h5 class="has-text-centered">Performance comparison on Advanced Interactive Understanding tasks and Real World Cases</h5>
+    <div class="container is-fluid" style="margin-top: 2rem; margin-bottom: 3rem;">
+      <div class="content">
+        <div class="table-container" style="width: 85%; overflow-x: auto; margin: auto; font-size: 0.8rem;">
+          <!-- js-sort-2 sorts by Overall Avg (index 2) by default -->
+          <table class="js-sort-table" id="results_detail">
+            <thead style="text-align: center;">
+              <tr>
+                <td rowspan="3" class="js-sort-number"><strong>#</strong></td>
+                <td rowspan="3" class="js-sort-number"><strong>Model</strong></td>
+                <td rowspan="3" class="js-sort-number"><strong><u>Overall<br>Avg.</u></strong></td>
+                <td colspan="9" class="js-sort-none"><strong>Advanced Interactive Understanding Tasks</strong></td>
+                <td colspan="4" rowspan="2" class="js-sort-none"><strong>Real World Cases</strong></td>
+              </tr>
+              <tr style="text-align: center;">
+                <td rowspan="2" class="js-sort-number" data-js-sort-colnum="3" ><strong>CR</strong></td>
+                <td colspan="3" class="js-sort-none"><strong>Proactive Response</strong></td>
+                <td colspan="4" class="js-sort-none"><strong>Process Tracking</strong></td>
+                <td rowspan="2" class="js-sort-number" data-js-sort-colnum="11" ><strong>Avg.</strong></td>
+              </tr>
+              <tr style="text-align: center;">
+                <td class="js-sort-number"><strong>SER</strong></td>
+                <td class="js-sort-number"><strong>MER</strong></td>
+                <td class="js-sort-number"><strong>Avg.</strong></td>
+                <td class="js-sort-number"><strong>ST</strong></td>
+                <td class="js-sort-number"><strong>CT</strong></td>
+                <td class="js-sort-number"><strong>MT</strong></td>
+                <td class="js-sort-number"><strong>Avg.</strong></td>
+                <td class="js-sort-number"><strong>Ms</strong></td>
+                <td class="js-sort-number"><strong>Ht</strong></td>
+                <td class="js-sort-number"><strong>Ba</strong></td>
+                <td class="js-sort-number"><strong>Avg.</strong></td>
+              </tr>
+            </thead>
+            <tbody style="text-align: center; vertical-align: middle;">
+              <tr>
+                <td >1</td>
+                <td><b class="best-score-text"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a> 🥇</b></td>
+                <td ><b class="best-score-text">3.32</b></td>
+                <td ><b class="best-score-text">3.80</b></td>
+                <td ><b class="best-score-text">3.39</b></td>
+                <td ><b class="best-score-text">2.42</b></td>
+                <td ><b class="best-score-text">2.93</b></td>
+                <td ><b class="best-score-text">3.59</b></td>
+                <td >3.75</td>
+                <td ><b class="best-score-text">3.51</b></td>
+                <td ><b class="best-score-text">3.61</b></td>
+                <td ><b class="best-score-text">3.41</b></td>
+                <td ><b class="best-score-text">3.82</b></td>
+                <td ><b class="best-score-text">3.29</b></td>
+                <td ><b class="best-score-text">3.25</b></td>
+                <td ><b class="best-score-text">3.40</b></td>
+              </tr>
+              <tr>
+                <td >2</td>
+                <td><b class="best-score-text"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a> 🥈</b></td>
+                <td >3.23</td>
+                <td >3.70</td>
+                <td >3.06</td>
+                <td >2.39</td>
+                <td >2.74</td>
+                <td >3.39</td>
+                <td ><b class="best-score-text">4.11</b></td>
+                <td >3.47</td>
+                <td >3.60</td>
+                <td >3.32</td>
+                <td >2.55</td>
+                <td >1.64</td>
+                <td >2.50</td>
+                <td >2.24</td>
+              </tr>
+              <tr>
+                <td >3</td>
+                <td><b class="best-score-text"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 4.5</a> 🥉</b></td>
+                <td >2.30</td>
+                <td ><b class="best-score-text">3.15</b></td>
+                <td >2.66</td>
+                <td >2.65</td>
+                <td >2.65</td>
+                <td >2.23</td>
+                <td >2.30</td>
+                <td >2.01</td>
+                <td >2.19</td>
+                <td >2.39</td>
+                <td >0.27</td>
+                <td >2.50</td>
+                <td >2.35</td>
+                <td >1.89</td>
+              </tr>
+              <tr>
+                <td >4</td>
+                <td><b><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni 1.5</a></b></td>
+                <td >2.16</td>
+                <td >1.75</td>
+                <td ><b class="best-score-text">2.84</b></td>
+                <td >2.42</td>
+                <td ><b class="best-score-text">2.64</b></td>
+                <td >1.60</td>
+                <td >2.02</td>
+                <td >2.03</td>
+                <td >1.83</td>
+                <td >2.09</td>
+                <td ><b class="best-score-text">1.91</b></td>
+                <td >2.57</td>
+                <td >2.20</td>
+                <td >2.24</td>
+              </tr>
+              <tr>
+                <td >5</td>
+                <td><b><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></b></td>
+                <td >2.16</td>
+                <td >2.25</td>
+                <td >2.36</td>
+                <td ><b class="best-score-text">2.77</b></td>
+                <td >2.56</td>
+                <td >2.55</td>
+                <td >1.64</td>
+                <td ><b class="best-score-text">2.22</b></td>
+                <td ><b class="best-score-text">2.22</b></td>
+                <td >2.33</td>
+                <td >0.91</td>
+                <td ><b class="best-score-text">3.00</b></td>
+                <td ><b class="best-score-text">2.45</b></td>
+                <td ><b class="best-score-text">2.26</b></td>
+              </tr>
+              <tr>
+                <td >6</td>
+                <td><b><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o 2.6</a></b></td>
+                <td >2.01</td>
+                <td >1.95</td>
+                <td >2.10</td>
+                <td >1.63</td>
+                <td >1.87</td>
+                <td >2.16</td>
+                <td >2.19</td>
+                <td >1.88</td>
+                <td >2.09</td>
+                <td >2.01</td>
+                <td >0.45</td>
+                <td >1.71</td>
+                <td >2.05</td>
+                <td >1.56</td>
+              </tr>
+              <tr>
+                <td >7</td>
+                <td><b><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni</a></b></td>
+                <td >1.68</td>
+                <td >1.05</td>
+                <td >1.51</td>
+                <td >1.97</td>
+                <td >1.73</td>
+                <td ><b class="best-score-text">2.76</b></td>
+                <td >1.20</td>
+                <td >1.26</td>
+                <td >1.94</td>
+                <td >1.82</td>
+                <td >1.18</td>
+                <td >1.36</td>
+                <td >2.35</td>
+                <td >1.76</td>
+              </tr>
+              <tr>
+                <td >8</td>
+                <td><b><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA 1.5</a></b></td>
+                <td >1.23</td>
+                <td >0.65</td>
+                <td >1.19</td>
+                <td >1.72</td>
+                <td >1.44</td>
+                <td >1.71</td>
+                <td >0.80</td>
+                <td >0.91</td>
+                <td >1.25</td>
+                <td >1.29</td>
+                <td >0.55</td>
+                <td >0.79</td>
+                <td >0.80</td>
+                <td >0.73</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- Interactive Radar Chart -->
+  <div class="container is-max-desktop">
+  <div style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 3rem; margin-bottom: 2rem;">
+    <div id="radar-chart" style="width: 100%; aspect-ratio: 3/1;"></div>
+    <p class="figure-caption has-text-grey" style="margin-top: 1rem;">
+    Sub-task level performance comparison of evaluated models.</p>
+  </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+  <h1 class="title is-1 OmniAssistBench">
+    <span class="OmniAssistBench" style="vertical-align: middle">OmniAssistBench Dataset</span>
+  </h1>
+  </div>
+</section>
+
+<!-- Task Design -->
+<section class="section" style="padding-bottom: 10;">
+  <div class="container is-max-desktop">
+    
+    <!-- Title -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Task Design</h2>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content has-text-justified" style="margin-bottom: 2rem;">
+          <p>OmniAssistBench decomposes real-world assistant capabilities into two complementary levels.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
+      <!-- Basic Tier Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Basic Tier</h4>
+              <p>
+                This tier focuses on core perception and multimodal instruction following capabilities that are frequently encountered in real-world interactions but are under represented in existing video benchmarks.
+              </p>
+              <!-- Inside Expand Button for Basic Tier -->
+              <div class="expand-btn" onclick="toggleTierTable('basic-tier-details', 'basic-arrow')" style="cursor: pointer; margin-top: 1rem;">
+                <span id="basic-arrow">►</span> <u>Click here to expand for Basic tasks</u>
+              </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Advanced Tier Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Advanced Tier</h4>
+              <p>
+                This tier evaluates the higher-level capabilities required for an interactive assistant. QA pairs in this tier are user goal-driven. Consequently, models need to go beyond accurate perception; they need to actively extract and align information to fulfill the user's objectives.
+              </p>
+              <!-- Inside Expand Button for Advanced Tier -->
+              <div class="expand-btn" onclick="toggleTierTable('adv-tier-details', 'adv-arrow')" style="cursor: pointer; margin-top: 1rem;">
+                <span id="adv-arrow">►</span> <u>Click here to expand for Advanced tasks</u>
+              </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  
+    <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
+      <!-- Scale Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Scale & Diversity</h4>
+                  <p>
+                  <span style="font-size: 0.95rem;">There are a total of <strong>687</strong> open-ended question-answer pairs from <strong>300</strong> videos, covering 7 major task types and <strong>16</strong> fine-grained tasks.</span>
+                  </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+       <!-- Real World Cases Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Real World Cases</h4>
+              <p>
+                <span style="font-size: 0.95rem;">There are also three comprehensive multi-turn <strong>real world interaction case studies filmed by our team</strong> to reflect genuine assistant usage.</span>
+              </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <!-- Detailed Task Table -->
+  <div class="content">
+
+    <!-- Detailed Basic Task Table -->
+    <div id="basic-tier-details" style="display: none;">
+    <div style="margin-top: 1.5rem;">
+        <h5 class="has-text-centered">Basic Interactive Understanding Tasks</h5>
+    <div class="container is-fluid" style="margin-top: 0rem; margin-bottom: 3rem;">
+      <div class="content">
+        <div class="table-container" style="width: 85%; overflow-x: auto; margin: auto; font-size: 0.8rem;">     
+          <table class="js-sort-table " id="results_detail">
+            <thead>
+              <tr style="text-align: center; vertical-align: middle;">
+                <th class="js-sort-none"><strong>Major task</strong></th>
+                <th class="js-sort-none"><strong>Sub task</strong></th>
+                <th class="js-sort-none"><strong>Turns</strong></th>
+                <th class="js-sort-none"><strong>Description</strong></th>
+              </tr>
+            </thead>
+            <tbody style="vertical-align: middle; text-align: center;">
+              <!-- Social Perception (3 rows) -->
+              <tr class="task-row" data-task="II">
+                <td rowspan="3"><strong>Social<br>Perception</strong></td>
+                <td><strong>Identity Identification (II)</strong></td>
+                <td>Single</td>
+                <td>"Who said that sentence? Who performed that action?"</td>
+              </tr>
+              <tr class="task-row" data-task="AI">
+                <td><strong>Addressee<br>Identification (AI)</strong></td>
+                <td>Single</td>
+                <td>"Who is he/she talking to?"</td>
+              </tr>
+              <tr class="task-row" data-task="CE">
+                <td><strong>Complex Emotion<br>Understanding (CE)</strong></td>
+                <td>Single</td>
+                <td>
+                  "What emotion or attitude is the person expressing?"<br>
+                  <i>One modality (e.g. expression or dialogue) alone cannot lead to the correct answer.</i>
+                </td>
+              </tr>
+
+              <!-- Temporal Perception (3 rows) -->
+              <tr class="task-row" data-task="ER">
+                <td rowspan="3"><strong>Temporal<br>Perception</strong></td>
+                <td><strong>Event Retrieval (ER)</strong></td>
+                <td>Single</td>
+                <td>
+                  "When the main person A said xxx, what color clothes were the person passing behind them wearing?"<br>
+                  <i>The model needs to establish temporal correlations between the main and non-salient objects or details.</i>
+                </td>
+              </tr>
+              <tr class="task-row" data-task="AO">
+                <td><strong>Appearance Order<br>Perception (AO)</strong></td>
+                <td>Single</td>
+                <td>
+                  "Which colors of clothes did the blogger try on in sequence?"<br>
+                  <i>Model may need to distinguish the target object from similar ones.<br>For example, the blogger may have picked up a lot of clothes but only tried on a part of them.</i>
+                </td>
+              </tr>
+              <tr class="task-row" data-task="DC">
+                <td><strong>Dynamic Counting (DC)</strong></td>
+                <td>Single</td>
+                <td>
+                  "How many standard pull-ups did the person perform?"<br>
+                  <i>Counting a large number of instances (>10) or requires the model to filter specific objects.</i>
+                </td>
+              </tr>
+
+              <!-- Referential Perception (2 rows) -->
+              <tr class="task-row" data-task="AR">
+                <td rowspan="2"><strong>Referential<br>Perception</strong></td>
+                <td><strong>Action Reference<br>Perception (AR)</strong></td>
+                <td>Single</td>
+                <td>
+                  "Which student is the teacher pointing at? Which file is the mouse point at on the screen?"<br>
+                  <i>The "pointing" action alone might be ambiguous, so contextual information may be required by the correct answer.</i>
+                </td>
+              </tr>
+              <tr class="task-row" data-task="LR">
+                <td><strong>Linguistic Reference<br>Perception (LR)</strong></td>
+                <td>Single</td>
+                <td>"What is the title of the second book on the right?"</td>
+              </tr>
+
+              <!-- Non-audio Prompt Following (2 rows) -->
+              <tr class="task-row" data-task="GPF">
+                <td rowspan="2"><strong>Non-audio<br>Prompt Following</strong></td>
+                <td><strong>Gesture-based Prompt<br>Following (GPF)</strong></td>
+                <td>4 turns<br>in avg.</td>
+                <td>
+                  <i>4 gestures are defined at the beginning of the video,<br>then these gestures are embedded using a picture-in-picture layout as prompts.<br>The gestures as prompts may be made by a different person.<br>Not all pre-defined gestures necessarily appear as prompts, nor do they strictly follow the defined order.</i>
+                </td>
+              </tr>
+              <tr class="task-row" data-task="OPF">
+                <td><strong>OCR-based Prompt<br>Following (OPF)</strong></td>
+                <td>Single</td>
+                <td>
+                  <i>User prompts are embedded as subtitles or images / video clips of hand writing using a picture-in-picture layout.<br>To balance task difficulty, most questions only ask about obvious properties of the target object.</i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Detailed Advanced Task Table -->
+    <div id="adv-tier-details" style="display: none;">
+    <div style="margin-top: 1.5rem;">
+        <h5 class="has-text-centered">Basic Interactive Understanding Tasks</h5>
+    <div class="container is-fluid" style="margin-top: 0rem; margin-bottom: 3rem;">
+      <div class="content">
+        <div class="table-container" style="width: 85%; overflow-x: auto; margin: auto; font-size: 0.8rem;">     
+          <table class="js-sort-table " id="results_detail">
+            <thead>
+              <tr style="text-align: center; vertical-align: middle;">
+                <th class="js-sort-none"><strong>Major task</strong></th>
+                <th class="js-sort-none"><strong>Sub task</strong></th>
+                <th class="js-sort-none"><strong>Turns</strong></th>
+                <th class="js-sort-none"><strong>Description</strong></th>
+              </tr>
+            </thead>
+            <tbody style="vertical-align: middle; text-align: center;">
+              <!-- Social Perception (3 rows) -->
+              <tr class="task-row" data-task="II">
+                <td rowspan="3"><strong>Social<br>Perception</strong></td>
+                <td><strong>Identity Identification (II)</strong></td>
+                <td>Single</td>
+                <td>"Who said that sentence? Who performed that action?"</td>
+              </tr>
+              <tr class="task-row" data-task="AI">
+                <td><strong>Addressee<br>Identification (AI)</strong></td>
+                <td>Single</td>
+                <td>"Who is he/she talking to?"</td>
+              </tr>
+              <tr class="task-row" data-task="CE">
+                <td><strong>Complex Emotion<br>Understanding (CE)</strong></td>
+                <td>Single</td>
+                <td>
+                  "What emotion or attitude is the person expressing?"<br>
+                  <i>One modality (e.g. expression or dialogue) alone cannot lead to the correct answer.</i>
+                </td>
+              </tr>
+
+              <!-- Temporal Perception (3 rows) -->
+              <tr class="task-row" data-task="ER">
+                <td rowspan="3"><strong>Temporal<br>Perception</strong></td>
+                <td><strong>Event Retrieval (ER)</strong></td>
+                <td>Single</td>
+                <td>
+                  "When the main person A said xxx, what color clothes were the person passing behind them wearing?"<br>
+                  <i>The model needs to establish temporal correlations between the main and non-salient objects or details.</i>
+                </td>
+              </tr>
+              <tr class="task-row" data-task="AO">
+                <td><strong>Appearance Order<br>Perception (AO)</strong></td>
+                <td>Single</td>
+                <td>
+                  "Which colors of clothes did the blogger try on in sequence?"<br>
+                  <i>Model may need to distinguish the target object from similar ones.<br>For example, the blogger may have picked up a lot of clothes but only tried on a part of them.</i>
+                </td>
+              </tr>
+              <tr class="task-row" data-task="DC">
+                <td><strong>Dynamic Counting (DC)</strong></td>
+                <td>Single</td>
+                <td>
+                  "How many standard pull-ups did the person perform?"<br>
+                  <i>Counting a large number of instances (>10) or requires the model to filter specific objects.</i>
+                </td>
+              </tr>
+
+              <!-- Referential Perception (2 rows) -->
+              <tr class="task-row" data-task="AR">
+                <td rowspan="2"><strong>Referential<br>Perception</strong></td>
+                <td><strong>Action Reference<br>Perception (AR)</strong></td>
+                <td>Single</td>
+                <td>
+                  "Which student is the teacher pointing at? Which file is the mouse point at on the screen?"<br>
+                  <i>The "pointing" action alone might be ambiguous, so contextual information may be required by the correct answer.</i>
+                </td>
+              </tr>
+              <tr class="task-row" data-task="LR">
+                <td><strong>Linguistic Reference<br>Perception (LR)</strong></td>
+                <td>Single</td>
+                <td>"What is the title of the second book on the right?"</td>
+              </tr>
+
+              <!-- Non-audio Prompt Following (2 rows) -->
+              <tr class="task-row" data-task="GPF">
+                <td rowspan="2"><strong>Non-audio<br>Prompt Following</strong></td>
+                <td><strong>Gesture-based Prompt<br>Following (GPF)</strong></td>
+                <td>4 turns<br>in avg.</td>
+                <td>
+                  <i>4 gestures are defined at the beginning of the video,<br>then these gestures are embedded using a picture-in-picture layout as prompts.<br>The gestures as prompts may be made by a different person.<br>Not all pre-defined gestures necessarily appear as prompts, nor do they strictly follow the defined order.</i>
+                </td>
+              </tr>
+              <tr class="task-row" data-task="OPF">
+                <td><strong>OCR-based Prompt<br>Following (OPF)</strong></td>
+                <td>Single</td>
+                <td>
+                  <i>User prompts are embedded as subtitles or images / video clips of hand writing using a picture-in-picture layout.<br>To balance task difficulty, most questions only ask about obvious properties of the target object.</i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+  
+  <!-- Statis Pie Chart -->
+  <div class="container is-max-desktop">
+  <div class="content">
+  <div class="columns is-centered is-vcentered" style="margin-top: 1.5rem;">
+  <div class="column is-6 has-text-centered">
+    <!-- Sunburst Chart Container -->
+    <div id="sunburst-chart-interactive" style="width: 100%; height: 600px; margin: 0 auto;"></div>
+    <p class="figure-caption has-text-grey" style="margin-top: -2rem;">Task construction of OmniAssistBench.</p>
+  </div>
+
+    <!-- Statis histogram -->
+  <div class="column is-6">
+    <!-- Top Bar Chart Container -->
+    <div class="has-text-centered" style="margin-bottom: 2rem;">
+      <div id="bar-chart-tasks" style="width: 100%; height: 300px; margin: 0 auto; margin-bottom: -2rem;"></div>
+      <p class="figure-caption has-text-grey" style="margin-top: 0rem;">Number of test samples in each sub-task.</p>
+    </div>
+      
+    <!-- Bottom Bar Chart Container -->
+    <div class="has-text-centered">
+      <div id="bar-chart-duration" style="width: 100%; height: 300px; margin: 0 auto; margin-bottom: -2rem;"></div>
+      <p class="figure-caption has-text-grey" style="margin-top: 0rem;">Statistics of video durations. For multi-turn tasks, durations are calculated as the sum of each turn.</p>
+    </div>
+  </div>
+  </div></div>
+  </div>
+</section>
+
+<!-- Data Format -->
+<section class="section" style="padding-bottom: 10;">
+  <div class="container is-max-desktop">
+
+    <!-- Title -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Data Format</h2>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content has-text-justified" style="margin-bottom: 0rem;">
+          <p>OmniAssistBench adopts open-ended questions. A typical QA pair contains a video clip embedded with one user question, a Ground Truth (GT) answer, and a group of key points of the GT answer. There are both single and multi-turn samples depending on the tasks.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
+      <!-- Data Format Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Data Format</h4>
+              <p><span style="font-size: 0.95rem;">
+                Unlike traditional benchmarks with text-only prompts, all user questions are embedded directly into the videos as realistic audio or typing/handwriting. Only the videos are input into the candidate models.
+              </span></p>
+              <div class="has-text-centered">
+              <img src="./static/img/data_format.png" alt="Single-Turn Example" style="width: 100%; height: auto; border-radius: 6px;">
+              </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+       <!-- Real World Cases Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+              <div class="columns is-vcentered is-mobile" style="margin: 0; height: 100%;">
+                <div class="column" style="padding-left: 0; padding-top: 0;">
+                  <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Offline Simulation of Online Interaction</h4>
+                  <p><span style="font-size: 0.95rem;">
+                    We adopt multi-turn interaction format to simulate online interaction in an offline manner. To mimic the temporal causality of online streaming interactions, user prompt is always embedded at the very end of each video clip. Also, the video clip in the current turn always starts at where the video in the previous turn ends.
+                  </span></p>
+                </div>
+
+                <div class="column is-5 has-text-centered" style="padding-right: 0;">
+                <img src="./static/img/multi-turn.png" alt="Multi-Turn Example" style="width: 100%; height: auto; border-radius: 6px;">
+                </div>  
+              </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+    
+  <div>                                                                                                                        
+</section>
+
+
+<section class="section" style="padding-bottom: 10;">
+  <div class="container is-max-desktop">
+
+    <!-- Title -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Annotation Pipeline</h2>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content has-text-justified" style="margin-bottom: 0rem;">
+          <p>OmniAssistBench follows a 4-phases annotation pipeline to ensure data quality. Every sample was rigorously annotated by human experts, demanding <strong>~4 hours of labor per sample</strong>. In total, this required <strong>more than 900 hours</strong> of dedicated labor to construct the whole dataset.<br></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered" style="margin-top: 1.5rem;">
+      <div class="column has-text-centered">
+      <img src="./static/img/labeling.png" alt="The labling process of OmniAssistBench" width="100%">
+      <p class="figure-caption has-text-grey">The annotation process of OmniAssistBench.</p>
+      </div>
+    </div>
+  
+    <!-- Data Annotation Steps -->
+    <div class="columns is-multiline">
+    
+      <!-- Steps 1 -->
+      <div class="column is-12">
+      <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <details class="clean-details" style="margin-top: 0;">
+            <summary style="outline: none;">
+              <strong style="font-size: 1.05rem;">Step 1: Raw Video Collection Based on Plots</strong>
+            </summary>
+          <div style="margin-top: 1rem;">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">
+                    For each task category, human experts collaborate with LLMs to brainstorm key scenarios that challenge specific model capabilities. We then source raw footage containing these key plots from the Internet. 
+                  </p>
+                  <p style="font-size: 0.95rem;">
+                    Since we search for videos based on detailed plots rather than broad topics or keywords, the video collection phase can be time-consuming. We also include several home-filmed samples for scenarios where the required plots are difficult to locate online.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+          </details>
+
+      </div>
+      </div>
+
+      <!-- Steps 2 -->
+      <div class="column is-12">
+      <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <details class="clean-details" style="margin-top: 0;">
+            <summary style="outline: none;">
+              <strong style="font-size: 1.05rem;">Step 2: QA Design and User Goal Design</strong>
+            </summary>
+          <div style="margin-top: 1rem;">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">
+                    Experts design QA pairs based on both the source video and the task type. For Advanced Interactive Understanding tasks, annotators must first summarize user goals from the source videos and then design QA pairs based on them.
+                  </p>
+                  <p style="font-size: 0.95rem;">
+                    To address the evaluation challenges of open-ended QA, we annotate each sample with two components: a Ground Truth (GT) Sentence and Key Points. The Key Points consist of 1-3 essential phrases that must be present in a correct answer.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+          </details>
+      </div>
+      </div>
+
+      <!-- Steps 3 -->
+      <div class="column is-12">
+      <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <details class="clean-details" style="margin-top: 0;">
+            <summary style="outline: none;">
+              <strong style="font-size: 1.05rem;">Step 3: Video Editing</strong>
+            </summary>
+          <div style="margin-top: 1rem;">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p style="font-size: 0.95rem;">
+                    The video editing phase primarily consists of 3-4 sub-steps:
+                    <ul>
+                      <li>1) Balancing Video length: Parts of the source videos that are less relevant to the QAs might be removed.</li>
+                      <li>2) Embedding user prompts: Most user prompts are converted to speech via TTS and embedded as audio. For Non-audio Prompt Following tasks, user prompts are embedded visually using a picture-in-picture format.</li> 
+                      <li>3) Embedding user goals: For Advanced Interactive Understanding tasks, user goals are embedded as on-screen subtitles. </li>
+                      <li>4) For tasks requiring multi-turn interaction, source videos are cut into clips corresponding to each QA turn. </li>
+                    </ul>
+                    This comprehensive editing process typically takes an annotator 1-2 hours per sample. 
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+          </details>
+      </div>
+      </div>
+
+      <!-- Steps 4 -->
+      <div class="column is-12">
+      <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <details class="clean-details" style="margin-top: 0;">
+            <summary style="outline: none;">
+              <strong style="font-size: 1.05rem;">Step 4: Quality Refinement</strong>
+            </summary>
+          <div style="margin-top: 1rem;">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">
+                    We employ state-of-the-art MLLMs (e.g., Gemini-2.5-Pro) to assess annotation completeness. If a model generates a response that is logically correct yet diverges significantly in phrasing from our initial ground truth, we manually verify and append this output as an alternative reference to improve evaluation robustness.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+          </details>
+      </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Data Examples -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+  <h1 class="title is-1 OmniAssistBench">
+    <span class="OmniAssistBench" style="vertical-align: middle">Data Examples</span>
+  </h1>
+  </div>
+</section>
+
+<section class="section">
+<div class="container is-max-desktop">
+
+    <!-- Slides Group 1 -->
+    <div class="columns is-centered mt-2">
+      <div class="column is-full has-text-centered content">
+        <h4 class="title is-4" style="margin-bottom: -0.5rem;">
+          Examples of Basic and Advanced Interaction Understanding Tasks</h4>
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="box m-5">
+            <div class="content has-text-centered">
+              <img src="./static/img/non_audio.png" alt="Examples for the Non-audio Prompt Following task" 
+                    style="width:80%; margin-bottom: 1.5rem;" />
+              <p class="figure-caption"><strong>Examples for the Non-audio Prompt Following tasks:<br>
+                The Gesture-based Prompt Following Task (GPF, left) and the OCR-based Prompt Following Task (OPF, right).
+              </strong></p>
+              <p class="figure-caption has-text-grey">For GPF tasks, the meaning of 4 gestures are defined at the beginning, then the gesture prompts are embedded in a picture-in-picture manner. For the OPF tasks, prompts appear as subtitles or handwritings.</p>
+            </div>
+          </div>
+          <div class="box m-5">
+            <div class="content has-text-centered">
+              <img src="./static/img/context_aware.png alt="An example for the Context-Aware Response task" 
+                    style="width:85%; margin-bottom: 1.5rem;"/>
+              <p class="figure-caption"><strong>Examples for the Context-Aware Response (CR) task.</strong></p>
+              <p class="figure-caption has-text-grey">User questions in this task are designed not to directly mention the target objects (e.g. The blue download button for Windows system in this example). Models need to actively associate the video content with the user questions and filter out related information that can be presented in the replies.</p>
+            </div>
+          </div>
+          <div class="box m-5">
+            <div class="content has-text-centered">
+              <img src="./static/img/single_proactive.png" alt="An example for the Single Event-triggered Response task" 
+                    style="width:85%; margin-bottom: 1.5rem;"/>
+              <p class="figure-caption"><strong>Examples for the Single Event-triggered Response (SER) task.</strong></p>
+              <p class="figure-caption has-text-grey">Models need to delay responsing until the target event happends. Different from other benchmarks which periodically questioning the model wether to reply or not, we only question once at the beginning, leaving the model to decide the proper response time on its own.</p>
+            </div>
+          </div>
+          <div class="box m-5">
+            <div class="content has-text-centered">
+              <img src="./static/img/multi_proactive.png" alt="An example for the Multi Event-triggered Response task" 
+                    style="width:85%; margin-bottom: 1.5rem;"/>
+              <p class="figure-caption"><strong>Examples for the Single Multi Event-triggered Response (MER) task.</strong></p>
+              <p class="figure-caption has-text-grey">Models need to keep replying whenever the target events appear, with the user prompt input only once.</p>
+            </div>
+          </div>
+          <div class="box m-5">
+            <div class="content has-text-centered">
+              <img src="./static/img/multitask_tracking.png" alt="An example for the Multitask Tracking task" 
+                    style="width:85%; margin-bottom: 1.5rem;"/>
+              <p class="figure-caption"><strong>Examples for the Single Multitask Tracking (MT) task.</strong></p>
+              <p class="figure-caption has-text-grey">Models need to simultaneously keep track of the statuses of multiple processes listed at the beginning of the video.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slides Group 2 -->
+    <div class="columns is-centered mt-2">
+      <div class="column is-full has-text-centered content">
+        <h4 class="title is-4" style="margin-bottom: -0.5rem;">
+          Key Plots of the Real World Cases</h4>
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="box m-5">
+            <div class="content has-text-centered">
+              <img src="./static/img/meeting.png" alt="Key plots of the Meeting Simulation task" 
+                    style="width:80%; margin-bottom: 1.5rem;" />
+              <p class="figure-caption"><strong>Key plots of the Meeting Simulation (Ms) task.</strong></p>
+              <p class="figure-caption has-text-grey">The user was watching a round-table discussion video and taking notes,<br>mimicking the scenario of attending online meetings.</p>
+            </div>
+          </div>
+          <div class="box m-5">
+            <div class="content has-text-centered">
+              <img src="./static/img/navigation.png" alt="Key plots of the Blind Assistance task" 
+                    style="width:85%; margin-bottom: 1.5rem;"/>
+              <p class="figure-caption"><strong>Key plots of the Blind Assistance (Ba) task.</strong></p>
+              <p class="figure-caption has-text-grey"></p>The user pretended to be blind, and required the assistant to guide them moving around in an office.</p>
+            </div>
+          </div>
+          <div class="box m-5">
+            <div class="content has-text-centered">
+              <img src="./static/img/handcraft.png" alt="Key plots of the Handicraft Process Tracking task" 
+                    style="width:85%; margin-bottom: 1.5rem;"/>
+              <p class="figure-caption"><strong>Key plots of the Handicraft Process Tracking (Ht) task.</strong></p>
+              <p class="figure-caption has-text-grey">Three people were making handicrafts together. The assistant is required to not only track the process of each person, but also understand this social situation by correctly identify which question is directed at the assistant.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+
+
+
+<!-- Insights -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+  <h1 class="title is-1 OmniAssistBench">
+    <span class="OmniAssistBench" style="vertical-align: middle">Key Insights</span>
+  </h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content has-text-justified" style="margin-bottom: 2rem;">         
+          <p>According to our scoring rubric, average scores ranged from 2-3 suggest that models generally succeed in understanding what to do but struggle with providing accurate and comprehensive answers.<br>From the evaluation results, we observe the following <strong>key bottlenecks</strong> in current Omni-LLMs:
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
+      <!-- Gesture Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Deficiency in Gesture Following</h4>
+                  <p><span style="font-size: 0.95rem;">
+                    Models struggle significantly with gesture-based commands. This reveals a critical weakness in interpreting visual instructions, as models usually fail to recognize gestures as user prompts.
+                  </span></p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+       <!-- Long-Context Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Long-Context Interaction Disparity</h4>
+              <p><span style="font-size: 0.95rem;">Proprietary models substantially outperform open source alternatives on multi-turn tasks, exposing a pronounced weakness in long-term memory retention and sustained context management among current open-source systems.
+              </span></p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
+      <!-- Silent Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Failure to Keep Silent</h4>
+                  <p><span style="font-size: 0.95rem;">
+                    Models systematically struggle to determine when a response is unnecessary, frequently giving video captions which are less related to the user prompt, instead of appropriately remaining silent when the visual input provides insufficient evidence.
+                  </span></p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+       <!-- Text Card -->
+      <div class="column is-half">
+        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Over-reliance on Text</h4>
+              <p><span style="font-size: 0.95rem;">Open-source models tend to echo their own replies during multi-turn tasks. This suggests an over-reliance on the text modality (the assistant's past replies) and an inability to dynamically update their context using the complex visual changes in the video.
+              </span></p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+  title     = {Nerfies: Deformable Neural Radiance Fields},
+  journal   = {ICCV},
+  year      = {2021},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is adapted from <a href="https://mathvista.github.io/">MathVista</a> and <a href="https://nerfies.github.io/">Nerfies</a>, licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- JAVASCRIPT LOGIC -->
+<script>
+
+  // -- Table Expand/Toggle Logic for the Tier Cards --
+  function toggleTierTable(tableId, arrowId) {
+    const tableContainer = document.getElementById(tableId);
+    const arrow = document.getElementById(arrowId);
+    
+    if (tableContainer.style.display === "none" || tableContainer.style.display === "") {
+      tableContainer.style.display = "block";
+      arrow.innerHTML = "▼";
+    } else {
+      tableContainer.style.display = "none";
+      arrow.innerHTML = "►";
+    }
+  }
+
+  // -- Table Sorting Logic --
+  function sortTable(tableId, colIndex) {
+    const table = document.getElementById(tableId);
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    rows.sort((a, b) => {
+      const aText = a.children[colIndex].innerText.replace('%', '').trim();
+      const bText = b.children[colIndex].innerText.replace('%', '').trim();
+
+      const aVal = parseFloat(aText);
+      const bVal = parseFloat(bText);
+
+      if (!isNaN(aVal) && !isNaN(bVal)) {
+        return bVal - aVal;
+      }
+      return bText.localeCompare(aText);
+    });
+
+    rows.forEach(row => tbody.appendChild(row));
+  }
+</script>
+
+</body>
+</html>
