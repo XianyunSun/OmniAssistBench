@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
   myChart.getZr().on('mousemove', function (params) {
     let width = myChart.getWidth();
     let height = myChart.getHeight();
-    let cx = width * 0.35; // Shifted center X to 40%
+    let cx = width * 0.30; // Shifted center X to 40%
     let cy = height * 0.50; // Shifted center Y to 50%
     
     let dx = params.offsetX - cx;
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     legend: {
       orient: 'vertical',
-      right: '20%',                // Placed on the right side
+      right: '18%',                // Placed on the right side
       top: 'middle',              // Centered vertically
       icon: 'circle',             // Makes it look like round checkboxes
       itemGap: 15,
@@ -109,12 +109,12 @@ document.addEventListener("DOMContentLoaded", function() {
     radar: {
       z:3,
       radius: RADAR_RADIUS,              
-      center:['35%', '50%'],      // Shifted left to make room for legend
+      center:['30%', '50%'],      // Shifted left to make room for legend
       splitNumber: 5,
       shape: 'polygon',
       nameGap: LABEL_DISTANCE,           
       axisName: { color: '#2c3e50', fontWeight: 'bold', fontSize: 13 },
-      splitArea: { areaStyle: { color:['#f4f4f4'] } },
+      splitArea: { areaStyle: { color:['#fefefe'] } },
       splitLine: { lineStyle: { color: '#ccc', type: 'dashed' } },
       axisLine: { lineStyle: { color: '#ccc', type: 'dashed' } },
       indicator: indicatorNames.map(name => ({ name: name, max: 5, axisLabel: { show: name === 'II', color: '#888', fontSize: 11 } }))
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
         type: 'pie',
         z:1,
         radius:[RING_INNER_RADIUS, RING_OUTER_RADIUS], 
-        center:['35%', '50%'],   // Shifted left to match radar
+        center:['30%', '50%'],   // Shifted left to match radar
         startAngle: 100.588,
         silent: true,
         label: { show: false },
