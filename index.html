@@ -3,38 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Evaluating paralinguistic-aware speech generation">
+        content="Evaluating Omni-LLM as video assistants.">
   <meta name="keywords" content="OmniAssistBench">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title> OmniAssistBench</title>
 
-  <!--<link rel="icon" href="./docs/static/images/icon.png">-->
+  <!--<link rel="icon" href="./static/images/icon.png">-->
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <!-- ECharts Library for Radar Chart -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 
-  <link rel="stylesheet" href="./docs/static/css/bulma.min.css">
-  <link rel="stylesheet" href="./docs/static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./docs/static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./docs/static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./docs/static/css/index.css">
-  <link rel="stylesheet" href="./docs/static/css/leaderboard.css">
-  <link rel="stylesheet" href="./docs/static/css/example-container.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/leaderboard.css">
+  <link rel="stylesheet" href="./static/css/example-container.css">
   <script type="text/javascript" src="static/js/sort-table.js" defer></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./docs/static/js/fontawesome.all.min.js"></script>
-  <script src="./docs/static/js/bulma-carousel.min.js"></script>
-  <script src="./docs/static/js/bulma-slider.min.js"></script>
-  <script src="./docs/static/js/explorer-index.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/explorer-index.js"></script>
 
-  <script src="./docs/static/js/leaderboard_testmini.js"></script>  
-  <script src="./docs/static/js/example-shower.js"></script>
-  <script src="./docs/static/js/radar-chart.js"></script>
-  <script src="./docs/static/js/statis.js"></script>
+  <script src="./static/js/leaderboard_testmini.js"></script>  
+  <script src="./static/js/example-shower.js"></script>
+  <script src="./static/js/radar-chart.js"></script>
+  <script src="./static/js/statis.js"></script>
 </head>
 <body>
 
@@ -45,48 +45,47 @@
         <div class="column has-text-centered">
           
           <!-- Title and Subtitle -->
-          <h1 class="title is-1 publication-title">OmniAssistBench</h1>
-          <h2 class="title is-3 publication-title" style="margin-top: -10px; margin-bottom: 20px;">
+          <h1 class="title is-1 publication-title is-bold">OmniAssistBench</h1>
+          <h2 class="subtitle is-3 publication-subtitle">
             Assistant-style Interaction Benchmark for Omni-LLMs
           </h2>
 
           <!-- Authors -->
-          <div class="is-size-5 publication-authors">
+          <div class="is-size-5 publication-authors" style="margin-bottom: 0.5rem;">
             <span class="author-block">
-              <a href="#">Xianyun Sun</a><sup>1, *</sup>,</span>
+              <a href="#">Xianyun Sun</a><sup style="color:#6fbf73;">1</sup><sup>, *</sup>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=4A1xYQwAAAAJ&hl=en&oi=ao">Chaoyou Fu</a><sup>1, *&dagger;</sup>,</span>
+              <a href="https://scholar.google.com/citations?user=4A1xYQwAAAAJ&hl=en&oi=ao">Chaoyou Fu</a><sup style="color:#6fbf73;">1</sup><sup>, *&dagger;</sup>,</span>
             <span class="author-block">
-              <a href="#">Zhengye Zhang</a><sup>1, *</sup>,</span>
+              <a href="#">Zhengye Zhang</a><sup style="color:#6fbf73;">1</sup><sup>, *</sup>,</span>
             <span class="author-block">
-              <a href="#">Feiyang Duan</a><sup>1</sup>,</span>
+              <a href="#">Feiyang Duan</a><sup style="color:#6fbf73;">1</sup>,</span>
             <span class="author-block">
-              <a href="#">Qingyuan Cao</a><sup>1</sup>,</span>
+              <a href="#">Qingyuan Cao</a><sup style="color:#6fbf73;">1</sup>,</span><br>
             <span class="author-block">
-              <a href="#">Yonghui Niu</a><sup>1</sup>,</span>
+              <a href="#">Yonghui Niu</a><sup style="color:#6fbf73;">1</sup>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=UhJwHRAAAAAJ&hl=en&oi=ao">Zijian Liu</a><sup>1</sup>,</span>
+              <a href="https://scholar.google.com/citations?user=UhJwHRAAAAAJ&hl=en&oi=ao">Zijian Liu</a><sup style="color:#6fbf73;">1</sup>,</span>
             <span class="author-block">
-              <a href="#">Sihang Yuan</a><sup>2</sup>,</span>
+              <a href="#">Sihang Yuan</a><sup style="color:#ed4b82">2</sup>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=qyTrq4kAAAAJ&hl=en&oi=ao">Ge Zhang</a><sup>2</sup>,</span>
+              <a href="https://scholar.google.com/citations?user=qyTrq4kAAAAJ&hl=en&oi=ao">Ge Zhang</a><sup style="color:#ed4b82">2</sup>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=ayrg9AUAAAAJ&hl=en&oi=ao">Ran He</a><sup>3</sup>,</span>
+              <a href="https://scholar.google.com/citations?user=ayrg9AUAAAAJ&hl=en&oi=ao">Ran He</a><sup style="color:#ffac33">3</sup>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=fIXA_SsAAAAJ&hl=en&oi=sra">Caifeng Shan</a><sup>1</sup></span>
+              <a href="https://scholar.google.com/citations?user=fIXA_SsAAAAJ&hl=en&oi=sra">Caifeng Shan</a><sup style="color:#6fbf73;">1</sup></span>
           </div>
 
           <!-- Contribution Notes / Legend -->
-          <div class="is-size-6 has-text-grey" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
-            <span class="author-block" style="margin-right: 15px;"><sup>&dagger;</sup>Project Leader</span>
-            <span class="author-block"><sup>*</sup>Equal Contribution</span>
-          </div>
+          <span class="author-block"><sup>&dagger;</sup>Project Leader</span>
+          <span class="author-block"><sup>*</sup>Equal Contribution</span>
+
 
           <!-- Institutions -->
           <div class="is-size-5 publication-authors" style="margin-top: 0.5rem;">
-            <span class="author-block"><sup>1</sup>Nanjing University,</span>
-            <span class="author-block"><sup>2</sup>ByteDance Seed,</span>
-            <span class="author-block"><sup>3</sup>CASIA</span>
+            <span class="author-block"><sup style="color:#6fbf73;">1</sup>Nanjing University,</span>
+            <span class="author-block"><sup style="color:#ed4b82">2</sup>ByteDance Seed,</span>
+            <span class="author-block"><sup style="color:#ffac33">3</sup>CASIA</span>
           </div>
 
           <!-- Links/Badges -->
@@ -147,7 +146,7 @@
         
         <!-- Main Image -->
         <div class="has-text-centered" style="margin-bottom: 2rem;">
-          <img src="./docs/static/img/general_cases.png" alt="OmniAssistBench summarizes critical abilities" width="90%" style="border-radius: 8px;">
+          <img src="./static/img/general_cases.png" alt="OmniAssistBench summarizes critical abilities" width="100%" style="border-radius: 8px;">
           <p class="has-text-centered has-text-grey" style="margin-top: 1rem;">
             OmniAssistBench summarizes critical abilities and tasks from real world Omni-LLM applications <br> to provide quantified evaluation of Omni-LLMs as assistants.
           </p>
@@ -169,37 +168,31 @@
       
       <!-- Question 1 Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong style="font-size: 1.1rem; color: #363636;">What abilities should be evaluated?</strong><br>
-                  <span style="display: inline-block; margin-top: 0.5rem; font-size: 0.95rem; color: #4a4a4a;">
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              What abilities should be evaluated?</strong></span>
+          </div>
+          <div class="ex-body">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
                     Under the scenario of a video assistant, we systematically summarize and categorize the core capabilities required by common, real-world applications to form a two-tier evaluation taxonomy.
-                  </span>
-                </p>
-              </div>
-            </div>
-          </article>
+            </span>
+          </div>
         </div>
       </div>
 
       <!-- Question 2 Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong style="font-size: 1.1rem; color: #363636;">How should we evaluate them?</strong><br>
-                  <span style="display: inline-block; margin-top: 0.5rem; font-size: 0.95rem; color: #4a4a4a;">
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              How should we evaluate them?</strong></span>
+          </div>
+          <div class="ex-body">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
                     To mimic genuine real-world interactions, we adopt open-ended questions and seamlessly embed user prompts directly into the source videos as audio or visual elements, rather than providing them as separate text.
-                  </span>
-                </p>
-              </div>
-            </div>
-          </article>
+            </span>
+          </div>
         </div>
       </div>
 
@@ -373,21 +366,21 @@
       <div class="content">
         <div class="table-container" style="width: 85%; overflow-x: auto; margin: auto; font-size: 0.8rem;">     
           <table class="js-sort-table " id="results_detail">
-            <thead>
-              <tr style="text-align: center; vertical-align: top;">
-                <td rowspan="3" class="js-sort-number"><strong>#</strong></td>
-                <td rowspan="3" class="js-sort-number"><strong>Model</strong></td>
-                <td rowspan="3" class="js-sort-number"><strong>Overall<br>Avg.</strong></td>
+            <thead style="text-align: center; background-color: #f5f5f5;">
+              <tr>
+                <td rowspan="3" class="js-sort-number" style="vertical-align: middle;"><strong>#</strong></td>
+                <td rowspan="3" class="js-sort-number" style="vertical-align: middle;"><strong>Model</strong></td>
+                <td rowspan="3" class="js-sort-number" style="vertical-align: middle;"><strong>Overall<br>Avg.</strong></td>
                 <td colspan="14" class="js-sort-none"><strong>Basic Interactive Understanding Tasks</strong></td>
-                <td rowspan="3" class="js-sort-number"><strong>Basic<br>Tier<br>Avg.</strong></td>
+                <td rowspan="3" class="js-sort-number" style="vertical-align: middle;"><strong>Basic<br>Tier<br>Avg.</strong></td>
               </tr>
-              <tr style="text-align: center; vertical-align: middle;">
+              <tr style="vertical-align: middle;">
                 <td colspan="4" class="js-sort-none"><strong>Social Perception</strong></td>
                 <td colspan="4" class="js-sort-none"><strong>Temporal Perception</strong></td>
                 <td colspan="3" class="js-sort-none"><strong>Referential Perception</strong></td>
                 <td colspan="3" class="js-sort-none"><strong>Non-audio Prompt</strong></td>
               </tr>
-              <tr style="text-align: center; vertical-align: middle;">
+              <tr style="vertical-align: middle;">
                 <td class="js-sort-number"><strong>II</strong></td>
                 <td class="js-sort-number"><strong>AI</strong></td>
                 <td class="js-sort-number"><strong>CE</strong></td>
@@ -583,19 +576,19 @@
         <div class="table-container" style="width: 85%; overflow-x: auto; margin: auto; font-size: 0.8rem;">
           <!-- js-sort-2 sorts by Overall Avg (index 2) by default -->
           <table class="js-sort-table" id="results_detail">
-            <thead style="text-align: center;">
+            <thead style="text-align: center; background-color: #f5f5f5;">
               <tr>
-                <td rowspan="3" class="js-sort-number"><strong>#</strong></td>
-                <td rowspan="3" class="js-sort-number"><strong>Model</strong></td>
-                <td rowspan="3" class="js-sort-number"><strong><u>Overall<br>Avg.</u></strong></td>
+                <td rowspan="3" class="js-sort-number" style="vertical-align: middle;"><strong>#</strong></td>
+                <td rowspan="3" class="js-sort-number" style="vertical-align: middle;"><strong>Model</strong></td>
+                <td rowspan="3" class="js-sort-number" style="vertical-align: middle;"><strong><u>Overall<br>Avg.</u></strong></td>
                 <td colspan="9" class="js-sort-none"><strong>Advanced Interactive Understanding Tasks</strong></td>
-                <td colspan="4" rowspan="2" class="js-sort-none"><strong>Real World Cases</strong></td>
+                <td colspan="4" rowspan="2" class="js-sort-none" style="vertical-align: middle;"><strong>Real World Cases</strong></td>
               </tr>
               <tr style="text-align: center;">
-                <td rowspan="2" class="js-sort-number" data-js-sort-colnum="3" ><strong>CR</strong></td>
+                <td rowspan="2" class="js-sort-number" data-js-sort-colnum="3" style="vertical-align: middle;"><strong>CR</strong></td>
                 <td colspan="3" class="js-sort-none"><strong>Proactive Response</strong></td>
                 <td colspan="4" class="js-sort-none"><strong>Process Tracking</strong></td>
-                <td rowspan="2" class="js-sort-number" data-js-sort-colnum="11" ><strong>Avg.</strong></td>
+                <td rowspan="2" class="js-sort-number" data-js-sort-colnum="11" style="vertical-align: middle;"><strong>Avg.</strong></td>
               </tr>
               <tr style="text-align: center;">
                 <td class="js-sort-number"><strong>SER</strong></td>
@@ -767,10 +760,9 @@
 
   <!-- Interactive Radar Chart -->
   <div class="container is-max-desktop">
-  <div style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 3rem; margin-bottom: 2rem;">
-    <div id="radar-chart" style="width: 100%; aspect-ratio: 3/1;"></div>
-    <p class="figure-caption has-text-grey" style="margin-top: 1rem;">
-    Sub-task level performance comparison of evaluated models.</p>
+  <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <div id="radar-chart" style="width: 100%; aspect-ratio: 2.5/1;"></div>
+    <p class="figure-caption has-text-grey">Sub-task level performance comparison of evaluated models.</p>
   </div>
   </div>
 </section>
@@ -796,7 +788,7 @@
 
     <div class="columns is-centered">
       <div class="column is-full">
-        <div class="content has-text-justified" style="margin-bottom: 2rem;">
+        <div class="content has-text-justified" style="margin-bottom: 0rem;">
           <p>OmniAssistBench decomposes real-world assistant capabilities into two complementary levels.</p>
         </div>
       </div>
@@ -805,41 +797,37 @@
     <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
       <!-- Basic Tier Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Basic Tier</h4>
-              <p>
-                This tier focuses on core perception and multimodal instruction following capabilities that are frequently encountered in real-world interactions but are under represented in existing video benchmarks.
-              </p>
-              <!-- Inside Expand Button for Basic Tier -->
-              <div class="expand-btn" onclick="toggleTierTable('basic-tier-details', 'basic-arrow')" style="cursor: pointer; margin-top: 1rem;">
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              Basic Tier</strong></span>
+          </div>
+          <div class="ex-body">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              This tier focuses on core perception and multimodal instruction following capabilities that are frequently encountered in real-world interactions but are under represented in existing video benchmarks.
+            <div class="expand-btn" onclick="toggleTierTable('basic-tier-details', 'basic-arrow')" style="cursor: pointer; margin-top: 1rem;">
                 <span id="basic-arrow">►</span> <u>Click here to expand for Basic tasks</u>
-              </div>
-              </div>
             </div>
-          </article>
+            </span>
+          </div>
         </div>
       </div>
 
       <!-- Advanced Tier Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Advanced Tier</h4>
-              <p>
-                This tier evaluates the higher-level capabilities required for an interactive assistant. QA pairs in this tier are user goal-driven. Consequently, models need to go beyond accurate perception; they need to actively extract and align information to fulfill the user's objectives.
-              </p>
-              <!-- Inside Expand Button for Advanced Tier -->
-              <div class="expand-btn" onclick="toggleTierTable('adv-tier-details', 'adv-arrow')" style="cursor: pointer; margin-top: 1rem;">
-                <span id="adv-arrow">►</span> <u>Click here to expand for Advanced tasks</u>
-              </div>
-              </div>
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              Advanced Tier</strong></span>
+          </div>
+          <div class="ex-body">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              This tier evaluates the higher-level capabilities required for an interactive assistant. QA pairs in this tier are user goal-driven. Consequently, models need to go beyond accurate perception; they need to actively extract and align information to fulfill the user's objectives.
+            <div class="expand-btn" onclick="toggleTierTable('basic-tier-details', 'basic-arrow')" style="cursor: pointer; margin-top: 1rem;">
+                <span id="basic-arrow">►</span> <u>Click here to expand for Advanced tasks</u>
             </div>
-          </article>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -847,33 +835,31 @@
     <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
       <!-- Scale Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Scale & Diversity</h4>
-                  <p>
-                  <span style="font-size: 0.95rem;">There are a total of <strong>687</strong> open-ended question-answer pairs from <strong>300</strong> videos, covering 7 major task types and <strong>16</strong> fine-grained tasks.</span>
-                  </p>
-              </div>
-            </div>
-          </article>
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              Scale & Diversity</strong></span>
+          </div>
+          <div class="ex-body">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              There are a total of <strong>687</strong> open-ended question-answer pairs from <strong>300</strong> videos, covering 7 major task types and <strong>16</strong> fine-grained tasks.
+            </span>
+          </div>
         </div>
       </div>
 
        <!-- Real World Cases Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Real World Cases</h4>
-              <p>
-                <span style="font-size: 0.95rem;">There are also three comprehensive multi-turn <strong>real world interaction case studies filmed by our team</strong> to reflect genuine assistant usage.</span>
-              </p>
-              </div>
-            </div>
-          </article>
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              Real World Cases</strong></span>
+          </div>
+          <div class="ex-body">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              There are also three comprehensive multi-turn <strong>real world interaction case studies filmed by our team</strong> to reflect genuine assistant usage.
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -1143,44 +1129,43 @@
     <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
       <!-- Data Format Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Data Format</h4>
-              <p><span style="font-size: 0.95rem;">
-                Unlike traditional benchmarks with text-only prompts, all user questions are embedded directly into the videos as realistic audio or typing/handwriting. Only the videos are input into the candidate models.
-              </span></p>
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              QA Format</strong></span>
+          </div>
+          <div class="ex-body">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              Unlike traditional benchmarks with text-only prompts, all user questions are embedded directly into the videos as realistic audio or typing/handwriting. Only the videos are input into the candidate models.
               <div class="has-text-centered">
-              <img src="./docs/static/img/data_format.png" alt="Single-Turn Example" style="width: 100%; height: auto; border-radius: 6px;">
+              <img src="./static/img/data_format.png" alt="Single-Turn Example" 
+                  style="width: 100%; height: auto; border-radius: 6px; margin-top: 1rem;">
               </div>
-              </div>
-            </div>
-          </article>
+            </span>
+          </div>
         </div>
       </div>
 
-       <!-- Real World Cases Card -->
+       <!-- Multi-turn Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-              <div class="columns is-vcentered is-mobile" style="margin: 0; height: 100%;">
-                <div class="column" style="padding-left: 0; padding-top: 0;">
-                  <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Offline Simulation of Online Interaction</h4>
-                  <p><span style="font-size: 0.95rem;">
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              Offline Simulation of Online Interaction</strong></span>
+          </div>
+          <div class="ex-body">
+              <div class="columns" style="margin: 0; margin-top: 0rem;">
+                <div class="column" style="padding-left: 0;">
+                  <span style="font-size: 0.95rem; color: #4a4a4a;">
                     We adopt multi-turn interaction format to simulate online interaction in an offline manner. To mimic the temporal causality of online streaming interactions, user prompt is always embedded at the very end of each video clip. Also, the video clip in the current turn always starts at where the video in the previous turn ends.
-                  </span></p>
+                  </span>
                 </div>
 
                 <div class="column is-5 has-text-centered" style="padding-right: 0;">
-                <img src="./docs/static/img/multi-turn.png" alt="Multi-Turn Example" style="width: 100%; height: auto; border-radius: 6px;">
+                <img src="./static/img/multi-turn.png" alt="Multi-Turn Example" style="width: 100%; height: auto;">
                 </div>  
               </div>
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
       </div>
     </div>
@@ -1209,7 +1194,7 @@
 
     <div class="columns is-centered" style="margin-top: 1.5rem;">
       <div class="column has-text-centered">
-      <img src="./docs/static/img/labeling.png" alt="The labling process of OmniAssistBench" width="100%">
+      <img src="./static/img/labeling.png" alt="The labling process of OmniAssistBench" width="100%">
       <p class="figure-caption has-text-grey">The annotation process of OmniAssistBench.</p>
       </div>
     </div>
@@ -1219,67 +1204,64 @@
     
       <!-- Steps 1 -->
       <div class="column is-12">
-      <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <details class="clean-details" style="margin-top: 0;">
-            <summary style="outline: none;">
-              <strong style="font-size: 1.05rem;">Step 1: Raw Video Collection Based on Plots</strong>
-            </summary>
-          <div style="margin-top: 1rem;">
-            <article class="media">
-              <div class="media-content">
-                <div class="content">
-                  <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">
-                    For each task category, human experts collaborate with LLMs to brainstorm key scenarios that challenge specific model capabilities. We then source raw footage containing these key plots from the Internet. 
-                  </p>
-                  <p style="font-size: 0.95rem;">
-                    Since we search for videos based on detailed plots rather than broad topics or keywords, the video collection phase can be time-consuming. We also include several home-filmed samples for scenarios where the required plots are difficult to locate online.
-                  </p>
-                </div>
-              </div>
-            </article>
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <div class="expand-btn" onclick="toggleTierTable('step1-detail', 'step1-arrow')" style="cursor: pointer;">
+              <span id="step1-arrow" style="font-size: 1.1rem; color: #203864;">►</span> 
+              <strong style="font-size: 1.1rem; color: #203864;">
+              Step 1: Raw Video Collection Based on Plots</strong>
+            </div>
           </div>
-          </details>
-
-      </div>
+          <div id="step1-detail" class="ex-body" style="display: none;">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              <p style="margin-bottom: 0.75rem;">
+                For each task category, human experts collaborate with LLMs to brainstorm key scenarios that challenge specific model capabilities. We then source raw footage containing these key plots from the Internet. 
+              </p>
+              <p>
+                Since we search for videos based on detailed plots rather than broad topics or keywords, the video collection phase can be time-consuming. We also include several home-filmed samples for scenarios where the required plots are difficult to locate online.
+              </p>
+            </span>
+          </div>
+        </div>
       </div>
 
       <!-- Steps 2 -->
       <div class="column is-12">
-      <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <details class="clean-details" style="margin-top: 0;">
-            <summary style="outline: none;">
-              <strong style="font-size: 1.05rem;">Step 2: QA Design and User Goal Design</strong>
-            </summary>
-          <div style="margin-top: 1rem;">
-            <article class="media">
-              <div class="media-content">
-                <div class="content">
-                  <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">
-                    Experts design QA pairs based on both the source video and the task type. For Advanced Interactive Understanding tasks, annotators must first summarize user goals from the source videos and then design QA pairs based on them.
-                  </p>
-                  <p style="font-size: 0.95rem;">
-                    To address the evaluation challenges of open-ended QA, we annotate each sample with two components: a Ground Truth (GT) Sentence and Key Points. The Key Points consist of 1-3 essential phrases that must be present in a correct answer.
-                  </p>
-                </div>
-              </div>
-            </article>
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <div class="expand-btn" onclick="toggleTierTable('step2-detail', 'step2-arrow')" style="cursor: pointer;">
+              <span id="step2-arrow" style="font-size: 1.1rem; color: #203864;">►</span> 
+              <strong style="font-size: 1.1rem; color: #203864;">
+              Step 2: QA Design and User Goal Design</strong>
+            </div>
           </div>
-          </details>
-      </div>
+          <div id="step2-detail" class="ex-body" style="display: none;">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              <p style="margin-bottom: 0.75rem;">
+                Experts design QA pairs based on both the source video and the task type. For Advanced Interactive Understanding tasks, annotators must first summarize user goals from the source videos and then design QA pairs based on them.
+              </p>
+              <p>
+                To address the evaluation challenges of open-ended QA, we annotate each sample with two components: a Ground Truth (GT) Sentence and Key Points. The Key Points consist of 1-3 essential phrases that must be present in a correct answer.
+              </p>
+            </span>
+          </div>
+        </div>
       </div>
 
       <!-- Steps 3 -->
       <div class="column is-12">
-      <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <details class="clean-details" style="margin-top: 0;">
-            <summary style="outline: none;">
-              <strong style="font-size: 1.05rem;">Step 3: Video Editing</strong>
-            </summary>
-          <div style="margin-top: 1rem;">
-            <article class="media">
-              <div class="media-content">
-                <div class="content">
-                  <p style="font-size: 0.95rem;">
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <div class="expand-btn" onclick="toggleTierTable('step3-detail', 'step3-arrow')" style="cursor: pointer;">
+              <span id="step3-arrow" style="font-size: 1.1rem; color: #203864;">►</span> 
+              <strong style="font-size: 1.1rem; color: #203864;">
+              Step 3: Video Editing</strong>
+            </div>
+          </div>
+          <div id="step3-detail" class="ex-body" style="display: none;">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              <div class="content">
+              <p>
                     The video editing phase primarily consists of 3-4 sub-steps:
                     <ul>
                       <li>1) Balancing Video length: Parts of the source videos that are less relevant to the QAs might be removed.</li>
@@ -1288,37 +1270,32 @@
                       <li>4) For tasks requiring multi-turn interaction, source videos are cut into clips corresponding to each QA turn. </li>
                     </ul>
                     This comprehensive editing process typically takes an annotator 1-2 hours per sample. 
-                  </p>
-                </div>
-              </div>
-            </article>
+              </p></div>
+            </span>
           </div>
-          </details>
-      </div>
+        </div>
       </div>
 
       <!-- Steps 4 -->
       <div class="column is-12">
-      <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <details class="clean-details" style="margin-top: 0;">
-            <summary style="outline: none;">
-              <strong style="font-size: 1.05rem;">Step 4: Quality Refinement</strong>
-            </summary>
-          <div style="margin-top: 1rem;">
-            <article class="media">
-              <div class="media-content">
-                <div class="content">
-                  <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">
-                    We employ state-of-the-art MLLMs (e.g., Gemini-2.5-Pro) to assess annotation completeness. If a model generates a response that is logically correct yet diverges significantly in phrasing from our initial ground truth, we manually verify and append this output as an alternative reference to improve evaluation robustness.
-                  </p>
-                </div>
-              </div>
-            </article>
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <div class="expand-btn" onclick="toggleTierTable('step4-detail', 'step4-arrow')" style="cursor: pointer;">
+              <span id="step4-arrow" style="font-size: 1.1rem; color: #203864;">►</span> 
+              <strong style="font-size: 1.1rem; color: #203864;">
+              Step 4: Quality Refinement</strong>
+            </div>
           </div>
-          </details>
+          <div id="step4-detail" class="ex-body" style="display: none;">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              <p>
+                We employ state-of-the-art MLLMs (e.g., Gemini-2.5-Pro) to assess annotation completeness. If a model generates a response that is logically correct yet diverges significantly in phrasing from our initial ground truth, we manually verify and append this output as an alternative reference to improve evaluation robustness.
+              </p>
+            </span>
+          </div>
+        </div>
       </div>
-      </div>
-
+    
     </div>
 
   </div>
@@ -1344,9 +1321,10 @@
         <div id="results-carousel" class="carousel results-carousel">
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/non_audio.png" alt="Examples for the Non-audio Prompt Following task" 
+              <img src="./static/img/non_audio.png" alt="Examples for the Non-audio Prompt Following task" 
                     style="width:80%; margin-bottom: 1.5rem;" />
-              <p class="figure-caption"><strong>Examples for the Non-audio Prompt Following tasks:<br>
+              <p class="figure-caption">
+                <strong style="color: #203864;">Examples for the Non-audio Prompt Following tasks:<br>
                 The Gesture-based Prompt Following Task (GPF, left) and the OCR-based Prompt Following Task (OPF, right).
               </strong></p>
               <p class="figure-caption has-text-grey">For GPF tasks, the meaning of 4 gestures are defined at the beginning, then the gesture prompts are embedded in a picture-in-picture manner. For the OPF tasks, prompts appear as subtitles or handwritings.</p>
@@ -1354,33 +1332,36 @@
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/context_aware.png" alt="An example for the Context-Aware Response task" 
+              <img src="./static/img/context_aware.png" alt="An example for the Context-Aware Response task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
-              <p class="figure-caption"><strong>Examples for the Context-Aware Response (CR) task.</strong></p>
+              <p class="figure-caption">
+                <strong style="color: #203864;">Examples for the Context-Aware Response (CR) task.</strong></p>
               <p class="figure-caption has-text-grey">User questions in this task are designed not to directly mention the target objects (e.g. The blue download button for Windows system in this example). Models need to actively associate the video content with the user questions and filter out related information that can be presented in the replies.</p>
             </div>
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/single_proactive.png" alt="An example for the Single Event-triggered Response task" 
+              <img src="./static/img/single_proactive.png" alt="An example for the Single Event-triggered Response task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
-              <p class="figure-caption"><strong>Examples for the Single Event-triggered Response (SER) task.</strong></p>
+              <p class="figure-caption">
+                <strong style="color: #203864;">Examples for the Single Event-triggered Response (SER) task.</strong></p>
               <p class="figure-caption has-text-grey">Models need to delay responsing until the target event happends. Different from other benchmarks which periodically questioning the model wether to reply or not, we only question once at the beginning, leaving the model to decide the proper response time on its own.</p>
             </div>
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/multi_proactive.png" alt="An example for the Multi Event-triggered Response task" 
+              <img src="./static/img/multi_proactive.png" alt="An example for the Multi Event-triggered Response task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
-              <p class="figure-caption"><strong>Examples for the Single Multi Event-triggered Response (MER) task.</strong></p>
+              <p class="figure-caption">
+                <strong style="color: #203864;">Examples for the Single Multi Event-triggered Response (MER) task.</strong></p>
               <p class="figure-caption has-text-grey">Models need to keep replying whenever the target events appear, with the user prompt input only once.</p>
             </div>
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/multitask_tracking.png" alt="An example for the Multitask Tracking task" 
+              <img src="./static/img/multitask_tracking.png" alt="An example for the Multitask Tracking task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
-              <p class="figure-caption"><strong>Examples for the Single Multitask Tracking (MT) task.</strong></p>
+              <p class="figure-caption"><strong style="color: #203864;">Examples for the Single Multitask Tracking (MT) task.</strong></p>
               <p class="figure-caption has-text-grey">Models need to simultaneously keep track of the statuses of multiple processes listed at the beginning of the video.</p>
             </div>
           </div>
@@ -1396,25 +1377,25 @@
         <div id="results-carousel" class="carousel results-carousel">
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/meeting.png" alt="Key plots of the Meeting Simulation task" 
+              <img src="./static/img/meeting.png" alt="Key plots of the Meeting Simulation task" 
                     style="width:80%; margin-bottom: 1.5rem;" />
-              <p class="figure-caption"><strong>Key plots of the Meeting Simulation (Ms) task.</strong></p>
+              <p class="figure-caption"><strong style="color: #203864;">Key plots of the Meeting Simulation (Ms) task.</strong></p>
               <p class="figure-caption has-text-grey">The user was watching a round-table discussion video and taking notes,<br>mimicking the scenario of attending online meetings.</p>
             </div>
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/navigation.png" alt="Key plots of the Blind Assistance task" 
+              <img src="./static/img/navigation.png" alt="Key plots of the Blind Assistance task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
-              <p class="figure-caption"><strong>Key plots of the Blind Assistance (Ba) task.</strong></p>
+              <p class="figure-caption"><strong style="color: #203864;">Key plots of the Blind Assistance (Ba) task.</strong></p>
               <p class="figure-caption has-text-grey"></p>The user pretended to be blind, and required the assistant to guide them moving around in an office.</p>
             </div>
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/handcraft.png" alt="Key plots of the Handicraft Process Tracking task" 
+              <img src="./static/img/handcraft.png" alt="Key plots of the Handicraft Process Tracking task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
-              <p class="figure-caption"><strong>Key plots of the Handicraft Process Tracking (Ht) task.</strong></p>
+              <p class="figure-caption"><strong style="color: #203864;">Key plots of the Handicraft Process Tracking (Ht) task.</strong></p>
               <p class="figure-caption has-text-grey">Three people were making handicrafts together. The assistant is required to not only track the process of each person, but also understand this social situation by correctly identify which question is directed at the assistant.</p>
             </div>
           </div>
@@ -1450,32 +1431,31 @@
     <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
       <!-- Gesture Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Deficiency in Gesture Following</h4>
-                  <p><span style="font-size: 0.95rem;">
-                    Models struggle significantly with gesture-based commands. This reveals a critical weakness in interpreting visual instructions, as models usually fail to recognize gestures as user prompts.
-                  </span></p>
-              </div>
-            </div>
-          </article>
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              Deficiency in Gesture Following</strong></span>
+          </div>
+          <div class="ex-body">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              Models struggle significantly with gesture-based commands. This reveals a critical weakness in interpreting visual instructions, as models usually fail to recognize gestures as user prompts.
+            </span>
+          </div>
         </div>
       </div>
 
        <!-- Long-Context Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Long-Context Interaction Disparity</h4>
-              <p><span style="font-size: 0.95rem;">Proprietary models substantially outperform open source alternatives on multi-turn tasks, exposing a pronounced weakness in long-term memory retention and sustained context management among current open-source systems.
-              </span></p>
-              </div>
-            </div>
-          </article>
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              Long-Context Interaction Disparity</strong></span>
+          </div>
+          <div class="ex-body">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              Proprietary models substantially outperform open source alternatives on multi-turn tasks, exposing a pronounced weakness in long-term memory retention and sustained context management among current open-source systems.
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -1483,32 +1463,32 @@
     <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
       <!-- Silent Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Failure to Keep Silent</h4>
-                  <p><span style="font-size: 0.95rem;">
-                    Models systematically struggle to determine when a response is unnecessary, frequently giving video captions which are less related to the user prompt, instead of appropriately remaining silent when the visual input provides insufficient evidence.
-                  </span></p>
-              </div>
-            </div>
-          </article>
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              Failure to Keep Silen</strong></span>
+          </div>
+          <div class="ex-body">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              Models systematically struggle to determine when a response is unnecessary, frequently giving video captions which are less related to the user prompt, instead of appropriately remaining silent when the visual input provides insufficient evidence.
+            </span>
+          </div>
         </div>
       </div>
 
        <!-- Text Card -->
       <div class="column is-half">
-        <div class="box" style="height: 100%; border-radius: 12px; border: 1px solid #e8e8e8; background-color: #fafafa; box-shadow: 0 4px 12px rgba(0,0,0,0.04); padding: 1.5rem;">
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-              <h4 class="title is-5" style="margin-bottom: 0.5rem; color: #2c3e50;">Over-reliance on Text</h4>
-              <p><span style="font-size: 0.95rem;">Open-source models tend to echo their own replies during multi-turn tasks. This suggests an over-reliance on the text modality (the assistant's past replies) and an inability to dynamically update their context using the complex visual changes in the video.
-              </span></p>
-              </div>
-            </div>
-          </article>
+
+        <div class="example-card modern" style="height: 100%; ">
+          <div class="ex-badge-row">
+            <span><strong style="font-size: 1.1rem; color: #203864;">
+              Over-reliance on Text</strong></span>
+          </div>
+          <div class="ex-body">
+            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
+              Open-source models tend to echo their own replies during multi-turn tasks. This suggests an over-reliance on the text modality (the assistant's past replies) and an inability to dynamically update their context using the complex visual changes in the video.
+            </span>
+          </div>
         </div>
       </div>
     </div>
