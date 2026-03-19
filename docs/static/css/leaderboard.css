@@ -110,9 +110,7 @@ table#results.js-sort-14 tbody tr td:nth-child(15) {
 #results_detail tr:nth-child(even) {
     background-color: #f5f5f5;
 }
-#results_detail tr:nth-child(3) {
-    background-color: #f5f5f5;
-}
+
 
 #results_detail tr:hover {
     background-color: #ddd;
