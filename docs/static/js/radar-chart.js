@@ -16,24 +16,26 @@ document.addEventListener("DOMContentLoaded", function() {
   const colors = {
     'Gemini-3-Pro': '#5A7B7D',
     'Gemini-2.5-Pro': '#82A2A4',
-    'MiniCPM-o 4.5': '#A05A58',
-    'Baichuan-Omni 1.5': '#B87572',
+    'MiMo-V2-Omni':'#AAC9CB',
+    'MiniCPM-o-4.5': '#A05A58',
+    'Baichuan-Omni-1.5': '#B87572',
     'Qwen2.5-Omni': '#CE8F8C',
-    'MiniCPM-o 2.6': '#DFABA8',
-    'Qwen3-Omni': '#EBC5C3',
-    'VITA 1.5': '#F5DFDD'
+    'MiniCPM-o-2.6': '#DFABA8',
+    'Qwen3-Omni-Instruct': '#EBC5C3',
+    'VITA-1.5': '#F5DFDD'
   };
 
   // 2. Default Checkbox State (Checked Models)
   let userLegendState = {
     'Gemini-3-Pro': true,
-    'Qwen3-Omni': true,
-    'MiniCPM-o 4.5': true,
+    'Qwen3-Omni-Instruct': true,
+    'MiMo-V2-Omni': true,
+    'MiniCPM-o-4.5': true,
     'Gemini-2.5-Pro': false,
-    'Baichuan-Omni 1.5': false,
+    'Baichuan-Omni-1.5': false,
     'Qwen2.5-Omni': false,
-    'MiniCPM-o 2.6': false,
-    'VITA 1.5': false
+    'MiniCPM-o-2.6': false,
+    'VITA-1.5': false
   };
 
   // 3. Define original indicators (clockwise from top)
@@ -47,12 +49,13 @@ document.addEventListener("DOMContentLoaded", function() {
   const rawData =[
     { name: 'Gemini-3-Pro', value:[3.59, 3.14, 3.31, 3.06, 3.73, 2.63, 3.63, 3.32, 2.75, 3.33, 3.80, 3.39, 2.42, 3.59, 3.75, 3.51, 3.40] },
     { name: 'Gemini-2.5-Pro', value:[3.86, 2.95, 3.48, 3.13, 3.60, 2.75, 3.70, 3.91, 2.74, 3.27, 3.70, 3.06, 2.39, 3.39, 4.11, 3.47, 2.24] },
-    { name: 'MiniCPM-o 4.5', value:[3.14, 2.67, 2.54, 1.88, 3.27, 2.19, 3.00, 2.64, 1.23, 1.20, 3.15, 2.66, 2.65, 2.23, 2.30, 2.01, 1.89] },
-    { name: 'Baichuan-Omni 1.5', value:[2.18, 2.00, 2.35, 2.19, 2.47, 2.00, 2.52, 2.23, 2.16, 2.60, 1.75, 2.84, 2.42, 1.60, 2.02, 2.03, 2.24] },
+    { name: 'MiMo-V2-Omni', value:[3.33, 2.80, 3.20, 2.50, 3.87, 3.00, 3.38, 2.82, 1.36, 3.13, 3.90, 1.97, 2.33, 2.84, 3.08, 3.15, 2.05] },
+    { name: 'MiniCPM-o-4.5', value:[3.14, 2.67, 2.54, 1.88, 3.27, 2.19, 3.00, 2.64, 1.23, 1.20, 3.15, 2.66, 2.65, 2.23, 2.30, 2.01, 1.89] },
+    { name: 'Baichuan-Omni-1.5', value:[2.18, 2.00, 2.35, 2.19, 2.47, 2.00, 2.52, 2.23, 2.16, 2.60, 1.75, 2.84, 2.42, 1.60, 2.02, 2.03, 2.24] },
     { name: 'Qwen2.5-Omni', value:[1.45, 2.14, 2.42, 2.44, 2.60, 2.13, 2.44, 2.00, 1.08, 1.20, 2.25, 2.36, 2.77, 2.55, 1.64, 2.22, 2.26] },
-    { name: 'MiniCPM-o 2.6', value:[2.73, 2.33, 2.23, 1.75, 2.33, 1.94, 2.37, 2.55, 1.69, 1.27, 1.95, 2.10, 1.63, 2.16, 2.19, 1.88, 1.56] },
-    { name: 'Qwen3-Omni', value:[1.50, 0.62, 2.00, 1.13, 1.53, 0.80, 1.89, 1.00, 1.08, 3.33, 1.05, 1.51, 1.97, 2.76, 1.20, 1.26, 1.76] },
-    { name: 'VITA 1.5', value:[1.09, 1.14, 1.00, 1.25, 1.40, 1.33, 1.59, 0.73, 1.31, 1.47, 0.65, 1.19, 1.72, 1.71, 0.80, 0.91, 0.73] }
+    { name: 'MiniCPM-o-2.6', value:[2.73, 2.33, 2.23, 1.75, 2.33, 1.94, 2.37, 2.55, 1.69, 1.27, 1.95, 2.10, 1.63, 2.16, 2.19, 1.88, 1.56] },
+    { name: 'Qwen3-Omni-Instruct', value:[1.50, 0.62, 2.00, 1.13, 1.53, 0.80, 1.89, 1.00, 1.08, 3.33, 1.05, 1.51, 1.97, 2.76, 1.20, 1.26, 1.76] },
+    { name: 'VITA-1.5', value:[1.09, 1.14, 1.00, 1.25, 1.40, 1.33, 1.59, 0.73, 1.31, 1.47, 0.65, 1.19, 1.72, 1.71, 0.80, 0.91, 0.73] }
   ];
 
   const echartsRadarData = rawData.map(d => ({
