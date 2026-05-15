@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", function() {
     xAxis: {
       type: 'category',
       data:['0-15s', '15-30s', '30-45s', '45-60s', '60-90s', '90-120s', '120-150s', '150-180s', '180-360s', '300-420s', '>420s'],
-      axisLabel: { interval: 0, fontSize: 9 }
+      axisLabel: { interval: 0, fontSize: 9, rotate: 30, }
     },
     yAxis: { type: 'value', name: '# Videos', nameTextStyle: { fontSize: 10 } },
     series:[
