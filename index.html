@@ -8,33 +8,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title> OmniAssistBench</title>
 
-  <!--<link rel="icon" href="./docs/static/images/icon.png">-->
+  <!--<link rel="icon" href="./static/images/icon.png">-->
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <!-- ECharts Library for Radar Chart -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 
-  <link rel="stylesheet" href="./docs/static/css/bulma.min.css">
-  <link rel="stylesheet" href="./docs/static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./docs/static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./docs/static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./docs/static/css/index.css">
-  <link rel="stylesheet" href="./docs/static/css/leaderboard.css">
-  <link rel="stylesheet" href="./docs/static/css/example-container.css">
-  <script type="text/javascript" src="./docs/static/js/sort-table.js" defer></script>
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/leaderboard.css">
+  <link rel="stylesheet" href="./static/css/example-container.css">
+  <script type="text/javascript" src="./static/js/sort-table.js" defer></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./docs/static/js/fontawesome.all.min.js"></script>
-  <script src="./docs/static/js/bulma-carousel.min.js"></script>
-  <script src="./docs/static/js/bulma-slider.min.js"></script>
-  <script src="./docs/static/js/explorer-index.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/explorer-index.js"></script>
 
-  <script src="./docs/static/js/leaderboard_testmini.js"></script>  
-  <script src="./docs/static/js/example-shower.js"></script>
-  <script src="./docs/static/js/radar-chart.js"></script>
-  <script src="./docs/static/js/statis.js"></script>
+  <script src="./static/js/leaderboard_testmini.js"></script>  
+  <script src="./static/js/example-shower.js"></script>
+  <script src="./static/js/radar-chart.js"></script>
+  <script src="./static/js/statis.js"></script>
 </head>
 <body>
 
@@ -65,13 +65,9 @@
             <span class="author-block">
               <a href="#">Yonghui Niu</a><sup style="color:#6fbf73;">1</sup>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=UhJwHRAAAAAJ&hl=en&oi=ao">Zijian Liu</a><sup style="color:#6fbf73;">1</sup>,</span>
-            <span class="author-block">
               <a href="#">Sihang Yuan</a><sup style="color:#ed4b82">2</sup>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=qyTrq4kAAAAJ&hl=en&oi=ao">Ge Zhang</a><sup style="color:#ed4b82">2</sup>,</span>
-            <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=ayrg9AUAAAAJ&hl=en&oi=ao">Ran He</a><sup style="color:#6fbf73">1</sup>,</span>
+              <a href="https://scholar.google.com/citations?user=qyTrq4kAAAAJ&hl=en&oi=ao">Ge Zhang</a><sup style="color:#ed6e4b">3</sup>,</span>
             <span class="author-block">
               <a href="https://scholar.google.com/citations?user=fIXA_SsAAAAJ&hl=en&oi=sra">Caifeng Shan</a><sup style="color:#6fbf73;">1</sup></span>
           </div>
@@ -84,7 +80,8 @@
           <!-- Institutions -->
           <div class="is-size-5 publication-authors" style="margin-top: 0.5rem;">
             <span class="author-block"><sup style="color:#6fbf73;">1</sup>Nanjing University,</span>
-            <span class="author-block"><sup style="color:#ed4b82">2</sup>ByteDance Seed,</span>
+            <span class="author-block"><sup style="color:#ed4b82">2</sup>Nankai University,</span>
+            <span class="author-block"><sup style="color:#ed6e4b">3</sup>University of Waterloo</span>
           </div>
 
           <!-- Links/Badges -->
@@ -144,23 +141,20 @@
       <div class="column is-full">
         
         <!-- Main Image -->
-        <div class="has-text-centered" style="margin-bottom: 2rem;">
-          <img src="./docs/static/img/general_cases.png" alt="OmniAssistBench summarizes critical abilities" width="100%" style="border-radius: 8px;">
-          <p class="has-text-centered has-text-grey" style="margin-top: 1rem;">
-            OmniAssistBench summarizes critical abilities and tasks from real world Omni-LLM applications <br> to provide quantified evaluation of Omni-LLMs as assistants.
-          </p>
-        </div>
+
+
 
         <!-- Left-aligned paragraphs -->
         <div class="content has-text-justified" style="margin-bottom: 2rem;">         
           <p>
-            Recent advances in Omni-LLMs are paving the way for real-time video chat applications. However, existing benchmarks fail to systematically evaluate models under these dynamic, interactive settings. 
-            <strong>OmniAssistBench is the first benchmark specially designed to evaluate Omni-LLMs under these assistant-style, real-time video chat scenarios</strong> by discussing two critical questions:
+            Recent advances in Omni-LLMs are paving the way for real-time video assistant applications, where models constantly perceive the environment and guide users to achieve certain goals through multi-turn conversations. However, evaluations under these assistant-style interaction scenarios are still challenging. 
+            OmniAssistBench aims at addressing this challenge by proposing an annotation pipeline which allow annotators to build test samples from existing Internet videos.
           </p>
         </div>
 
       </div>
     </div>
+
       
     <!-- 2. Research Problems & Solutions (2 Cards in One Row) -->
     <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
@@ -170,11 +164,11 @@
         <div class="example-card modern" style="height: 100%; ">
           <div class="ex-badge-row">
             <span><strong style="font-size: 1.1rem; color: #4381F4;">
-              What abilities should be evaluated?</strong></span>
+              Why evaluation is challenging?</strong></span>
           </div>
           <div class="ex-body">
             <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
-                    Under the scenario of a video assistant, we systematically summarize and categorize the core capabilities required by common, real-world applications to form a two-tier evaluation taxonomy.
+                    In traditional video understanding evaluation, the model's answer would not change the content of the test video. However, during interaction with assistant models, users will do what the model suggests. This means that the <b>model's unpredictable response dynamically changes the subsequent video contents</b>, which static offline datasets cannot accommodate.
             </span>
           </div>
         </div>
@@ -185,17 +179,32 @@
         <div class="example-card modern" style="height: 100%; ">
           <div class="ex-badge-row">
             <span><strong style="font-size: 1.1rem; color: #4381F4;">
-              How should we evaluate them?</strong></span>
+              How to address this challenge?</strong></span>
           </div>
           <div class="ex-body">
             <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
-                    To mimic genuine real-world interactions, we adopt open-ended questions and seamlessly embed user prompts directly into the source videos as audio or visual elements, rather than providing them as separate text.
+                    During annotation, experts first filter for videos with certain plots and deduce prior knowledge from the video content to enforce a fixed interaction path. <br>Based on the paths, experts then design detailed interaction turns and edit the videos accordingly to build human-assistant interaction recordings.
             </span>
           </div>
         </div>
       </div>
 
     </div>
+
+    <div class="has-text-centered" style="margin-bottom: 2rem;">
+          <img src="./static/img/main.png" alt="OmniAssistBench summarizes critical abilities" width="85%" style="border-radius: 8px;">
+          <p class="has-text-centered has-text-grey" style="margin-top: 1rem;">
+          Assistant models may guide the user to achieve one goal through different paths (e.g., both Response 1 and Response 2 shown in figure (b) are valid, but test data only contains the consequent video of Response 1.) <br>We propose an annotation pipeline to address this problem of path diversity.
+          </p>
+    </div>
+
+    <div class="has-text-centered" style="margin-bottom: 2rem;">
+      <img src="./static/img/general_cases.png" alt="OmniAssistBench summarizes critical abilities" width="86%" style="border-radius: 8px;">
+      <p class="has-text-centered has-text-grey" style="margin-top: 1rem;">
+        OmniAssistBench summarizes critical abilities and tasks from real world applications to form a two-tier task framework.
+      </p>
+    </div>
+
 
     <!-- Final paragraph -->
     <div class="columns is-centered">
@@ -224,7 +233,7 @@
       <div class="column is-full">
         <div class="content has-text-justified">
           <p>
-            OmniAssistBench requires candidate models to be capable of processing videos along with the corresponding audios. All models are graded using our LLM-as-a-Judge pipeline on a 0 - 5 scale.</p>
+            OmniAssistBench requires candidate models to be capable of processing videos along with the corresponding audios. Models are graded using our LLM-as-a-Judge pipeline on a 0 - 5 scale. Reported scores have been normalized to 0-100.</p>
           <p>
             Please refer to the <a href="https://github.com/XianyunSun/OmniAssistBench">Github page</a> for detailed evaluation pipeline and example codes.</p>
         </div>
@@ -245,107 +254,117 @@
                 <td class="js-sort-number"><strong>Basic Tier</strong></td>
                 <td class="js-sort-number"><strong>Advanced Tier</strong></td>
                 <td class="js-sort-number"><strong>Real Cases</strong></td>
-                <td class="js-sort-number"><strong>Overall (/5.0)</strong></td>
-                <td class="js-sort-number"><strong>Percentage (%)</strong></td>
+                <td class="js-sort-number"><strong>Overall (/100)</strong></td>
               </tr>
               <tr>
                 <td>1</td>
                 <td><b class="best-score-text"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a> 🥇</b></td>
                 <td>-</td>
                 <td>-</td>
-                <td>3.18</td>
-                <td>3.41</td>
-                <td>3.40</td>
-                <td><b class="best-score-text">3.32</b></td>
-                <td>66.4</td>
+                <td>63.6</td>
+                <td>68.2</td>
+                <td>68.0</td>
+                <td><b class="best-score-text">66.4</b></td>
               </tr>
               <tr>
                 <td>2</td>
                 <td><b class="best-score-text"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a> 🥈</b></td>
                 <td>-</td>
                 <td>-</td>
-                <td>3.27</td>
-                <td>3.32</td>
-                <td>2.24</td>
-                <td><b class="best-score-text">3.23</b></td>
-                <td>64.6</td>
+                <td>65.4</td>
+                <td>66.4</td>
+                <td>44.8</td>
+                <td><b class="best-score-text">64.6</b></td>
               </tr>
               <tr>
                 <td>3</td>
-                <td><b class="best-score-text"><a href="https://platform.xiaomimimo.com/#/docs/news/v2-omni-release" target="_blank">MiMo-V2-Omni</a> 🥉</b></td>
+                <td><b class="best-score-text"><a href="https://seed.bytedance.com/en/seed2" target="_blank">Doubao-Seed-2.0-lite</a>🥉</b></td>
                 <td>-</td>
                 <td>1fps</td>
-                <td>2.68</td>
-                <td>2.76</td>
-                <td>2.05</td>
-                <td><b class="best-score-text">2.69</b></td>
-                <td>53.8</td>
+                <td>53.2</td>
+                <td>62.1</td>
+                <td>35.5</td>
+                <td><b class="best-score-text">57.3</b></td>
               </tr>
               <tr>
                 <td>4</td>
-                <td><b class="best-score-text"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-4.5</a></b></td>
-                <td>9B</td>
+                <td><b><a href="https://platform.xiaomimimo.com/#/docs/news/v2-omni-release" target="_blank">MiMo-V2-Omni</a> </b></td>
+                <td>-</td>
                 <td>1fps</td>
-                <td>2.23</td>
-                <td>2.39</td>
-                <td>1.89</td>
-                <td><b>2.30</b></td>
-                <td>46.0</td>
+                <td>53.6</td>
+                <td>55.2</td>
+                <td>41.0</td>
+                <td><b>53.8</b></td>
               </tr>
               <tr>
                 <td>5</td>
-                <td><b><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni-1.5</a></b></td>
-                <td>7B</td>
-                <td>32</td>
-                <td>2.25</td>
-                <td>2.09</td>
-                <td>2.24</td>
-                <td><b>2.16</b></td>
-                <td>43.2</td>
+                <td><b><a href="https://qwen.ai/blog?id=qwen3.5-omni" target="_blank">Qwen3.5-Omni-Plus</a></b></td>
+                <td>-</td>
+                <td>1fps</td>
+                <td>41.6</td> 
+                <td>57.8</td> 
+                <td>50.6</td> 
+                <td><b>51.6</b></td> 
               </tr>
               <tr>
                 <td>6</td>
-                <td><b><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></b></td>
-                <td>7B</td>
-                <td>1fps</td>
-                <td>1.85</td>
-                <td>2.33</td>
-                <td>2.26</td>
-                <td><b>2.16</b></td>
-                <td>43.2</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td><b><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-2.6</a></b></td>
-                <td>8B</td>
-                <td>1fps</td>
-                <td>2.09</td>
-                <td>2.01</td>
-                <td>1.56</td>
-                <td><b>2.01</b></td>
-                <td>40.2</td>
-              </tr>
-              <tr>
-                <td>8</td>
                 <td><b><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni-Instruct</a></b></td>
                 <td>30B-A3B</td>
                 <td>1fps</td>
-                <td>1.42</td>
-                <td>1.82</td>
-                <td>1.76</td>
-                <td><b>1.68</b></td>
-                <td>33.6</td>
+                <td>46.4</td>
+                <td>53.8</td>
+                <td>53.8</td>
+                <td><b>51.2</b></td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td><b class="best-score-text"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-4.5</a></b></td>
+                <td>9B</td>
+                <td>1fps</td>
+                <td>44.6</td>
+                <td>47.8</td>
+                <td>37.8</td>
+                <td><b>46.0</b></td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td><b><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni-1.5</a></b></td>
+                <td>7B</td>
+                <td>32</td>
+                <td>45.0</td>
+                <td>41.8</td>
+                <td>44.8</td>
+                <td><b>43.2</b></td>
               </tr>
               <tr>
                 <td>9</td>
+                <td><b><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></b></td>
+                <td>7B</td>
+                <td>1fps</td>
+                <td>37.0</td>
+                <td>46.6</td>
+                <td>45.2</td>
+                <td><b>43.2</b></td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td><b><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-2.6</a></b></td>
+                <td>8B</td>
+                <td>1fps</td>
+                <td>41.8</td>
+                <td>40.2</td>
+                <td>31.2</td>
+                <td><b>40.2</b></td>
+              </tr>
+              <tr>
+                <td>11</td>
                 <td><b><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA-1.5</a></b></td>
                 <td>7B</td>
                 <td>4</td>
-                <td>1.23</td>
-                <td>1.29</td>
-                <td>0.73</td>
-                <td><b>1.23</b></td>
                 <td>24.6</td>
+                <td>25.8</td>
+                <td>14.6</td>
+                <td><b>24.6</b></td>
               </tr>
         </table>
       </div>
@@ -369,7 +388,7 @@
   <div class="content">
   <div id="detailed-results" style="display: none;">
   
-    <!-- Table 2: Basic Interactive Understanding Tasks -->
+  <!-- Table 2: Basic Interactive Understanding Tasks -->
   <div style="margin-top: 1.5rem;">
     <h5 class="has-text-centered">Performance comparison on Basic Interactive Understanding tasks</h5>
     <div class="container is-fluid" style="margin-top: 2rem; margin-bottom: 3rem;">
@@ -413,183 +432,223 @@
             <tbody style="text-align: center; vertical-align: middle;">
               <tr>
                 <td >1</td>
-                <td><b class="best-score-text"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a> 🥇</b></td>
-                <td ><b class="best-score-text">3.32</b></td>
-                <td >3.59</td>
-                <td ><b class="best-score-text">3.14</b></td>
-                <td >3.31</td>
-                <td >3.35</td>
-                <td >3.06</td>
-                <td >3.73</td>
-                <td >2.63</td>
-                <td >3.13</td>
-                <td >3.63</td>
-                <td >3.32</td>
-                <td >3.49</td>
-                <td ><b class="best-score-text">2.75</b></td>
-                <td ><b class="best-score-text">3.33</b></td>
-                <td ><b class="best-score-text">2.87</b></td>
-                <td >3.18</td>
+                <td><b><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a></b> 🥇</td>
+                <td ><b class="best-score-text">66.4</b></td>
+                <td >71.8</td>
+                <td >62.8</td>
+                <td >66.2</td>
+                <td >67.0</td>
+                <td >61.2</td>
+                <td >74.6</td>
+                <td >52.6</td>
+                <td >62.6</td>
+                <td >72.6</td>
+                <td >66.4</td>
+                <td >69.8</td>
+                <td >55.0</td>
+                <td >66.6</td>
+                <td ><b class="best-score-text">57.4</b></td>
+                <td >63.6</td>
               </tr>
               <tr>
                 <td >2</td>
-                <td><b class="best-score-text"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a> 🥈</b></td>
-                <td >3.23</td>
-                <td ><b class="best-score-text">3.86</b></td>
-                <td >2.95</td>
-                <td ><b class="best-score-text">3.48</b></td>
-                <td ><b class="best-score-text">3.44</b></td>
-                <td ><b class="best-score-text">3.13</b></td>
-                <td >3.60</td>
-                <td >2.75</td>
-                <td ><b class="best-score-text">3.15</b></td>
-                <td ><b class="best-score-text">3.70</b></td>
-                <td ><b class="best-score-text">3.91</b></td>
-                <td ><b class="best-score-text">3.80</b></td>
-                <td >2.74</td>
-                <td >3.27</td>
-                <td >2.84</td>
-                <td ><b class="best-score-text">3.27</b></td>
+                <td><b><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a></b> 🥈</td>
+                <td >64.6</td>
+                <td >77.2</td>
+                <td >59.0</td>
+                <td >69.6</td>
+                <td ><b class="best-score-text">68.8</b></td>
+                <td >62.6</td>
+                <td >72.0</td>
+                <td >55.0</td>
+                <td ><b class="best-score-text">63.0</b></td>
+                <td >74.0</td>
+                <td >78.2</td>
+                <td ><b class="best-score-text">76.0</b></td>
+                <td >54.8</td>
+                <td >65.4</td>
+                <td >56.8</td>
+                <td ><b class="best-score-text">65.4</b></td>
               </tr>
               <tr>
-                <td >3</td>
-                <td><b class="best-score-text"><a href="https://platform.xiaomimimo.com/#/docs/news/v2-omni-release" target="_blank">MiMo-V2-Omni</a> 🥉</b></td>
-                <td >2.69</td>
-                <td >3.33</td>
-                <td >2.80</td>
-                <td >3.20</td>
-                <td >3.12</td>
-                <td >2.50</td>
-                <td ><b class="best-score-text">3.87</b></td>
-                <td ><b class="best-score-text">3.00</b></td>
-                <td >3.11</td>
-                <td >3.38</td>
-                <td >2.82</td>
-                <td >3.12</td>
-                <td >1.36</td>
-                <td >3.13</td>
-                <td >1.73</td>
-                <td >2.68</td>
-              </tr>              
+                <td>3</td>
+                <td><a href="https://seed.bytedance.com/en/seed2" target="_blank">Doubao-Seed-2.0-lite</a>🥉</td>
+                <td>57.3</td>
+                <td>64.5</td>
+                <td>54.3</td> 
+                <td>50.0</td>
+                <td>55.9</td>
+                <td>56.3</td> 
+                <td>78.7</td>
+                <td>51.3</td>
+                <td>61.7</td>
+                <td>72.6</td> 
+                <td>65.5</td>
+                <td>69.4</td>
+                <td>29.5</td>
+                <td>57.3</td>
+                <td>35.0</td>
+                <td>53.2</td>
+              </tr>
               <tr>
                 <td >4</td>
-                <td><b class="best-score-text"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-4.5</a> </b></td>
-                <td ><b>2.30</b></td>
-                <td ><b>3.14</b></td>
-                <td ><b>2.67</b></td>
-                <td ><b>2.54</b></td>
-                <td ><b>2.77</b></td>
-                <td >1.88</td>
-                <td ><b>3.27</b></td>
-                <td ><b>2.19</b></td>
-                <td ><b>2.42</b></td>
-                <td ><b>3.00</b></td>
-                <td ><b>2.64</b></td>
-                <td ><b>2.84</b></td>
-                <td >1.23</td>
-                <td >1.20</td>
-                <td >1.22</td>
-                <td >2.23</td>
+                <td><b><a href="https://platform.xiaomimimo.com/#/docs/news/v2-omni-release" target="_blank">MiMo-V2-Omni</a></b> </td>
+                <td >53.8</td>
+                <td >66.6</td>
+                <td >56.0</td>
+                <td >64.0</td>
+                <td >62.4</td>
+                <td >50.0</td>
+                <td >77.4</td>
+                <td >60.0</td>
+                <td >62.2</td>
+                <td >67.6</td>
+                <td >56.4</td>
+                <td >62.4</td>
+                <td >27.2</td>
+                <td >62.6</td>
+                <td >34.6</td>
+                <td >53.6</td>
               </tr>
               <tr>
                 <td >5</td>
-                <td><b><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni-1.5</a></b></td>
-                <td >2.16</td>
-                <td >2.18</td>
-                <td >2.00</td>
-                <td >2.35</td>
-                <td >2.19</td>
-                <td >2.19</td>
-                <td >2.47</td>
-                <td >2.00</td>
-                <td >2.21</td>
-                <td >2.52</td>
-                <td >2.23</td>
-                <td >2.39</td>
-                <td ><b>2.16</b></td>
-                <td >2.60</td>
-                <td ><b>2.25</b></td>
-                <td ><b>2.25</b></td>
+                <td><b><a href="https://qwen.ai/blog?id=qwen3.5-omni" target="_blank">Qwen3.5-Omni-Plus</a></b></td>
+                <td >51.6</td>
+                <td >61.8</td>
+                <td >33.4</td> 
+                <td >55.2</td>
+                <td >50.6</td>
+                <td >25.0</td>
+                <td >65.4</td>
+                <td >50.0</td>
+                <td >46.4</td>
+                <td >51.2</td>
+                <td >50.0</td>
+                <td >50.6</td>
+                <td >21.0</td>
+                <td >37.4</td>
+                <td >24.4</td>
+                <td >41.6</td>
               </tr>
               <tr>
                 <td >6</td>
-                <td><b><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></b></td>
-                <td >2.16</td>
-                <td >1.45</td>
-                <td >2.14</td>
-                <td >2.42</td>
-                <td >2.03</td>
-                <td ><b>2.44</b></td>
-                <td >2.60</td>
-                <td >2.13</td>
-                <td >2.38</td>
-                <td >2.44</td>
-                <td >2.00</td>
-                <td >2.24</td>
-                <td >1.08</td>
-                <td >1.20</td>
-                <td >1.11</td>
-                <td >1.85</td>
+                <td><b><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni-Instruct</a></b></td>
+                <td ><b>51.2</b></td>
+                <td >59.0</td>
+                <td >50.4</td>
+                <td >54.6</td>
+                <td >54.8</td>
+                <td >52.6</td>
+                <td >56.0</td>
+                <td >41.2</td>
+                <td ><b>49.8</b></td>
+                <td >54.8</td>
+                <td >56.4</td>
+                <td >55.6</td>
+                <td >28.2</td>
+                <td >41.4</td>
+                <td >30.8</td>
+                <td ><b>46.4</b></td>
               </tr>
               <tr>
                 <td >7</td>
-                <td><b><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-2.6</a></b></td>
-                <td >2.01</td>
-                <td >2.73</td>
-                <td >2.33</td>
-                <td >2.23</td>
-                <td >2.42</td>
-                <td >1.75</td>
-                <td >2.33</td>
-                <td >1.94</td>
-                <td >2.00</td>
-                <td >2.37</td>
-                <td >2.55</td>
-                <td >2.45</td>
-                <td >1.69</td>
-                <td >1.27</td>
-                <td >1.61</td>
-                <td >2.09</td>
+                <td><b><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-4.5</a></b></td>
+                <td >46.0</td>
+                <td >62.8</td>
+                <td >53.4</td>
+                <td >50.8</td>
+                <td ><b>55.4</b></td>
+                <td >37.6</td>
+                <td >65.4</td>
+                <td >43.8</td>
+                <td >48.4</td>
+                <td >60.0</td>
+                <td >52.8</td>
+                <td ><b>56.8</b></td>
+                <td >24.6</td>
+                <td >24.0</td>
+                <td >24.4</td>
+                <td >44.6</td>
               </tr>
               <tr>
                 <td >8</td>
-                <td><b><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni-Instruct</a></b></td>
-                <td >1.68</td>
-                <td >1.50</td>
-                <td >0.62</td>
-                <td >2.00</td>
-                <td >1.42</td>
-                <td >1.13</td>
-                <td >1.53</td>
-                <td >0.80</td>
-                <td >1.15</td>
-                <td >1.89</td>
-                <td >1.00</td>
-                <td >1.49</td>
-                <td >1.08</td>
-                <td ><b>3.33</b></td>
-                <td >1.53</td>
-                <td >1.42</td>
+                <td><b><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni-1.5</a></b></td>
+                <td >43.2</td>
+                <td >43.6</td>
+                <td >40.0</td>
+                <td >47.0</td>
+                <td >43.8</td>
+                <td >43.8</td>
+                <td >49.4</td>
+                <td >40.0</td>
+                <td >44.2</td>
+                <td >50.4</td>
+                <td >44.6</td>
+                <td >47.8</td>
+                <td >43.2</td>
+                <td >52.0</td>
+                <td ><b>45.0</b></td>
+                <td >45.0</td>
               </tr>
               <tr>
                 <td >9</td>
+                <td><b><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></b></td>
+                <td >43.2</td>
+                <td >29.0</td>
+                <td >42.8</td>
+                <td >48.4</td>
+                <td >40.6</td>
+                <td >48.8</td>
+                <td >52.0</td>
+                <td >42.6</td>
+                <td >47.6</td>
+                <td >48.8</td>
+                <td >40.0</td>
+                <td >44.8</td>
+                <td >21.6</td>
+                <td >24.0</td>
+                <td >22.2</td>
+                <td >37.0</td>
+              </tr>
+              <tr>
+                <td >10</td>
+                <td><b><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-2.6</a></b></td>
+                <td >40.2</td>
+                <td >54.6</td>
+                <td >46.6</td>
+                <td >44.6</td>
+                <td >48.4</td>
+                <td >35.0</td>
+                <td >46.6</td>
+                <td >38.8</td>
+                <td >40.0</td>
+                <td >47.4</td>
+                <td >51.0</td>
+                <td >49.0</td>
+                <td >33.8</td>
+                <td >25.4</td>
+                <td >32.2</td>
+                <td >41.8</td>
+              </tr>
+              <tr>
+                <td >11</td>
                 <td><b><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA-1.5</a></b></td>
-                <td >1.23</td>
-                <td >1.09</td>
-                <td >1.14</td>
-                <td >1.00</td>
-                <td >1.07</td>
-                <td >1.25</td>
-                <td >1.40</td>
-                <td >1.33</td>
-                <td >1.33</td>
-                <td >1.59</td>
-                <td >0.73</td>
-                <td >1.20</td>
-                <td >1.31</td>
-                <td >1.47</td>
-                <td >1.34</td>
-                <td >1.23</td>
+                <td >24.6</td>
+                <td >21.8</td>
+                <td >22.8</td>
+                <td >20.0</td>
+                <td >21.4</td>
+                <td >25.0</td>
+                <td >28.0</td>
+                <td >26.6</td>
+                <td >26.6</td>
+                <td >31.8</td>
+                <td >14.6</td>
+                <td >24.0</td>
+                <td >26.2</td>
+                <td >29.4</td>
+                <td >26.8</td>
+                <td >24.6</td>
               </tr>
             </tbody>
           </table>
@@ -638,164 +697,200 @@
               <tr>
                 <td >1</td>
                 <td><b class="best-score-text"><a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">Gemini-3-Pro</a> 🥇</b></td>
-                <td ><b class="best-score-text">3.32</b></td>
-                <td >3.80</td>
-                <td ><b class="best-score-text">3.39</b></td>
-                <td ><b class="best-score-text">2.42</b></td>
-                <td ><b class="best-score-text">2.93</b></td>
-                <td ><b class="best-score-text">3.59</b></td>
-                <td >3.75</td>
-                <td ><b class="best-score-text">3.51</b></td>
-                <td ><b class="best-score-text">3.61</b></td>
-                <td ><b class="best-score-text">3.41</b></td>
-                <td ><b class="best-score-text">3.82</b></td>
-                <td ><b class="best-score-text">3.29</b></td>
-                <td ><b class="best-score-text">3.25</b></td>
-                <td ><b class="best-score-text">3.40</b></td>
+                <td ><b class="best-score-text">66.4</b></td>
+                <td >76.0</td>
+                <td >67.8</td>
+                <td >48.4</td>
+                <td >58.6</td>
+                <td >71.8</td>
+                <td >75.0</td>
+                <td >70.2</td>
+                <td ><b class="best-score-text">72.2</b></td>
+                <td ><b class="best-score-text">68.2</b></td>
+                <td >76.4</td>
+                <td >65.8</td>
+                <td >65.0</td>
+                <td ><b class="best-score-text">68.0</b></td>
               </tr>
               <tr>
                 <td >2</td>
                 <td><b class="best-score-text"><a href="https://deepmind.google/technologies/gemini/" target="_blank">Gemini-2.5-Pro</a> 🥈</b></td>
-                <td >3.23</td>
-                <td >3.70</td>
-                <td >3.06</td>
-                <td >2.39</td>
-                <td >2.74</td>
-                <td >3.39</td>
-                <td ><b class="best-score-text">4.11</b></td>
-                <td >3.47</td>
-                <td >3.60</td>
-                <td >3.32</td>
-                <td >2.55</td>
-                <td >1.64</td>
-                <td >2.50</td>
-                <td >2.24</td>
+                <td >64.6</td>
+                <td >74.0</td>
+                <td >61.2</td>
+                <td >47.8</td>
+                <td >54.8</td>
+                <td >67.8</td>
+                <td >82.2</td>
+                <td >69.4</td>
+                <td >72.0</td>
+                <td >66.4</td>
+                <td >51.0</td>
+                <td >32.8</td>
+                <td >50.0</td>
+                <td >44.8</td>
               </tr>
               <tr>
-                <td >3</td>
-                <td><b class="best-score-text"><a href="https://platform.xiaomimimo.com/#/docs/news/v2-omni-release" target="_blank">MiMo-V2-Omni</a> 🥉</b></td>
-                <td >2.69</td>
-                <td ><b class="best-score-text">3.90</b></td>
-                <td >1.97</td>
-                <td >2.33</td>
-                <td >2.14</td>
-                <td >2.84</td>
-                <td >3.08</td>
-                <td >3.15</td>
-                <td >2.99</td>
-                <td >2.76</td>
-                <td >2.63</td>
-                <td >1.36</td>
-                <td >2.22</td>
-                <td >2.05</td>
+                <td>3</td>
+                <td><a href="https://seed.bytedance.com/en/seed2" target="_blank">Doubao-Seed-2.0-lite</a>🥉</td>
+                <td>57.3</td>
+                <td>76.0</td> 
+                <td>46.6</td>
+                <td>62.6</td>
+                <td>54.9</td>
+                <td>68.6</td>
+                <td>73.8</td>
+                <td>50.3</td>
+                <td>64.9</td>
+                <td>62.1</td>
+                <td>26.0</td>
+                <td>21.4</td>
+                <td>50.0</td>
+                <td>35.5</td>
               </tr>
               <tr>
                 <td >4</td>
-                <td><b class="best-score-text"><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-4.5</a></b></td>
-                <td ><b>2.30</b></td>
-                <td ><b>3.15</b></td>
-                <td >2.66</td>
-                <td >2.65</td>
-                <td >2.65</td>
-                <td >2.23</td>
-                <td >2.30</td>
-                <td >2.01</td>
-                <td >2.19</td>
-                <td >2.39</td>
-                <td >0.27</td>
-                <td >2.50</td>
-                <td >2.35</td>
-                <td >1.89</td>
+                <td><b class="best-score-text"><a href="https://platform.xiaomimimo.com/#/docs/news/v2-omni-release" target="_blank">MiMo-V2-Omni</a></b></td>
+                <td >53.8</td>
+                <td >78.0</td>
+                <td >39.4</td>
+                <td >46.6</td>
+                <td >42.8</td>
+                <td >56.8</td>
+                <td >61.6</td>
+                <td >63.0</td>
+                <td >59.8</td>
+                <td >55.2</td>
+                <td >52.6</td>
+                <td >27.2</td>
+                <td >44.4</td>
+                <td >41.0</td>
               </tr>
               <tr>
                 <td >5</td>
-                <td><b><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni-1.5</a></b></td>
-                <td >2.16</td>
-                <td >1.75</td>
-                <td ><b>2.84</b></td>
-                <td >2.42</td>
-                <td ><b>2.64</b></td>
-                <td >1.60</td>
-                <td >2.02</td>
-                <td >2.03</td>
-                <td >1.83</td>
-                <td >2.09</td>
-                <td ><b>1.91</b></td>
-                <td >2.57</td>
-                <td >2.20</td>
-                <td >2.24</td>
+                <td><b><a href="https://qwen.ai/blog?id=qwen3.5-omni" target="_blank">Qwen3.5-Omni-Plus</a></b></td>
+                <td >51.6</td>
+                <td >56.0</td>
+                <td >58.0</td>
+                <td >63.8</td>
+                <td ><b class="best-score-text">61.0</b></td>
+                <td >54.6</td>
+                <td >62.6</td>
+                <td >53.0</td>
+                <td >56.2</td>
+                <td >57.8</td>
+                <td >51.0</td>
+                <td >41.6</td>
+                <td >56.0</td>
+                <td >50.6</td>
               </tr>
               <tr>
                 <td >6</td>
-                <td><b><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></b></td>
-                <td >2.16</td>
-                <td >2.25</td>
-                <td >2.36</td>
-                <td ><b>2.77</b></td>
-                <td >2.56</td>
-                <td >2.55</td>
-                <td >1.64</td>
-                <td ><b>2.22</b></td>
-                <td ><b>2.22</b></td>
-                <td >2.33</td>
-                <td >0.91</td>
-                <td ><b>3.00</b></td>
-                <td ><b>2.45</b></td>
-                <td ><b>2.26</b></td>
+                <td><b><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni-Instruct</a></b></td>
+                <td ><b>51.2</b></td>
+                <td >72.0</td>
+                <td >40.4</td>
+                <td >58.8</td>
+                <td >50.0</td>
+                <td >55.8</td>
+                <td >52.6</td>
+                <td >53.6</td>
+                <td ><b>54.4</b></td>
+                <td ><b>53.8</b></td>
+                <td >67.2</td>
+                <td >40.0</td>
+                <td >56.0</td>
+                <td ><b>53.8</b></td>
               </tr>
               <tr>
                 <td >7</td>
-                <td><b><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-2.6</a></b></td>
-                <td >2.01</td>
-                <td >1.95</td>
-                <td >2.10</td>
-                <td >1.63</td>
-                <td >1.87</td>
-                <td >2.16</td>
-                <td >2.19</td>
-                <td >1.88</td>
-                <td >2.09</td>
-                <td >2.01</td>
-                <td >0.45</td>
-                <td >1.71</td>
-                <td >2.05</td>
-                <td >1.56</td>
+                <td><b><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-4.5</a></b></td>
+                <td >46.0</td>
+                <td >63.0</td>
+                <td >53.2</td>
+                <td >53.0</td>
+                <td ><b>53.0</b></td>
+                <td >44.6</td>
+                <td >46.0</td>
+                <td >40.2</td>
+                <td >43.8</td>
+                <td >47.8</td>
+                <td >5.4</td>
+                <td >50.0</td>
+                <td >47.0</td>
+                <td >37.8</td>
               </tr>
               <tr>
                 <td >8</td>
-                <td><b><a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank">Qwen3-Omni-Instruct</a></b></td>
-                <td >1.68</td>
-                <td >1.05</td>
-                <td >1.51</td>
-                <td >1.97</td>
-                <td >1.73</td>
-                <td ><b>2.76</b></td>
-                <td >1.20</td>
-                <td >1.26</td>
-                <td >1.94</td>
-                <td >1.82</td>
-                <td >1.18</td>
-                <td >1.36</td>
-                <td >2.35</td>
-                <td >1.76</td>
+                <td><b><a href="https://github.com/baichuan-inc/Baichuan-Omni-1.5" target="_blank">Baichuan-Omni-1.5</a></b></td>
+                <td >43.2</td>
+                <td >35.0</td>
+                <td >56.8</td>
+                <td >48.4</td>
+                <td >52.8</td>
+                <td >32.0</td>
+                <td >40.4</td>
+                <td >40.6</td>
+                <td >36.6</td>
+                <td >41.8</td>
+                <td >38.2</td>
+                <td >51.4</td>
+                <td >44.0</td>
+                <td >44.8</td>
               </tr>
               <tr>
                 <td >9</td>
+                <td><b><a href="https://github.com/QwenLM/Qwen2.5" target="_blank">Qwen2.5-Omni</a></b></td>
+                <td >43.2</td>
+                <td >45.0</td>
+                <td >47.2</td>
+                <td >55.4</td>
+                <td >51.2</td>
+                <td >51.0</td>
+                <td >32.8</td>
+                <td >44.4</td>
+                <td >44.4</td>
+                <td >46.6</td>
+                <td >18.2</td>
+                <td >60.0</td>
+                <td >49.0</td>
+                <td >45.2</td>
+              </tr>
+              <tr>
+                <td >10</td>
+                <td><b><a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank">MiniCPM-o-2.6</a></b></td>
+                <td >40.2</td>
+                <td >39.0</td>
+                <td >42.0</td>
+                <td >32.6</td>
+                <td >37.4</td>
+                <td >43.2</td>
+                <td >43.8</td>
+                <td >37.6</td>
+                <td >41.8</td>
+                <td >40.2</td>
+                <td >9.0</td>
+                <td >34.2</td>
+                <td >41.0</td>
+                <td >31.2</td>
+              </tr>
+              <tr>
+                <td >11</td>
                 <td><b><a href="https://github.com/VITA-MLLM/VITA" target="_blank">VITA-1.5</a></b></td>
-                <td >1.23</td>
-                <td >0.65</td>
-                <td >1.19</td>
-                <td >1.72</td>
-                <td >1.44</td>
-                <td >1.71</td>
-                <td >0.80</td>
-                <td >0.91</td>
-                <td >1.25</td>
-                <td >1.29</td>
-                <td >0.55</td>
-                <td >0.79</td>
-                <td >0.80</td>
-                <td >0.73</td>
+                <td >24.6</td>
+                <td >13.0</td>
+                <td >23.8</td>
+                <td >34.4</td>
+                <td >28.8</td>
+                <td >34.2</td>
+                <td >16.0</td>
+                <td >18.2</td>
+                <td >25.0</td>
+                <td >25.8</td>
+                <td >11.0</td>
+                <td >15.8</td>
+                <td >16.0</td>
+                <td >14.6</td>
               </tr>
             </tbody>
           </table>
@@ -804,13 +899,12 @@
     </div>
   </div>
   </div>
-  </div>
 
   <!-- Interactive Radar Chart -->
   <div class="container is-max-desktop">
   <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
     <div id="radar-chart" style="width: 100%; aspect-ratio: 2.5/1;"></div>
-    <p class="figure-caption has-text-grey">Sub-task level performance comparison of evaluated models.</p>
+    <p class="figure-caption has-text-grey has-text-centered">Sub-task level performance comparison of evaluated models. <br>Click on the model names on the right to display the corresponding lines. </p>
   </div>
   </div>
 </section>
@@ -837,7 +931,7 @@
     <div class="columns is-centered">
       <div class="column is-full">
         <div class="content has-text-justified" style="margin-bottom: 0rem;">
-          <p>OmniAssistBench decomposes real-world assistant capabilities into two complementary levels.</p>
+          <p>To build a comperhensive benchmark, OmniAssistBench decomposes real-world assistant capabilities into two levels.</p>
         </div>
       </div>
     </div>
@@ -890,7 +984,7 @@
           </div>
           <div class="ex-body">
             <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
-              There are a total of <strong>687</strong> open-ended question-answer pairs from <strong>300</strong> videos, covering 7 major task types and <strong>16</strong> fine-grained tasks.
+              There are a total of <strong>685</strong> open-ended question-answer pairs, covering 7 major task types and <strong>16</strong> fine-grained tasks. Video domains cover common daily topics such as sports, cooking, lectures, DIYs, and talk shows.
             </span>
           </div>
         </div>
@@ -905,7 +999,7 @@
           </div>
           <div class="ex-body">
             <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
-              There are also three comprehensive multi-turn <strong>real world interaction case studies filmed by our team</strong> to reflect genuine assistant usage.
+              We design and film 3 cases with <b>an average of 15 interaction turns</b>. Each case specifically targets the combinations of a group of the abilities evaluated in our benchmark to reflect genuine assistant usage.
             </span>
           </div>
         </div>
@@ -1186,7 +1280,7 @@
             <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
               Unlike traditional benchmarks with text-only prompts, all user questions are embedded directly into the videos as realistic audio or typing/handwriting. Only the videos are input into the candidate models.
               <div class="has-text-centered">
-              <img src="./docs/static/img/data_format.png" alt="Single-Turn Example" 
+              <img src="./static/img/data_format.png" alt="Single-Turn Example" 
                   style="width: 100%; height: auto; border-radius: 6px; margin-top: 1rem;">
               </div>
             </span>
@@ -1210,7 +1304,7 @@
                 </div>
 
                 <div class="column is-5 has-text-centered" style="padding-right: 0;">
-                <img src="./docs/static/img/multi-turn.png" alt="Multi-Turn Example" style="width: 100%; height: auto;">
+                <img src="./static/img/multi-turn.png" alt="Multi-Turn Example" style="width: 100%; height: auto;">
                 </div>  
               </div>
           </div>
@@ -1242,7 +1336,7 @@
 
     <div class="columns is-centered" style="margin-top: 1.5rem;">
       <div class="column has-text-centered">
-      <img src="./docs/static/img/labeling.png" alt="The labling process of OmniAssistBench" width="100%">
+      <img src="./static/img/labeling.png" alt="The labling process of OmniAssistBench" width="100%">
       <p class="figure-caption has-text-grey">The annotation process of OmniAssistBench.</p>
       </div>
     </div>
@@ -1255,8 +1349,8 @@
         <div class="example-card modern" style="height: 100%; ">
           <div class="ex-badge-row">
             <div class="expand-btn" onclick="toggleTierTable('step1-detail', 'step1-arrow')" style="cursor: pointer;">
-              <span id="step1-arrow" style="font-size: 1.1rem; color: #000000;">►</span> 
-              <strong style="font-size: 1.1rem; color: #000000;">
+              <span id="step1-arrow" style="font-size: 1.1rem; color: #4381F4;">►</span> 
+              <strong style="font-size: 1.1rem; color: #4381F4;">
               Step 1: Raw Video Collection Based on Plots</strong>
             </div>
           </div>
@@ -1278,8 +1372,8 @@
         <div class="example-card modern" style="height: 100%; ">
           <div class="ex-badge-row">
             <div class="expand-btn" onclick="toggleTierTable('step2-detail', 'step2-arrow')" style="cursor: pointer;">
-              <span id="step2-arrow" style="font-size: 1.1rem; color: #000000;">►</span> 
-              <strong style="font-size: 1.1rem; color: #000000;">
+              <span id="step2-arrow" style="font-size: 1.1rem; color: #4381F4;">►</span> 
+              <strong style="font-size: 1.1rem; color: #4381F4;">
               Step 2: QA Design and User Goal Design</strong>
             </div>
           </div>
@@ -1301,8 +1395,8 @@
         <div class="example-card modern" style="height: 100%; ">
           <div class="ex-badge-row">
             <div class="expand-btn" onclick="toggleTierTable('step3-detail', 'step3-arrow')" style="cursor: pointer;">
-              <span id="step3-arrow" style="font-size: 1.1rem; color: #000000;">►</span> 
-              <strong style="font-size: 1.1rem; color: #000000;">
+              <span id="step3-arrow" style="font-size: 1.1rem; color: #4381F4;">►</span> 
+              <strong style="font-size: 1.1rem; color: #4381F4;">
               Step 3: Video Editing</strong>
             </div>
           </div>
@@ -1329,8 +1423,8 @@
         <div class="example-card modern" style="height: 100%; ">
           <div class="ex-badge-row">
             <div class="expand-btn" onclick="toggleTierTable('step4-detail', 'step4-arrow')" style="cursor: pointer;">
-              <span id="step4-arrow" style="font-size: 1.1rem; color: #000000;">►</span> 
-              <strong style="font-size: 1.1rem; color: #000000;">
+              <span id="step4-arrow" style="font-size: 1.1rem; color: #4381F4;">►</span> 
+              <strong style="font-size: 1.1rem; color: #4381F4;">
               Step 4: Quality Refinement</strong>
             </div>
           </div>
@@ -1369,7 +1463,7 @@
         <div id="results-carousel" class="carousel results-carousel">
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/non_audio.png" alt="Examples for the Non-audio Prompt Following task" 
+              <img src="./static/img/non_audio.png" alt="Examples for the Non-audio Prompt Following task" 
                     style="width:80%; margin-bottom: 1.5rem;" />
               <p class="figure-caption">
                 <strong style="color: #000000;">Examples for the Non-audio Prompt Following tasks:<br>
@@ -1380,7 +1474,7 @@
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/context_aware.png" alt="An example for the Context-Aware Response task" 
+              <img src="./static/img/context_aware.png" alt="An example for the Context-Aware Response task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
               <p class="figure-caption">
                 <strong style="color: #000000;">Examples for the Context-Aware Response (CR) task.</strong></p>
@@ -1389,7 +1483,7 @@
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/single_proactive.png" alt="An example for the Single Event-triggered Response task" 
+              <img src="./static/img/single_proactive.png" alt="An example for the Single Event-triggered Response task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
               <p class="figure-caption">
                 <strong style="color: #000000;">Examples for the Single Event-triggered Response (SER) task.</strong></p>
@@ -1398,16 +1492,16 @@
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/multi_proactive.png" alt="An example for the Multi Event-triggered Response task" 
+              <img src="./static/img/multi_proactive.png" alt="An example for the Multi Event-triggered Response task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
               <p class="figure-caption">
-                <strong style="color: #000000;">Examples for the Single Multi Event-triggered Response (MER) task.</strong></p>
+                <strong style="color: #000000;">Examples for the Multi Event-triggered Response (MER) task.</strong></p>
               <p class="figure-caption has-text-grey">Models need to keep replying whenever the target events appear, with the user prompt input only once.</p>
             </div>
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/multitask_tracking.png" alt="An example for the Multitask Tracking task" 
+              <img src="./static/img/multitask_tracking.png" alt="An example for the Multitask Tracking task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
               <p class="figure-caption"><strong style="color: #000000;">Examples for the Single Multitask Tracking (MT) task.</strong></p>
               <p class="figure-caption has-text-grey">Models need to simultaneously keep track of the statuses of multiple processes listed at the beginning of the video.</p>
@@ -1425,7 +1519,7 @@
         <div id="results-carousel" class="carousel results-carousel">
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/meeting.png" alt="Key plots of the Meeting Simulation task" 
+              <img src="./static/img/meeting.png" alt="Key plots of the Meeting Simulation task" 
                     style="width:80%; margin-bottom: 1.5rem;" />
               <p class="figure-caption"><strong style="color: #000000;">Key plots of the Meeting Simulation (Ms) task.</strong></p>
               <p class="figure-caption has-text-grey">The user was watching a round-table discussion video and taking notes,<br>mimicking the scenario of attending online meetings.</p>
@@ -1433,7 +1527,7 @@
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/navigation.png" alt="Key plots of the Blind Assistance task" 
+              <img src="./static/img/navigation.png" alt="Key plots of the Blind Assistance task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
               <p class="figure-caption"><strong style="color: #000000;">Key plots of the Blind Assistance (Ba) task.</strong></p>
               <p class="figure-caption has-text-grey">The user pretended to be blind. They asked the assistant to guide them around the office<br>based on a hand-drawn map, and to tell them when another person arrives. </p>
@@ -1441,7 +1535,7 @@
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="./docs/static/img/handcraft.png" alt="Key plots of the Handicraft Process Tracking task" 
+              <img src="./static/img/handcraft.png" alt="Key plots of the Handicraft Process Tracking task" 
                     style="width:85%; margin-bottom: 1.5rem;"/>
               <p class="figure-caption"><strong style="color: #000000;">Key plots of the Handicraft Process Tracking (Ht) task.</strong></p>
               <p class="figure-caption has-text-grey">Three people were making handicrafts together. The assistant was required not only to track each person's progress, but also to understand the social context by correctly identifying which questions were directed at it.</p>
@@ -1470,19 +1564,19 @@
     <div class="columns is-centered">
       <div class="column is-full">
         <div class="content has-text-justified" style="margin-bottom: 2rem;">         
-          <p>According to our scoring rubric, average scores ranged from 2-3 suggest that models generally succeed in understanding what to do but struggle with providing accurate and comprehensive answers.<br>From the evaluation results, we observe the following <strong>key bottlenecks</strong> in current Omni-LLMs:
+          <p>According to our scoring rubric, average scores ranged from 40-60 suggest that models generally succeed in understanding what to do but struggle with providing accurate and comprehensive answers.<br>Apart from basic perception shortcomings, we observe the following <strong>key bottlenecks</strong> in current Omni-LLMs, 
           </p>
         </div>
       </div>
     </div>
 
-    <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
+<div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
       <!-- Gesture Card -->
-      <div class="column is-half">
+      <div class="column is-one-third">
         <div class="example-card modern" style="height: 100%; ">
           <div class="ex-badge-row">
             <span><strong style="font-size: 1.1rem; color: #4381F4;">
-              Deficiency in Gesture Following</strong></span>
+              Deficiency in Visual Prompts</strong></span>
           </div>
           <div class="ex-body">
             <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
@@ -1493,48 +1587,30 @@
       </div>
 
        <!-- Long-Context Card -->
-      <div class="column is-half">
+      <div class="column is-one-third">
         <div class="example-card modern" style="height: 100%; ">
           <div class="ex-badge-row">
             <span><strong style="font-size: 1.1rem; color: #4381F4;">
-              Long-Context Interaction Disparity</strong></span>
+              Context Limitation</strong></span>
           </div>
           <div class="ex-body">
             <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
-              Proprietary models substantially outperform open source alternatives on multi-turn tasks, exposing a pronounced weakness in long-term memory retention and sustained context management among current open-source systems.
+              Input videos and audios can be token-consuming. Without specialized mechanisms for long-term memory, context length limits are quickly exhausted within minutes. As a result, models quickly forget user goals and fail to provide useful guidence.
             </span>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="columns is-desktop is-centered" style="margin-bottom: 2rem;">
       <!-- Silent Card -->
-      <div class="column is-half">
+      <div class="column is-one-third">
         <div class="example-card modern" style="height: 100%; ">
           <div class="ex-badge-row">
             <span><strong style="font-size: 1.1rem; color: #4381F4;">
-              Failure to Keep Silen</strong></span>
+              Failure in Delayed Response</strong></span>
           </div>
           <div class="ex-body">
             <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
               Models systematically struggle to determine when a response is unnecessary, frequently giving video captions which are less related to the user prompt, instead of appropriately remaining silent when the visual input provides insufficient evidence.
-            </span>
-          </div>
-        </div>
-      </div>
-
-       <!-- Text Card -->
-      <div class="column is-half">
-
-        <div class="example-card modern" style="height: 100%; ">
-          <div class="ex-badge-row">
-            <span><strong style="font-size: 1.1rem; color: #4381F4;">
-              Over-reliance on Text</strong></span>
-          </div>
-          <div class="ex-body">
-            <span style="display: inline-block; font-size: 0.95rem; color: #4a4a4a;">
-              Open-source models tend to echo their own replies during multi-turn tasks. This suggests an over-reliance on the text modality (the assistant's past replies) and an inability to dynamically update their context using the complex visual changes in the video.
             </span>
           </div>
         </div>
