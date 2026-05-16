@@ -21,7 +21,7 @@ The dataset and the paper will be made public after review.
 Recent advances in Omni-LLMs are paving the way for real-time video assistant applications, where models constantly perceive the environment and guide users to achieve certain goals through multi-turn conversations. However, evaluations under these assistant-style interaction scenarios are still challenging. **OmniAssistBench** aims at addressing this challenge by proposing an annotation pipeline which allows annotators to build test samples from existing Internet videos.
 
 <div align="center">
-  <img src="img/main.png" alt="OmniAssistBench proposes an annotation pipeline which allows annotators to build test samples from existing Internet videos " width="50%">
+  <img src="docs/main.png" alt="OmniAssistBench proposes an annotation pipeline which allows annotators to build test samples from existing Internet videos " width="50%">
   <p>
 <i>OmniAssistBench proposes an annotation pipeline which allows annotators to build test samples from existing Internet videos.
 </i></p>
@@ -33,7 +33,7 @@ To address this challenge, OmniAssistBench **proposes an annotation pipeline whi
 
 
 <div align="center">
-  <img src="img/label.png" alt="The data construction process of OmniAssistBench" width="60%">
+  <img src="docs/label.png" alt="The data construction process of OmniAssistBench" width="60%">
   <p>
 <i>The data construction process of OmniAssistBench.
 </i></p>
@@ -43,7 +43,7 @@ To address this challenge, OmniAssistBench **proposes an annotation pipeline whi
 ## 🧠 Benchmark Constructions
 
 <div align="center">
-  <img src="img/statis.png" alt="Task construction and statistics of OmniAssistBench" width="50%">
+  <img src="docs/statis.png" alt="Task construction and statistics of OmniAssistBench" width="50%">
   <p>
 <i>Task construction and statistics of OmniAssistBench.
 </i></p>
@@ -59,7 +59,7 @@ To address this challenge, OmniAssistBench **proposes an annotation pipeline whi
 Click here for the examples of typical tasks in OmniAssistBench.</summary>      
 <div align="center">     
 <br>     
-<img src="img/tasks_demo.png" alt="Examples of typical tasks in OmniAssistBench" width="50%">     
+<img src="docs/tasks_demo.png" alt="Examples of typical tasks in OmniAssistBench" width="50%">     
 <p>
 <i>Examples of typical tasks in OmniAssistBench.</i>
 </p>   
@@ -71,7 +71,7 @@ Click here for the examples of typical tasks in OmniAssistBench.</summary>
 Click here for the key plots of the real world cases filmed by our team. Each case is sepcially designed to cover a set of ablities evaluated in the benchmark.</summary>      
 <div align="center">     
 <br>     
-<img src="img/real_case.png" alt="Examples of key plots and questions from the three Real World Cases" width="50%">     
+<img src="docs/real_case.png" alt="Examples of key plots and questions from the three Real World Cases" width="50%">     
 <p>
 <i>Examples of key plots and questions from the three Real World Cases.</i>
 </p>   
