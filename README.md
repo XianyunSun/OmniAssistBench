@@ -9,7 +9,7 @@
 [![Project Page](https://img.shields.io/badge/Project_Page-green)](https://xianyunsun.github.io/OmniAssistBench/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](#)
 
-The first benchmerk specially designed to evaluate Omni-LLMs under assistant-style, real-time video chat scenarios.
+A benchmerk specially designed to evaluate Omni-LLMs under assistant-style, real-time video chat scenarios.
 The dataset and the paper will be made public after review.
 
 </div>
@@ -18,76 +18,98 @@ The dataset and the paper will be made public after review.
 
 ## 💡 Introduction
 
-Recent advances in Omni-LLMs are paving the way for real-time video chat applications, such as visual assistance for visually impaired users. However, existing benchmarks fail to systematically evaluate models under these dynamic, interactive settings. To bridge this gap, **OmniAssistBench** quantifies model's omni-assistant capabilities by summarizing critical abilities and tasks from common real world Omni-MLLM application senarios.
+Recent advances in Omni-LLMs are paving the way for real-time video assistant applications, where models constantly perceive the environment and guide users to achieve certain goals through multi-turn conversations. However, evaluations under these assistant-style interaction scenarios are still challenging. **OmniAssistBench** aims at addressing this challenge by proposing an annotation pipeline which allows annotators to build test samples from existing Internet videos.
 
 <div align="center">
-  <img src="docs/general.png" alt="OmniAssistBench summarizes critical abilities and tasks from real world Omni-LLM applications" width="80%">
+  <img src="img/main.png" alt="OmniAssistBench proposes an annotation pipeline which allows annotators to build test samples from existing Internet videos " width="50%">
   <p>
-<i>OmniAssistBench summarizes critical abilities and tasks from real world Omni-LLM applications to provide quantified evaluation of Omni-LLMs as assistants.
+<i>OmniAssistBench proposes an annotation pipeline which allows annotators to build test samples from existing Internet videos.
+</i></p>
+</div>
+
+The main evaluation challenge lies in dataset construction: In multi-turn interaction with the assistant, user will do what the model suggests. This means that **the model's unpredictable response dynamically changes the subsequent video contents**, which static offline datasets cannot accommodate. As shown in Fig. (b) above, when the user asks for instructions on making latte coffee, the model may suggest extracting espresso first then frothing the milk, or vice versa. Although both suggestions are valid, static dataset may only contain subsequential videos of extracting espresso before frothing milk. 
+
+To address this challenge, OmniAssistBench **proposes an annotation pipeline which provides the model with prior knowledges to enforce a fixed interaction path**. As shown in Fig. (c) above, annotators first summarize the scource video into a list of steps to achieve the user goal. Then, multi-turn user questions and ground truth answers are designed. Scource videos are cut into clips based on the designed intercation process, whith prior knowledges embedded as on-screen subtitles and user questions embedded as audios. This pipeline allows annotators build evaluation data from raw Internet videos.
+
+
+<div align="center">
+  <img src="img/label.png" alt="The data construction process of OmniAssistBench" width="60%">
+  <p>
+<i>The data construction process of OmniAssistBench.
 </i></p>
 </div>
 
 
+## 🧠 Benchmark Constructions
+
 <div align="center">
-  <img src="docs/typical_tasks.png" alt="Examples of typical tasks in OmniAssistBench" width="80%">
+  <img src="img/statis.png" alt="Task construction and statistics of OmniAssistBench" width="50%">
   <p>
-<i>Examples of typical tasks in OmniAssistBench.
+<i>Task construction and statistics of OmniAssistBench.
 </i></p>
 </div>
+
+
+* 🟢 **Basic Tier:** Core perception ablities that are necessary especially in interactive situations (e.g., social understanding, temporal perception, and gesture-based prompts).
+* 🔵 **Advanced Tier:** Higher-level, user goal-driven interactive tasks derived from common applications (e.g., procedural guidance and proactive response).
+
 
 <details>   
 <summary>
-Click here for the key plots of the real world cases</summary>      
+Click here for the examples of typical tasks in OmniAssistBench.</summary>      
 <div align="center">     
 <br>     
-<img src="docs/real_world.png" alt="Examples of key plots and questions from the three Real World Cases" width="80%">     
+<img src="img/tasks_demo.png" alt="Examples of typical tasks in OmniAssistBench" width="50%">     
+<p>
+<i>Examples of typical tasks in OmniAssistBench.</i>
+</p>   
+</div>  
+</details>
+
+<details>   
+<summary>
+Click here for the key plots of the real world cases filmed by our team. Each case is sepcially designed to cover a set of ablities evaluated in the benchmark.</summary>      
+<div align="center">     
+<br>     
+<img src="img/real_case.png" alt="Examples of key plots and questions from the three Real World Cases" width="50%">     
 <p>
 <i>Examples of key plots and questions from the three Real World Cases.</i>
 </p>   
 </div>  
 </details>
 
-### 🧠 Two-Tier Evaluation Framework
 
-* 🟢 **Basic Tier:** Core perception and multimodal instruction following (e.g., social understanding, temporal perception, and gesture-based prompts).
-* 🔵 **Advanced Tier:** Higher-level interactive skills (e.g., procedural guidance and proactive response).
 
-<div align="center">
-  <img src="docs/statis_table.png" alt="Task construction and statistics of OmniAssistBench" width="80%">
-  <p>
-<i>Task construction and statistics of OmniAssistBench.
-</i></p>
-</div>
 
-<div align="center">
-  <img src="docs/labling.png" alt="The data construction process of OmniAssistBench" width="80%">
-  <p>
-<i>The data construction process of OmniAssistBench.
-</i></p>
-</div>
 
 ### 📊 Dataset Highlights
 
-* 📈 **Scale**: **687** open-ended question-answer pairs from **300** videos, covering 7 major task types and **17** fine-grained tasks.
-* **🎥 Custom-Filmed Real-World Cases**: Features three comprehensive multi-turn interaction case studies exclusively filmed by our team to reflect genuine assistant usage.
+* 📈 **Scale**: **685** open-ended question-answer pairs covering 7 major task types and **16** fine-grained tasks. Video domains cover common daily topics such as sports, cooking, lectures, DIYs, and talk shows.
+* **🎥 Custom-Filmed Real-World Cases**: We design and film 3 cases with **an average of over 15 interaction turns**. Each case specifically targets the combinations of a group of the abilities evaluated in our benchmark to reflect genuine assistant usage.
 * **🔊 Naturally Embedded Prompts**: Unlike traditional benchmarks with text-only prompts, **all user questions are embedded directly into the videos** as realistic audio or typing/handwriting.
-* **⏳ High Quality & Effort**: Creating the dataset required careful choices of source videos and heavy video editing to balance video length and to embed the user prompts. Every sample was rigorously annotated by human experts, demanding **~4 hours of labor per sample**.
+* **⏳ High Quality & Effort**: Creating the dataset required careful choices of source videos and heavy video editing to balance video length and to embed the user prompts. Every sample was rigorously annotated by human experts. It takes **1000+ expert-hours** to build the benchmark.
 
 ---
 
 ## 🏆 Leaderboard
 
-OmniAssistBench requires candidate models to be capable of processing videos along with the corresponding audios. All models are graded using our LLM-as-a-Judge pipeline on a 0 - 5 scale.
+OmniAssistBench requires candidate models to be capable of processing videos along with the corresponding audios. All models are graded using our LLM-as-a-Judge pipeline on a 0 - 5 scale. Reported scores have been normalized to 0-100.
 
-| Model | Size | Basic Tier | Advanced Tier | Real Cases | Overall (/5.0) | Percentage (%) |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Gemini-3-Pro** | - | 3.18 | 3.41 | 3.40 | **3.32** | 66.4%|
-| **MiniCPM-o 4.5** | 9B | 2.23 | 2.39 | 1.89 | **2.30** | 46.0% |
-| **Qwen3-Omni** | 30B-A3B | 1.42 | 1.82 | 1.76 | **1.68** | 33.6% |
-| **Baichuan-Omni 1.5** | 7B | 1.23 | 2.09 | 1.76 | **2.16** | 43.2% |
-| **VITA 1.5** | 7B | 1.23 | 1.29 | 0.73 | **1.23** | 24.6% |
+| # | Model | Size | Frames | Basic Tier | Advanced Tier | Real Cases | Overall (/100) |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | **Gemini-3-Pro** 🥇 | - | - | 63.6 | 68.2 | 68.0 | **66.4** |
+| 2 | **Gemini-2.5-Pro** 🥈 | - | - | 65.4 | 66.4 | 44.8 | **64.6** |
+| 3 | **Doubao-Seed-2.0-lite** 🥉 | - | 1fps | 53.2 | 62.1 | 35.5 | **57.3** |
+| 4 | **MiMo-V2-Omni** | - | 1fps | 53.6 | 55.2 | 41.0 | **53.8** |
+| 5 | **Qwen3.5-Omni-Plus** | - | 1fps | 41.6 | 57.8 | 50.6 | **51.6** |
+| 6 | **Qwen3-Omni-Instruct** | 30B-A3B | 1fps | 46.4 | 53.8 | 53.8 | **51.2** |
+| 7 | **MiniCPM-o-4.5** | 9B | 1fps | 44.6 | 47.8 | 37.8 | **46.0** |
+| 8 | **Baichuan-Omni-1.5** | 7B | 32 | 45.0 | 41.8 | 44.8 | **43.2** |
+| 9 | **Qwen2.5-Omni** | 7B | 1fps | 37.0 | 46.6 | 45.2 | **43.2** |
+| 10 | **MiniCPM-o-2.6** | 8B | 1fps | 41.8 | 40.2 | 31.2 | **40.2** |
+| 11 | **VITA-1.5** | 7B | 4 | 24.6 | 25.8 | 14.6 | **24.6** |
 
-OmniAssistBench is highly challenging. Current evaluations show that even the most advanced models have substantial room for improvement before they can serve as reliable real-world assistants.
+OmniAssistBench is highly challenging. Current evaluations show that although most models can understand what to do, they struggle to provide correct and comprehensive responses.
 
 ---
 
